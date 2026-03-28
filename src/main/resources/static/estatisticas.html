@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Estatísticas · CEBRASPE Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        /* ── TEMAS ── */
+        [data-tema="escuro"] {
+            --bg: #06080f;
+            --bg2: #0d1120;
+            --bg3: #141929;
+            --surface: #1a2035;
+            --surface2: #202740;
+            --border: rgba(255, 255, 255, .07);
+            --border2: rgba(255, 255, 255, .13);
+            --text: #dde2f0;
+            --text2: #7e8aaa;
+            --text3: #414d6b;
+            --card-bg: #0d1120;
+            --input-bg: #141929;
+        }
+
+        [data-tema="claro"] {
+            --bg: #f4f5f7;
+            --bg2: #ffffff;
+            --bg3: #f0f1f4;
+            --surface: #e8eaef;
+            --surface2: #dde0e8;
+            --border: rgba(0, 0, 0, .09);
+            --border2: rgba(0, 0, 0, .15);
+            --text: #1a1d2e;
+            --text2: #5a6080;
+            --text3: #9097b0;
+            --card-bg: #ffffff;
+            --input-bg: #f0f1f4;
+        }
+
+        :root {
+            --gold: #f5c842;
+            --gold2: #fde98a;
+            --gold-bg: rgba(245, 200, 66, .12);
+            --gold-bd: rgba(245, 200, 66, .3);
+            --green: #34d399;
+            --green-bg: rgba(52, 211, 153, .12);
+            --green-bd: rgba(52, 211, 153, .3);
+            --red: #f87171;
+            --red-bg: rgba(248, 113, 113, .12);
+            --red-bd: rgba(248, 113, 113, .3);
+            --blue: #60a5fa;
+            --blue-bg: rgba(96, 165, 250, .12);
+            --blue-bd: rgba(96, 165, 250, .3);
+            --amber: #fbbf24;
+            --amber-bg: rgba(251, 191, 36, .12);
+            --amber-bd: rgba(251, 191, 36, .3);
+            --purple: #a78bfa;
+            --purple-bg: rgba(167, 139, 250, .12);
+            --purple-bd: rgba(167, 139, 250, .3);
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans: 'Outfit', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --r: 12px;
+            --r-sm: 8px;
+            --r-xs: 5px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 15px;
+            transition: background .25s, color .25s;
+        }
+
+        /* ── HEADER ── */
+        .hdr {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 1.5rem;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            transition: background .25s;
+        }
+
+        .hdr-brand {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .hdr-mark {
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 7px;
+            display: grid;
+            place-items: center;
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: #06080f;
+        }
+
+        .hdr-name {
+            font-weight: 700;
+            font-size: .9rem;
+            letter-spacing: -.2px;
+        }
+
+        .hdr-sep {
+            width: 1px;
+            height: 15px;
+            background: var(--border2);
+        }
+
+        .hdr-sub {
+            font-size: .75rem;
+            color: var(--text3);
+            font-weight: 300;
+        }
+
+        .hdr-nav {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+        }
+
+        .hdr-link {
+            padding: .35rem .8rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border2);
+            color: var(--text2);
+            font-size: .78rem;
+            font-family: var(--sans);
+            text-decoration: none;
+            transition: all .15s;
+        }
+
+        .hdr-link:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .tema-btn {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border2);
+            background: transparent;
+            color: var(--text2);
+            cursor: pointer;
+            transition: all .15s;
+            font-size: 16px;
+        }
+
+        .tema-btn:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        /* ── PAGE ── */
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 5rem;
+        }
+
+        .page-hero {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-family: var(--serif);
+            font-size: 1.9rem;
+            font-style: italic;
+            margin-bottom: .3rem;
+        }
+
+        .page-sub {
+            color: var(--text2);
+            font-size: .88rem;
+            font-weight: 300;
+        }
+
+        /* Grupo tabs */
+        .grupo-tabs {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .gtab {
+            flex: 1;
+            max-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .6rem 1rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid var(--border2);
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--sans);
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .gtab:hover {
+            border-color: var(--border2);
+            background: var(--surface);
+        }
+
+        .gtab.on-edital {
+            border-color: var(--blue-bd);
+            background: var(--blue-bg);
+            color: var(--blue);
+        }
+
+        .gtab.on-banca {
+            border-color: var(--gold-bd);
+            background: var(--gold-bg);
+            color: var(--gold);
+        }
+
+        /* Métricas */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: .65rem;
+            margin-bottom: 2rem;
+        }
+
+        @media(max-width:700px) {
+            .metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .metric {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1.1rem;
+            text-align: center;
+            transition: background .25s, border-color .2s;
+        }
+
+        .metric:hover {
+            border-color: var(--border2);
+        }
+
+        .metric-val {
+            font-family: var(--mono);
+            font-size: 1.7rem;
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: .25rem;
+        }
+
+        .metric-lbl {
+            font-size: .69rem;
+            color: var(--text3);
+            line-height: 1.3;
+        }
+
+        .metric.gold .metric-val {
+            color: var(--gold);
+        }
+
+        .metric.green {
+            border-color: var(--green-bd);
+        }
+
+        .metric.green .metric-val {
+            color: var(--green);
+        }
+
+        .metric.red {
+            border-color: var(--red-bd);
+        }
+
+        .metric.red .metric-val {
+            color: var(--red);
+        }
+
+        .metric.blue {
+            border-color: var(--blue-bd);
+        }
+
+        .metric.blue .metric-val {
+            color: var(--blue);
+        }
+
+        .metric.purple {
+            border-color: var(--purple-bd);
+        }
+
+        .metric.purple .metric-val {
+            color: var(--purple);
+        }
+
+        /* Seções */
+        .sec {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-bottom: 1.1rem;
+            transition: background .25s;
+        }
+
+        .sec-hdr {
+            padding: .8rem 1.1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sec-hdr-l {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .75rem;
+            font-weight: 700;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .sec-hdr-l svg {
+            width: 13px;
+            height: 13px;
+            color: var(--gold);
+        }
+
+        .sec-hdr-r {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+        }
+
+        .sec-body {
+            padding: .9rem 1.1rem;
+        }
+
+        /* Barra */
+        .brow-row {
+            display: grid;
+            grid-template-columns: 170px 1fr 48px;
+            align-items: center;
+            gap: .65rem;
+            margin-bottom: .5rem;
+            font-size: .8rem;
+        }
+
+        @media(max-width:480px) {
+            .brow-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .brow-nm {
+            color: var(--text2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .brow-bar {
+            height: 6px;
+            background: var(--surface2);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .brow-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 1s ease;
+        }
+
+        .brow-pct {
+            font-family: var(--mono);
+            font-size: .72rem;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        /* Chart */
+        .chart-wrap {
+            position: relative;
+            height: 220px;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .2rem;
+            padding: .18rem .55rem;
+            border-radius: 99px;
+            font-size: .68rem;
+            font-weight: 700;
+        }
+
+        .b-facil {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-medio {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        .b-dificil {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .b-pegad {
+            background: var(--purple-bg);
+            border: 1px solid var(--purple-bd);
+            color: var(--purple);
+        }
+
+        .b-pct-r {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .b-pct-a {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        .b-pct-g {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-certo {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-errado {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        /* ── QUESTÕES ERRADAS ── */
+        .errada-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--red-bd);
+            border-radius: 0 var(--r-sm) var(--r-sm) 0;
+            padding: .9rem 1rem;
+            margin-bottom: .6rem;
+            transition: background .25s;
+        }
+
+        .errada-head {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            margin-bottom: .5rem;
+            flex-wrap: wrap;
+        }
+
+        .errada-num {
+            font-family: var(--mono);
+            font-size: .68rem;
+            color: var(--text3);
+            background: var(--surface2);
+            padding: .15rem .5rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border2);
+        }
+
+        .errada-enu {
+            font-family: var(--serif);
+            font-size: .98rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: .65rem;
+        }
+
+        .errada-exp-wrap {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            padding: .75rem .9rem;
+            margin-bottom: .5rem;
+            transition: background .25s;
+        }
+
+        .errada-exp-hdr {
+            font-size: .72rem;
+            font-weight: 700;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            margin-bottom: .3rem;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .errada-exp-hdr svg {
+            width: 11px;
+            height: 11px;
+        }
+
+        .errada-exp {
+            font-size: .84rem;
+            line-height: 1.65;
+            color: var(--text2);
+        }
+
+        .errada-ref {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            margin-top: .4rem;
+            font-family: var(--mono);
+            font-size: .72rem;
+            color: var(--text3);
+            background: var(--surface);
+            padding: .2rem .55rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border);
+        }
+
+        .errada-stats {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: .5rem;
+        }
+
+        .errada-stat {
+            font-family: var(--mono);
+            font-size: .7rem;
+            color: var(--text3);
+            background: var(--surface);
+            padding: .2rem .5rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border);
+        }
+
+        /* Botão refazer questão */
+        .btn-refazer {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            margin-top: .5rem;
+            padding: .4rem .85rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid var(--gold-bd);
+            background: var(--gold-bg);
+            color: var(--gold);
+            font-family: var(--sans);
+            font-size: .78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .btn-refazer:hover {
+            background: var(--gold);
+            color: #06080f;
+        }
+
+        .btn-refazer svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Botões de ação */
+        .action-row {
+            display: flex;
+            gap: .65rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .45rem;
+            padding: .65rem 1.2rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--sans);
+            font-size: .83rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .btn svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .btn-outline {
+            border-color: var(--border2);
+            background: transparent;
+            color: var(--text2);
+        }
+
+        .btn-outline:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .btn-gold {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: #06080f;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold2);
+        }
+
+        .btn-danger {
+            border-color: var(--red-bd);
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        .btn-danger:hover {
+            background: var(--red);
+            color: white;
+            border-color: var(--red);
+        }
+
+        .btn-blue {
+            border-color: var(--blue-bd);
+            background: var(--blue-bg);
+            color: var(--blue);
+        }
+
+        .btn-blue:hover {
+            background: var(--blue);
+            color: white;
+            border-color: var(--blue);
+        }
+
+        /* Filtro questões erradas */
+        .filtro-erradas {
+            display: flex;
+            gap: .4rem;
+            flex-wrap: wrap;
+            margin-bottom: .9rem;
+        }
+
+        .ftab {
+            padding: .3rem .75rem;
+            border-radius: 99px;
+            border: 1px solid var(--border2);
+            background: transparent;
+            color: var(--text2);
+            font-size: .76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .15s;
+            font-family: var(--sans);
+        }
+
+        .ftab:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .ftab.on {
+            background: var(--surface2);
+            border-color: var(--border2);
+            color: var(--text);
+        }
+
+        /* Modal "refazer" */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 8, 15, .78);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+        }
+
+        .modal-bg.hidden {
+            display: none;
+        }
+
+        .modal {
+            background: var(--bg2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            width: 100%;
+            max-width: 680px;
+            margin: auto;
+            animation: min .2s ease;
+        }
+
+        @keyframes min {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-hdr {
+            padding: 1rem 1.3rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg3);
+        }
+
+        .modal-title {
+            font-size: .95rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border2);
+            border-radius: var(--r-xs);
+            background: transparent;
+            color: var(--text3);
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 1.3rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        /* Refazer questão */
+        .refazer-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            padding: 1rem 1.1rem;
+            margin-bottom: .75rem;
+        }
+
+        .refazer-enu {
+            font-family: var(--serif);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .refazer-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .rb-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .45rem;
+            padding: .75rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--sans);
+            font-size: .88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .rb-certo {
+            border-color: var(--green-bd);
+            color: var(--green);
+            background: var(--green-bg);
+        }
+
+        .rb-errado {
+            border-color: var(--red-bd);
+            color: var(--red);
+            background: var(--red-bg);
+        }
+
+        .rb-certo:hover:not(:disabled) {
+            background: var(--green);
+            color: #06080f;
+        }
+
+        .rb-errado:hover:not(:disabled) {
+            background: var(--red);
+            color: white;
+        }
+
+        .rb-btn:disabled {
+            opacity: .35;
+            cursor: not-allowed;
+        }
+
+        .refazer-gab {
+            margin-top: .75rem;
+            padding: .75rem .9rem;
+            border-radius: var(--r-sm);
+            font-size: .84rem;
+            line-height: 1.65;
+            animation: gabin .2s ease;
+        }
+
+        @keyframes gabin {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .refazer-gab.ok {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--text);
+        }
+
+        .refazer-gab.err {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--text);
+        }
+
+        /* Empty */
+        .empty {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text3);
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: .75rem;
+        }
+
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border2);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: sp .7s linear infinite;
+        }
+
+        @keyframes sp {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Loading full */
+        .page-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            gap: .75rem;
+            color: var(--text2);
+            font-size: .9rem;
+        }
+
+        /* Toggle expand */
+        .expand-btn {
+            padding: .25rem .65rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border2);
+            background: transparent;
+            color: var(--text3);
+            font-size: .72rem;
+            cursor: pointer;
+            font-family: var(--sans);
+            transition: all .15s;
+        }
+
+        .expand-btn:hover {
+            color: var(--text);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Toast */
+        .toast-wrap {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: .45rem;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .65rem .9rem;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-size: .82rem;
+            font-weight: 500;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+            min-width: 220px;
+            animation: tin .18s ease;
+        }
+
+        @keyframes tin {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .toast.ok {
+            background: var(--green-bg);
+            border-color: var(--green-bd);
+            color: var(--green);
+        }
+
+        .toast.err {
+            background: var(--red-bg);
+            border-color: var(--red-bd);
+            color: var(--red);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hdr">
+        <a href="prova.html" class="hdr-brand">
+            <div class="hdr-mark">CP</div>
+            <div class="hdr-sep"></div>
+            <span class="hdr-name">CEBRASPE Pro</span>
+            <div class="hdr-sep"></div>
+            <span class="hdr-sub">Estatísticas</span>
+        </a>
+        <nav class="hdr-nav">
+            <a href="prova.html" class="hdr-link">🎯 Simulado</a>
+            <a href="admin.html" class="hdr-link">⚙️ Admin</a>
+            <button class="tema-btn" id="tema-btn" onclick="toggleTema()" title="Alternar tema">🌙</button>
+        </nav>
+    </header>
+
+    <div class="page">
+
+        <!-- Loading state -->
+        <div id="loading-state" class="page-loading">
+            <span class="spinner"></span> Carregando estatísticas...
+        </div>
+
+        <div id="page-content" class="hidden">
+
+            <div class="page-hero">
+                <h1 class="page-title">Seu Desempenho</h1>
+                <p class="page-sub">Análise por tema, subtema e nível · Questões erradas para revisão · Refazer questões
+                    específicas</p>
+            </div>
+
+            <!-- Grupo tabs -->
+            <div class="grupo-tabs">
+                <button class="gtab on-edital" data-grupo="EDITAL" onclick="filtrarGrupo(this)">
+                    📚 Edital (Assuntos Teóricos)
+                </button>
+                <button class="gtab" data-grupo="BANCA" onclick="filtrarGrupo(this)">
+                    🏛️ Banca (Provas Reais)
+                </button>
+                <button class="gtab" data-grupo="TODOS" onclick="filtrarGrupo(this)">
+                    🔀 Todos
+                </button>
+            </div>
+
+            <!-- Actions -->
+            <div class="action-row">
+                <button class="btn btn-gold" onclick="irParaSimulado()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 13 8 5 13" />
+                    </svg>
+                    Novo Simulado
+                </button>
+                <button class="btn btn-blue" onclick="focarDificuldades()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="8" cy="8" r="6" />
+                        <circle cx="8" cy="8" r="2" fill="currentColor" />
+                    </svg>
+                    Treinar Dificuldades
+                </button>
+                <button class="btn btn-danger" onclick="confirmarReset()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 8A6 6 0 0114 5.5" />
+                        <path d="M14 8A6 6 0 012 10.5" />
+                        <path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2" />
+                    </svg>
+                    Resetar Questões Bloqueadas
+                </button>
+            </div>
+
+            <!-- Métricas -->
+            <div class="metrics">
+                <div class="metric gold">
+                    <div class="metric-val" id="m-total">—</div>
+                    <div class="metric-lbl">Respondidas</div>
+                </div>
+                <div class="metric green">
+                    <div class="metric-val" id="m-acertos">—</div>
+                    <div class="metric-lbl">Acertos</div>
+                </div>
+                <div class="metric red">
+                    <div class="metric-val" id="m-erros">—</div>
+                    <div class="metric-lbl">Erros</div>
+                </div>
+                <div class="metric blue">
+                    <div class="metric-val" id="m-aprov">—</div>
+                    <div class="metric-lbl">Aproveitamento</div>
+                </div>
+                <div class="metric purple">
+                    <div class="metric-val" id="m-bloq">—</div>
+                    <div class="metric-lbl">Bloqueadas ✓</div>
+                </div>
+            </div>
+
+            <!-- Por nível -->
+            <div class="sec">
+                <div class="sec-hdr">
+                    <div class="sec-hdr-l">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <rect x="1" y="10" width="3" height="4" />
+                            <rect x="6" y="6" width="3" height="8" />
+                            <rect x="11" y="2" width="3" height="12" />
+                        </svg>
+                        Por Nível de Dificuldade
+                    </div>
+                </div>
+                <div class="sec-body" id="nivel-body"></div>
+            </div>
+
+            <!-- Chart temas -->
+            <div class="sec">
+                <div class="sec-hdr">
+                    <div class="sec-hdr-l">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <circle cx="8" cy="8" r="6" />
+                            <path d="M8 4v4l3 1.5" />
+                        </svg>
+                        Aproveitamento por Tema
+                    </div>
+                </div>
+                <div class="sec-body">
+                    <div class="chart-wrap"><canvas id="chart-tema"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Piores subtemas -->
+            <div class="sec">
+                <div class="sec-hdr">
+                    <div class="sec-hdr-l">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <path d="M8 2v4M8 10v4M2 8h4M10 8h4" />
+                            <circle cx="8" cy="8" r="2" />
+                        </svg>
+                        Subtemas com Mais Dificuldade
+                        <span
+                            style="margin-left:.4rem;padding:.18rem .55rem;border-radius:99px;background:var(--red-bg);border:1px solid var(--red-bd);color:var(--red);font-size:.65rem;">Foco
+                            aqui!</span>
+                    </div>
+                </div>
+                <div class="sec-body" id="piores-body"></div>
+            </div>
+
+            <!-- Questões erradas -->
+            <div class="sec">
+                <div class="sec-hdr">
+                    <div class="sec-hdr-l">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M2 2l12 12M14 2L2 14" />
+                        </svg>
+                        Questões Erradas
+                        <span id="erradas-count-badge"
+                            style="margin-left:.4rem;padding:.18rem .55rem;border-radius:99px;background:var(--red-bg);border:1px solid var(--red-bd);color:var(--red);font-size:.7rem;font-family:var(--mono);">0</span>
+                    </div>
+                    <div class="sec-hdr-r">
+                        <button class="expand-btn" id="erradas-expand-btn" onclick="toggleErradas()">Expandir</button>
+                    </div>
+                </div>
+                <!-- Filtros -->
+                <div class="sec-body" style="border-bottom:1px solid var(--border);padding-bottom:.75rem;">
+                    <div class="filtro-erradas">
+                        <button class="ftab on" data-f="todas" onclick="filtrarErradas(this)">Todas</button>
+                        <button class="ftab" data-f="FACIL" onclick="filtrarErradas(this)">Fácil</button>
+                        <button class="ftab" data-f="MEDIO" onclick="filtrarErradas(this)">Médio</button>
+                        <button class="ftab" data-f="DIFICIL" onclick="filtrarErradas(this)">Difícil</button>
+                        <button class="ftab" data-f="mais" onclick="filtrarErradas(this)">Mais erradas</button>
+                    </div>
+                </div>
+                <div class="hidden" id="erradas-list">
+                    <div class="sec-body" id="erradas-body"></div>
+                </div>
+            </div>
+
+        </div><!-- /page-content -->
+    </div><!-- /page -->
+
+    <!-- Modal refazer questão -->
+    <div class="modal-bg hidden" id="modal-refazer">
+        <div class="modal">
+            <div class="modal-hdr">
+                <span class="modal-title">♻️ Refazer Questão</span>
+                <button class="modal-close" onclick="fecharModalRefazer()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-refazer-body"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-wrap" id="toast-wrap"></div>
+
+    <script>
+        const API = 'http://localhost:8090/api';
+        let dadosCompletos = null;
+        let grupoAtivo = 'TODOS';
+        let erradasExpandidas = false;
+        let filtroErradas = 'todas';
+        let chartTema = null;
+
+        /* ══ INIT ══ */
+        async function init() {
+            const prefs = await carregarPrefs();
+            aplicarTema(prefs.tema_visual || 'escuro');
+            grupoAtivo = prefs.grupo_ativo || 'TODOS';
+            // Atualiza tab ativa
+            document.querySelectorAll('.gtab').forEach(t => {
+                t.classList.remove('on-edital', 'on-banca');
+                if (t.dataset.grupo === grupoAtivo) {
+                    t.classList.add(grupoAtivo === 'EDITAL' ? 'on-edital' : grupoAtivo === 'BANCA' ? 'on-banca' : 'on-edital');
+                }
+            });
+
+            try {
+                dadosCompletos = await apiFetch('/estatisticas');
+                renderTudo();
+                document.getElementById('loading-state').classList.add('hidden');
+                document.getElementById('page-content').classList.remove('hidden');
+            } catch (e) {
+                document.getElementById('loading-state').innerHTML =
+                    '<div style="text-align:center;color:var(--text3)"><div style="font-size:2rem;margin-bottom:.75rem">📭</div><div>Nenhuma estatística disponível. Realize um simulado primeiro!</div></div>';
+            }
+        }
+
+        async function carregarPrefs() {
+            try { return await apiFetch('/preferencias'); }
+            catch (e) { return {}; }
+        }
+
+        /* ══ TEMA ══ */
+        function aplicarTema(t) {
+            document.documentElement.setAttribute('data-tema', t);
+            document.getElementById('tema-btn').textContent = t === 'escuro' ? '☀️' : '🌙';
+            if (chartTema) {
+                setTimeout(() => renderChartTema(dadosCompletos?.porTema || []), 100);
+            }
+        }
+
+        async function toggleTema() {
+            const atual = document.documentElement.getAttribute('data-tema');
+            const novo = atual === 'escuro' ? 'claro' : 'escuro';
+            aplicarTema(novo);
+            await apiFetch('/preferencias/tema_visual', 'PUT', { valor: novo });
+        }
+
+        /* ══ FILTRO GRUPO ══ */
+        async function filtrarGrupo(el) {
+            document.querySelectorAll('.gtab').forEach(t => t.classList.remove('on-edital', 'on-banca'));
+            grupoAtivo = el.dataset.grupo;
+            el.classList.add(grupoAtivo === 'BANCA' ? 'on-banca' : 'on-edital');
+            await apiFetch('/preferencias/grupo_ativo', 'PUT', { valor: grupoAtivo });
+            renderTudo();
+        }
+
+        /* ══ RENDER TUDO ══ */
+        function renderTudo() {
+            if (!dadosCompletos) return;
+            const d = dadosCompletos;
+
+            // Filtra por grupo se necessário
+            // Para métricas gerais usamos os totais do backend diretamente
+            document.getElementById('m-total').textContent = d.totalRespondidas.toLocaleString();
+            document.getElementById('m-acertos').textContent = d.totalCorretas.toLocaleString();
+            document.getElementById('m-erros').textContent = d.totalErradas.toLocaleString();
+            document.getElementById('m-aprov').textContent = Math.round(d.aproveitamentoGeral) + '%';
+            document.getElementById('m-bloq').textContent = d.totalBloqueadas.toLocaleString();
+
+            renderNivel(d.porNivel);
+            renderChartTema(d.porTema);
+            renderPiores(d.pioresSubtemas);
+            renderErradas(d.questoesErradas);
+        }
+
+        /* ══ NÍVEL ══ */
+        function renderNivel(arr) {
+            if (!arr?.length) { document.getElementById('nivel-body').innerHTML = vazio('Sem dados de nível'); return; }
+            const cfg = { FACIL: ['#34d399', 'Fácil'], MEDIO: ['#fbbf24', 'Médio'], DIFICIL: ['#f87171', 'Difícil'] };
+            document.getElementById('nivel-body').innerHTML = arr.map(n => {
+                const [cor, label] = cfg[n.nivel] || ['#60a5fa', n.nivel];
+                const p = Math.round(n.aproveitamento);
+                return `<div class="brow-row">
+      <div class="brow-nm">${label} (${n.total} questões)</div>
+      <div class="brow-bar"><div class="brow-fill" data-pct="${p}" style="background:${cor};width:0%"></div></div>
+      <div class="brow-pct" style="color:${cor}">${p}%</div>
+    </div>`;
+            }).join('');
+            setTimeout(animarBarras, 200);
+        }
+
+        /* ══ CHART TEMA ══ */
+        function renderChartTema(arr) {
+            if (!arr?.length) return;
+            const sorted = [...arr].sort((a, b) => b.aproveitamento - a.aproveitamento);
+            const tema = document.documentElement.getAttribute('data-tema');
+            const cor2 = tema === 'claro' ? '#5a6080' : '#7e8aaa';
+            const grade = tema === 'claro' ? 'rgba(0,0,0,.06)' : 'rgba(255,255,255,.04)';
+
+            const ctx = document.getElementById('chart-tema').getContext('2d');
+            if (chartTema) chartTema.destroy();
+            chartTema = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sorted.map(t => t.tema.length > 24 ? t.tema.slice(0, 24) + '…' : t.tema),
+                    datasets: [{
+                        label: 'Aproveitamento %',
+                        data: sorted.map(t => Math.round(t.aproveitamento)),
+                        backgroundColor: sorted.map(t =>
+                            t.aproveitamento >= 70 ? 'rgba(52,211,153,.75)' :
+                                t.aproveitamento >= 50 ? 'rgba(251,191,36,.75)' : 'rgba(248,113,113,.75)'),
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        x: { ticks: { color: cor2, font: { size: 11 } }, grid: { color: grade } },
+                        y: { min: 0, max: 100, ticks: { color: cor2, font: { size: 11 }, callback: v => v + '%' }, grid: { color: grade } },
+                    },
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.raw + '%' } } }
+                }
+            });
+        }
+
+        /* ══ PIORES SUBTEMAS ══ */
+        function renderPiores(arr) {
+            const el = document.getElementById('piores-body');
+            if (!arr?.length) { el.innerHTML = vazio('Dados insuficientes (mínimo 2 respostas por subtema)'); return; }
+            el.innerHTML = arr.map(s => {
+                const p = Math.round(s.aproveitamento);
+                const bcls = p < 50 ? 'b-pct-r' : p < 70 ? 'b-pct-a' : 'b-pct-g';
+                const cor = p < 50 ? '#f87171' : p < 70 ? '#fbbf24' : '#34d399';
+                return `<div class="brow-row">
+      <div class="brow-nm" title="${s.subtema}">${s.subtema}</div>
+      <div class="brow-bar"><div class="brow-fill" data-pct="${p}" style="background:${cor};width:0%"></div></div>
+      <div class="brow-pct" style="color:${cor}">${p}%</div>
+    </div>`;
+            }).join('');
+            setTimeout(animarBarras, 200);
+        }
+
+        /* ══ QUESTÕES ERRADAS ══ */
+        function renderErradas(arr) {
+            document.getElementById('erradas-count-badge').textContent = arr?.length || 0;
+            if (!arr?.length) {
+                document.getElementById('erradas-body').innerHTML = vazio('Nenhuma questão errada — ótimo!');
+                return;
+            }
+            renderErradasFiltradas(arr);
+        }
+
+        function renderErradasFiltradas(arr) {
+            let lista = [...arr];
+            if (filtroErradas !== 'todas' && filtroErradas !== 'mais') {
+                lista = lista.filter(q => q.nivelDificuldade === filtroErradas);
+            }
+            if (filtroErradas === 'mais') {
+                lista = lista.sort((a, b) => b.vezesErrada - a.vezesErrada);
+            }
+            const nLbl = { FACIL: 'b-facil', MEDIO: 'b-medio', DIFICIL: 'b-dificil' };
+            const nTxt = { FACIL: 'Fácil', MEDIO: 'Médio', DIFICIL: 'Difícil' };
+            document.getElementById('erradas-body').innerHTML = lista.map((q, i) => `
+    <div class="errada-card">
+      <div class="errada-head">
+        <span class="errada-num">#${q.questaoId}</span>
+        <span class="badge ${nLbl[q.nivelDificuldade] || 'b-medio'}">${nTxt[q.nivelDificuldade] || q.nivelDificuldade}</span>
+        <span class="badge" style="background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue);">${q.tema}</span>
+        <span class="badge" style="background:var(--surface);border:1px solid var(--border2);color:var(--text2);">${q.subtema}</span>
+        ${q.tipoPegadinha ? `<span class="badge b-pegad">🪤 ${q.tipoPegadinha}</span>` : ''}
+        <span class="badge ${q.gabarito ? 'b-certo' : 'b-errado'}" style="margin-left:auto;">Gabarito: ${q.gabarito ? 'CERTO' : 'ERRADO'}</span>
+      </div>
+      <div class="errada-enu">${q.enunciado}</div>
+      <div class="errada-exp-wrap">
+        <div class="errada-exp-hdr">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M8 5v3M8 11h.01"/></svg>
+          Explicação
+        </div>
+        <div class="errada-exp">${q.explicacao}</div>
+        ${q.artigoRef ? `<div class="errada-ref">📖 ${q.artigoRef}</div>` : ''}
+      </div>
+      <div class="errada-stats">
+        <span class="errada-stat">❌ Errada ${q.vezesErrada}x</span>
+        <span class="errada-stat">✓ ${Math.round(q.taxaAcerto)}% de acerto</span>
+        <span class="errada-stat">⏱ ${(q.tempoMedioMs / 1000).toFixed(1)}s médio</span>
+      </div>
+      <button class="btn-refazer" onclick="abrirRefazer(${q.questaoId})">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8A6 6 0 0114 5.5"/><path d="M14 8A6 6 0 012 10.5"/><path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2"/></svg>
+        Refazer esta questão
+      </button>
+    </div>
+  `).join('');
+        }
+
+        function filtrarErradas(el) {
+            document.querySelectorAll('.ftab').forEach(t => t.classList.remove('on'));
+            el.classList.add('on');
+            filtroErradas = el.dataset.f;
+            renderErradasFiltradas(dadosCompletos?.questoesErradas || []);
+        }
+
+        function toggleErradas() {
+            erradasExpandidas = !erradasExpandidas;
+            document.getElementById('erradas-list').classList.toggle('hidden', !erradasExpandidas);
+            document.getElementById('erradas-expand-btn').textContent = erradasExpandidas ? 'Recolher' : 'Expandir';
+        }
+
+        /* ══ REFAZER QUESTÃO ══ */
+        async function abrirRefazer(questaoId) {
+            const q = dadosCompletos?.questoesErradas?.find(x => x.questaoId === questaoId);
+            if (!q) return;
+            const body = document.getElementById('modal-refazer-body');
+            body.innerHTML = renderRefazerCard(q);
+            document.getElementById('modal-refazer').classList.remove('hidden');
+        }
+
+        function renderRefazerCard(q) {
+            return `<div class="refazer-card" id="rf-${q.questaoId}">
+    <div style="margin-bottom:.65rem;">
+      <span class="badge" style="background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue);">${q.tema}</span>
+      <span class="badge" style="background:var(--surface);border:1px solid var(--border2);color:var(--text2);margin-left:.3rem;">${q.subtema}</span>
+    </div>
+    <div class="refazer-enu">${q.enunciado}</div>
+    <div class="refazer-btns">
+      <button class="rb-btn rb-certo" onclick="responderRefazer(${q.questaoId}, true, ${q.gabarito})">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16"><path d="M2 8l4 4 8-8"/></svg>
+        CERTO
+      </button>
+      <button class="rb-btn rb-errado" onclick="responderRefazer(${q.questaoId}, false, ${q.gabarito})">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16"><path d="M2 2l12 12M14 2L2 14"/></svg>
+        ERRADO
+      </button>
+    </div>
+    <div id="rf-gab-${q.questaoId}"></div>
+  </div>`;
+        }
+
+        function responderRefazer(qId, resposta, gabarito) {
+            const acertou = resposta === gabarito;
+            const gabEl = document.getElementById(`rf-gab-${qId}`);
+            const q = dadosCompletos?.questoesErradas?.find(x => x.questaoId === qId);
+            const gabTxt = gabarito ? 'CERTO' : 'ERRADO';
+
+            document.querySelectorAll(`#rf-${qId} .rb-btn`).forEach(b => b.disabled = true);
+
+            gabEl.innerHTML = `<div class="refazer-gab ${acertou ? 'ok' : 'err'}">
+    <strong>${acertou ? '✅ Correto!' : '❌ Incorreto!'}</strong> — Gabarito: <strong>${gabTxt}</strong><br>
+    <span style="color:var(--text2);font-size:.85rem;">${q?.explicacao || ''}</span>
+    ${q?.artigoRef ? `<div class="errada-ref" style="margin-top:.4rem;">📖 ${q.artigoRef}</div>` : ''}
+  </div>`;
+
+            toast(acertou ? '✅ Acertou dessa vez!' : '❌ Errou novamente', acertou ? 'ok' : 'err');
+        }
+
+        function fecharModalRefazer() {
+            document.getElementById('modal-refazer').classList.add('hidden');
+        }
+
+        /* ══ AÇÕES ══ */
+        function irParaSimulado() { window.location.href = 'prova.html'; }
+
+        function focarDificuldades() {
+            localStorage.setItem('cp_foco_dificuldades', 'true');
+            localStorage.setItem('cp_grupo', grupoAtivo);
+            window.location.href = 'prova.html';
+        }
+
+        async function confirmarReset() {
+            if (!confirm('Isso removerá o bloqueio de todas as questões respondidas corretamente — elas voltarão ao pool de questões. Confirma?')) return;
+            try {
+                await apiFetch('/estatisticas/resetar', 'POST');
+                dadosCompletos.totalBloqueadas = 0;
+                document.getElementById('m-bloq').textContent = '0';
+                toast('Questões liberadas com sucesso!', 'ok');
+                setTimeout(init, 1000);
+            } catch (e) { toast('Erro ao resetar', 'err'); }
+        }
+
+        /* ══ UTILS ══ */
+        function animarBarras() {
+            document.querySelectorAll('.brow-fill[data-pct]').forEach(el => {
+                el.style.width = el.dataset.pct + '%';
+            });
+        }
+
+        function vazio(msg) {
+            return `<div class="empty"><div class="empty-icon">📭</div><div style="font-size:.88rem;color:var(--text3);">${msg}</div></div>`;
+        }
+
+        async function apiFetch(p, m = 'GET', b = null) {
+            const o = { method: m, headers: { 'Content-Type': 'application/json' } };
+            if (b) o.body = JSON.stringify(b);
+            const r = await fetch(API + p, o);
+            if (r.status === 204) return null;
+            if (!r.ok) throw new Error(await r.text().catch(() => r.statusText));
+            return r.json();
+        }
+
+        function toast(msg, type = '') {
+            const w = document.getElementById('toast-wrap');
+            const el = document.createElement('div');
+            el.className = 'toast ' + (type || '');
+            el.textContent = msg;
+            w.appendChild(el);
+            setTimeout(() => {
+                el.style.opacity = '0'; el.style.transition = 'opacity .2s';
+                setTimeout(() => el.remove(), 220);
+            }, 3000);
+        }
+
+        document.getElementById('modal-refazer').addEventListener('click', e => {
+            if (e.target === document.getElementById('modal-refazer')) fecharModalRefazer();
+        });
+
+        init();
+    </script>
+</body>
+
+</html>

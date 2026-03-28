@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Pro · CEBRASPE</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06080f;
+            --bg2: #0d1120;
+            --bg3: #141929;
+            --surface: #1a2035;
+            --surface2: #202740;
+            --border: rgba(255, 255, 255, .07);
+            --border2: rgba(255, 255, 255, .13);
+            --text: #dde2f0;
+            --text2: #7e8aaa;
+            --text3: #414d6b;
+            --gold: #f5c842;
+            --gold2: #fde98a;
+            --gold-bg: rgba(245, 200, 66, .1);
+            --gold-bd: rgba(245, 200, 66, .25);
+            --green: #34d399;
+            --green-bg: rgba(52, 211, 153, .1);
+            --green-bd: rgba(52, 211, 153, .28);
+            --red: #f87171;
+            --red-bg: rgba(248, 113, 113, .1);
+            --red-bd: rgba(248, 113, 113, .28);
+            --blue: #60a5fa;
+            --blue-bg: rgba(96, 165, 250, .1);
+            --blue-bd: rgba(96, 165, 250, .28);
+            --amber: #fbbf24;
+            --amber-bg: rgba(251, 191, 36, .1);
+            --amber-bd: rgba(251, 191, 36, .28);
+            --purple: #a78bfa;
+            --purple-bg: rgba(167, 139, 250, .1);
+            --purple-bd: rgba(167, 139, 250, .28);
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans: 'Outfit', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --r: 12px;
+            --r-sm: 8px;
+            --r-xs: 5px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ── HEADER ── */
+        .hdr {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 1.5rem;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 60;
+        }
+
+        .hdr-brand {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .hdr-mark {
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 7px;
+            display: grid;
+            place-items: center;
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--bg);
+        }
+
+        .hdr-name {
+            font-weight: 700;
+            font-size: .9rem;
+            letter-spacing: -.2px;
+        }
+
+        .hdr-sep {
+            width: 1px;
+            height: 15px;
+            background: var(--border2);
+        }
+
+        .hdr-sub {
+            font-size: .75rem;
+            color: var(--text3);
+            font-weight: 300;
+        }
+
+        .hdr-nav {
+            display: flex;
+            gap: .4rem;
+        }
+
+        .hdr-nav a {
+            padding: .35rem .8rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border2);
+            color: var(--text2);
+            font-size: .78rem;
+            font-family: var(--sans);
+            text-decoration: none;
+            transition: all .15s;
+        }
+
+        .hdr-nav a:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        /* ── SCREENS ── */
+        .screen {
+            display: none;
+        }
+
+        .screen.on {
+            display: block;
+        }
+
+        /* ══ CONFIGURAÇÃO ══ */
+        .cfg-wrap {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        .cfg-hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .28rem .8rem;
+            border-radius: 99px;
+            background: var(--gold-bg);
+            border: 1px solid var(--gold-bd);
+            color: var(--gold);
+            font-size: .72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 1rem;
+        }
+
+        .cfg-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: .6rem;
+        }
+
+        .cfg-title em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .cfg-sub {
+            color: var(--text2);
+            font-size: .9rem;
+            font-weight: 300;
+        }
+
+        .cfg-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .cfg-ch {
+            padding: .85rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            background: var(--bg3);
+        }
+
+        .cfg-ch svg {
+            width: 15px;
+            height: 15px;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .cfg-ct {
+            font-size: .83rem;
+            font-weight: 600;
+            letter-spacing: -.1px;
+        }
+
+        .cfg-cb {
+            padding: 1.25rem;
+        }
+
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .fg label {
+            font-size: .72rem;
+            font-weight: 600;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .fg select,
+        .fg input[type=number] {
+            padding: .55rem .85rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: .9rem;
+            outline: none;
+            width: 100%;
+            transition: border-color .15s;
+        }
+
+        .fg select:focus,
+        .fg input:focus {
+            border-color: var(--gold);
+        }
+
+        .fg select option {
+            background: var(--bg3);
+        }
+
+        .fgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .85rem;
+        }
+
+        .fgrid3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: .85rem;
+        }
+
+        @media(max-width:580px) {
+
+            .fgrid,
+            .fgrid3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Nível slider */
+        .nivel-modo-tabs {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ntab {
+            flex: 1;
+            padding: .55rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--sans);
+            font-size: .82rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            transition: all .18s;
+        }
+
+        .ntab.on {
+            border-color: var(--gold-bd);
+            background: var(--gold-bg);
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .pct-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .75rem;
+        }
+
+        .pct-item {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .pct-item label {
+            font-size: .72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        .pct-item label.facil {
+            color: #34d399;
+        }
+
+        .pct-item label.medio {
+            color: #fbbf24;
+        }
+
+        .pct-item label.dificil {
+            color: #f87171;
+        }
+
+        .pct-input {
+            padding: .5rem .7rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: .9rem;
+            font-weight: 500;
+            text-align: center;
+            outline: none;
+            width: 100%;
+        }
+
+        .pct-input:focus {
+            border-color: var(--gold);
+        }
+
+        .pct-sum {
+            text-align: center;
+            font-size: .78rem;
+            font-family: var(--mono);
+            margin-top: .35rem;
+        }
+
+        .pct-sum.ok {
+            color: var(--green);
+        }
+
+        .pct-sum.err {
+            color: var(--red);
+        }
+
+        /* Opções extras */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info {
+            display: flex;
+            flex-direction: column;
+            gap: .1rem;
+        }
+
+        .toggle-label {
+            font-size: .87rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .toggle-desc {
+            font-size: .75rem;
+            color: var(--text3);
+        }
+
+        .toggle-sw {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .toggle-sw input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .sw-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--surface2);
+            border-radius: 99px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .sw-slider::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 3px;
+            top: 3px;
+            background: var(--text3);
+            border-radius: 50%;
+            transition: transform .2s, background .2s;
+        }
+
+        .toggle-sw input:checked+.sw-slider {
+            background: var(--gold);
+        }
+
+        .toggle-sw input:checked+.sw-slider::before {
+            transform: translateX(18px);
+            background: var(--bg);
+        }
+
+        /* Btn iniciar */
+        .btn-go {
+            width: 100%;
+            padding: .95rem;
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--sans);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .6rem;
+            transition: all .2s;
+            margin-top: 1rem;
+            letter-spacing: -.1px;
+        }
+
+        .btn-go:hover:not(:disabled) {
+            background: var(--gold2);
+            transform: translateY(-1px);
+        }
+
+        .btn-go:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-go svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ══ PROVA ══ */
+        .prova-strip {
+            position: sticky;
+            top: 54px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            z-index: 50;
+        }
+
+        .strip-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: .7rem 1.5rem;
+        }
+
+        .strip-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .45rem;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        /* Cronômetro */
+        .cronometro {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .cron-display {
+            font-family: var(--mono);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: .5px;
+        }
+
+        .cron-display.alerta {
+            color: var(--amber);
+        }
+
+        .cron-display.critico {
+            color: var(--red);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: .5;
+            }
+        }
+
+        /* Placar topo */
+        .placar-top {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .sc {
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            padding: .2rem .6rem;
+            border-radius: 99px;
+            font-size: .75rem;
+            font-weight: 700;
+            font-family: var(--mono);
+        }
+
+        .sc.ok {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .sc.err {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .sc svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .prog-bar {
+            height: 3px;
+            background: var(--surface2);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .prog-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold2));
+            border-radius: 99px;
+            transition: width .4s ease;
+        }
+
+        .prova-wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 5rem;
+        }
+
+        /* Questão */
+        .q-outer {
+            margin-bottom: .85rem;
+            animation: qin .25s ease both;
+        }
+
+        @keyframes qin {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .q-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: border-color .2s;
+        }
+
+        .q-card.ok {
+            border-color: var(--green-bd);
+        }
+
+        .q-card.err {
+            border-color: var(--red-bd);
+        }
+
+        .q-head {
+            padding: .65rem 1.1rem;
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            flex-wrap: wrap;
+        }
+
+        .q-n {
+            font-family: var(--mono);
+            font-size: .68rem;
+            color: var(--text3);
+            background: var(--surface2);
+            padding: .15rem .5rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border2);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .2rem;
+            padding: .18rem .55rem;
+            border-radius: 99px;
+            font-size: .68rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .b-tema {
+            background: var(--blue-bg);
+            border: 1px solid var(--blue-bd);
+            color: var(--blue);
+        }
+
+        .b-sub {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            color: var(--text2);
+        }
+
+        .b-facil {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-medio {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        .b-dificil {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .b-pegad {
+            background: var(--purple-bg);
+            border: 1px solid var(--purple-bd);
+            color: var(--purple);
+        }
+
+        .b-tempo {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            color: var(--text2);
+            font-family: var(--mono);
+        }
+
+        .q-body {
+            padding: 1.25rem 1.1rem 1rem;
+        }
+
+        .q-enunciado {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            line-height: 1.78;
+            color: var(--text);
+            margin-bottom: 1.25rem;
+        }
+
+        .q-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .btn-resp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .8rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--sans);
+            font-size: .88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+            letter-spacing: .5px;
+        }
+
+        .btn-certo {
+            border-color: var(--green-bd);
+            color: var(--green);
+            background: var(--green-bg);
+        }
+
+        .btn-errado {
+            border-color: var(--red-bd);
+            color: var(--red);
+            background: var(--red-bg);
+        }
+
+        .btn-certo:hover:not(:disabled) {
+            background: var(--green);
+            color: var(--bg);
+        }
+
+        .btn-errado:hover:not(:disabled) {
+            background: var(--red);
+            color: var(--bg);
+        }
+
+        .btn-resp:disabled {
+            opacity: .35;
+            cursor: not-allowed;
+        }
+
+        .btn-resp svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Gabarito reveal */
+        .gab-reveal {
+            margin-top: .85rem;
+            border-radius: var(--r-sm);
+            overflow: hidden;
+            animation: gabin .2s ease;
+        }
+
+        @keyframes gabin {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gab-hdr {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .65rem .9rem;
+            font-size: .82rem;
+            font-weight: 700;
+        }
+
+        .gab-hdr svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .gab-ok .gab-hdr {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+            border-radius: var(--r-sm) var(--r-sm) 0 0;
+            border-bottom: none;
+        }
+
+        .gab-err .gab-hdr {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+            border-radius: var(--r-sm) var(--r-sm) 0 0;
+            border-bottom: none;
+        }
+
+        .gab-body {
+            padding: .8rem .9rem;
+            font-size: .84rem;
+            line-height: 1.68;
+            color: var(--text2);
+            border: 1px solid;
+            border-top: none;
+            border-radius: 0 0 var(--r-sm) var(--r-sm);
+        }
+
+        .gab-ok .gab-body {
+            border-color: var(--green-bd);
+            background: rgba(52, 211, 153, .04);
+        }
+
+        .gab-err .gab-body {
+            border-color: var(--red-bd);
+            background: rgba(248, 113, 113, .04);
+        }
+
+        .art-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            margin-top: .5rem;
+            font-family: var(--mono);
+            font-size: .72rem;
+            color: var(--text3);
+            background: var(--surface);
+            padding: .2rem .55rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border);
+        }
+
+        /* Btn finalizar */
+        .btn-fin {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            margin: 2rem auto 0;
+            padding: .85rem 2rem;
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--sans);
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .btn-fin:hover {
+            background: var(--gold2);
+        }
+
+        .btn-fin.hidden {
+            display: none;
+        }
+
+        .btn-fin svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ══ RESULTADO ══ */
+        .res-wrap {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 5rem;
+        }
+
+        .res-hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .ring-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .ring {
+            width: 130px;
+            height: 130px;
+            transform: rotate(-90deg);
+        }
+
+        .ring-bg {
+            fill: none;
+            stroke: var(--surface2);
+            stroke-width: 9;
+        }
+
+        .ring-fg {
+            fill: none;
+            stroke-width: 9;
+            stroke-linecap: round;
+            transition: stroke-dasharray 1.2s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .ring-fg.a {
+            stroke: var(--green);
+        }
+
+        .ring-fg.b {
+            stroke: var(--gold);
+        }
+
+        .ring-fg.c {
+            stroke: var(--red);
+        }
+
+        .ring-pct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--mono);
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--text);
+            text-align: center;
+            line-height: 1;
+        }
+
+        .ring-pct small {
+            display: block;
+            font-size: .58rem;
+            color: var(--text3);
+            font-weight: 400;
+            margin-top: .2rem;
+        }
+
+        .res-title {
+            font-family: var(--serif);
+            font-size: 1.7rem;
+            color: var(--text);
+            margin-bottom: .4rem;
+        }
+
+        .res-sub {
+            color: var(--text2);
+            font-size: .88rem;
+            font-weight: 300;
+        }
+
+        .res-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: .6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media(max-width:500px) {
+            .res-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .res-cell {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .res-val {
+            font-family: var(--mono);
+            font-size: 1.7rem;
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: .25rem;
+        }
+
+        .res-lbl {
+            font-size: .72rem;
+            color: var(--text3);
+        }
+
+        .res-cell.a {
+            border-color: var(--green-bd);
+        }
+
+        .res-cell.a .res-val {
+            color: var(--green);
+        }
+
+        .res-cell.b {
+            border-color: var(--red-bd);
+        }
+
+        .res-cell.b .res-val {
+            color: var(--red);
+        }
+
+        .res-cell.c .res-val {
+            color: var(--gold);
+        }
+
+        .res-cell.d .res-val {
+            color: var(--blue);
+        }
+
+        /* Breakdown */
+        .section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .sec-hdr {
+            padding: .8rem 1.1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sec-hdr-l {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        .sec-hdr-l svg {
+            width: 13px;
+            height: 13px;
+            color: var(--gold);
+        }
+
+        .sec-body {
+            padding: .9rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+
+        .brow-row {
+            display: grid;
+            grid-template-columns: 160px 1fr 44px;
+            align-items: center;
+            gap: .6rem;
+            font-size: .8rem;
+        }
+
+        @media(max-width:480px) {
+            .brow-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .brow-name {
+            color: var(--text2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .brow-bar {
+            height: 5px;
+            background: var(--surface2);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .brow-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 1s ease;
+        }
+
+        .brow-pct {
+            font-family: var(--mono);
+            font-size: .72rem;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        /* Erradas */
+        .errada-item {
+            padding: .8rem .9rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--red-bd);
+            border-radius: 0 var(--r-sm) var(--r-sm) 0;
+            margin-bottom: .5rem;
+        }
+
+        .errada-head {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+            margin-bottom: .4rem;
+            flex-wrap: wrap;
+        }
+
+        .errada-enu {
+            font-size: .83rem;
+            color: var(--text2);
+            line-height: 1.6;
+            margin-bottom: .3rem;
+        }
+
+        .errada-exp {
+            font-size: .78rem;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        .res-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .6rem;
+            margin-top: 1.5rem;
+        }
+
+        @media(max-width:400px) {
+            .res-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .45rem;
+            padding: .8rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--sans);
+            font-size: .87rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .btn svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .btn-outline {
+            border-color: var(--border2);
+            background: transparent;
+            color: var(--text2);
+        }
+
+        .btn-outline:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .btn-gold {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold2);
+            border-color: var(--gold2);
+        }
+
+        /* Misc */
+        .hidden {
+            display: none !important;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            border: 2px solid rgba(6, 8, 15, .2);
+            border-top-color: var(--bg);
+            border-radius: 50%;
+            animation: sp .7s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes sp {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .toast-wrap {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: .45rem;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .65rem .9rem;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-size: .82rem;
+            font-weight: 500;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+            min-width: 220px;
+            animation: tin .18s ease;
+        }
+
+        @keyframes tin {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .toast.ok {
+            background: var(--green-bg);
+            border-color: var(--green-bd);
+            color: var(--green);
+        }
+
+        .toast.err {
+            background: var(--red-bg);
+            border-color: var(--red-bd);
+            color: var(--red);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hdr">
+        <a href="#" class="hdr-brand" onclick="irConfig()">
+            <div class="hdr-mark">CP</div>
+            <div class="hdr-sep"></div>
+            <span class="hdr-name">CEBRASPE Pro</span>
+            <div class="hdr-sep"></div>
+            <span class="hdr-sub">Simulado Inteligente</span>
+        </a>
+        <nav class="hdr-nav">
+            <a href="estatisticas.html">📊 Estatísticas</a>
+            <a href="admin.html">⚙️ Admin</a>
+        </nav>
+    </header>
+
+    <!-- ══════════ CONFIGURAÇÃO ══════════ -->
+    <div id="s-config" class="screen on">
+        <div class="cfg-wrap">
+            <div class="cfg-hero">
+                <div class="eyebrow">⚡ Simulado Adaptativo</div>
+                <h1 class="cfg-title">Monte sua <em>prova personalizada</em></h1>
+                <p class="cfg-sub">Configure temas, dificuldade e quantidade — o sistema monta o simulado ideal para
+                    você.</p>
+            </div>
+
+            <!-- Filtros básicos -->
+            <div class="cfg-card">
+                <div class="cfg-ch">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <circle cx="8" cy="8" r="6" />
+                        <path d="M8 5v3l2 1.5" />
+                    </svg>
+                    <span class="cfg-ct">Configuração Básica</span>
+                </div>
+                <div class="cfg-cb">
+                    <div class="fgrid" style="margin-bottom:.85rem;">
+                        <div class="fg">
+                            <label>Cargo</label>
+                            <select id="c-cargo">
+                                <option value="">Todos os cargos</option>
+                            </select>
+                        </div>
+                        <div class="fg">
+                            <label>Quantidade de questões</label>
+                            <input type="number" id="c-qtd" value="20" min="5" max="200">
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Tema (deixe em branco para todos)</label>
+                        <select id="c-tema">
+                            <option value="">Todos os temas</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distribuição de dificuldade -->
+            <div class="cfg-card">
+                <div class="cfg-ch">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                        <rect x="1" y="10" width="3" height="4" />
+                        <rect x="6" y="6" width="3" height="8" />
+                        <rect x="11" y="2" width="3" height="12" />
+                    </svg>
+                    <span class="cfg-ct">Distribuição por Dificuldade</span>
+                </div>
+                <div class="cfg-cb">
+                    <div class="nivel-modo-tabs">
+                        <button class="ntab on" data-modo="pct" onclick="modoNivel(this)">Por Porcentagem</button>
+                        <button class="ntab" data-modo="alea" onclick="modoNivel(this)">Aleatório</button>
+                        <button class="ntab" data-modo="foco" onclick="modoNivel(this)">Focar Dificuldades</button>
+                    </div>
+                    <div id="pct-panel">
+                        <div class="pct-grid">
+                            <div class="pct-item">
+                                <label class="facil">Fácil %</label>
+                                <input type="number" class="pct-input" id="p-facil" value="33" min="0" max="100"
+                                    oninput="calcSum()">
+                            </div>
+                            <div class="pct-item">
+                                <label class="medio">Médio %</label>
+                                <input type="number" class="pct-input" id="p-medio" value="34" min="0" max="100"
+                                    oninput="calcSum()">
+                            </div>
+                            <div class="pct-item">
+                                <label class="dificil">Difícil %</label>
+                                <input type="number" class="pct-input" id="p-dif" value="33" min="0" max="100"
+                                    oninput="calcSum()">
+                            </div>
+                        </div>
+                        <div class="pct-sum ok" id="pct-sum">Total: 100%</div>
+                    </div>
+                    <div id="alea-panel" class="hidden" style="color:var(--text2);font-size:.85rem;padding:.5rem 0;">
+                        As questões serão sorteadas aleatoriamente de todos os níveis disponíveis.
+                    </div>
+                    <div id="foco-panel" class="hidden" style="color:var(--text2);font-size:.85rem;padding:.5rem 0;">
+                        O sistema priorizará os subtemas onde você tem menos de 60% de aproveitamento.
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-go" id="btn-iniciar" onclick="iniciarProva()">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <polygon points="5 3 13 8 5 13" />
+                </svg>
+                Iniciar Simulado
+            </button>
+        </div>
+    </div>
+
+    <!-- ══════════ PROVA ══════════ -->
+    <div id="s-prova" class="screen">
+        <div class="prova-strip">
+            <div class="strip-inner">
+                <div class="strip-top">
+                    <div class="cronometro">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="1.7">
+                            <circle cx="8" cy="9" r="5" />
+                            <path d="M8 4V2M6 1h4" />
+                            <path d="M8 7v2l1.5 1.5" />
+                        </svg>
+                        <span class="cron-display" id="cron-display">00:00:00</span>
+                    </div>
+                    <div class="placar-top">
+                        <div class="sc ok">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M2 6l3 3 5-5" />
+                            </svg>
+                            <span id="p-acertos">0</span>
+                        </div>
+                        <div class="sc err">
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M2 2l8 8M10 2L2 10" />
+                            </svg>
+                            <span id="p-erros">0</span>
+                        </div>
+                        <div class="sc"
+                            style="background:var(--gold-bg);border:1px solid var(--gold-bd);color:var(--gold);font-family:var(--mono);">
+                            <span id="p-pend">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="prog-bar">
+                    <div class="prog-fill" id="prog-fill" style="width:0%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="prova-wrap">
+            <div id="lista-questoes"></div>
+            <button class="btn-fin hidden" id="btn-fin" onclick="irResultado()">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2H4a1 1 0 00-1 1v10a1 1 0 001 1h9a1 1 0 001-1V5l-2-3z" />
+                </svg>
+                Ver Resultado Final
+            </button>
+        </div>
+    </div>
+
+    <!-- ══════════ RESULTADO ══════════ -->
+    <div id="s-result" class="screen">
+        <div class="res-wrap">
+            <div class="res-hero">
+                <div class="ring-wrap">
+                    <svg class="ring" viewBox="0 0 130 130">
+                        <circle class="ring-bg" cx="65" cy="65" r="55" />
+                        <circle class="ring-fg" id="ring-fg" cx="65" cy="65" r="55" stroke-dasharray="0 346" />
+                    </svg>
+                    <div class="ring-pct"><span id="r-pct">0%</span><small id="r-nota-label">aproveitamento</small>
+                    </div>
+                </div>
+                <h2 class="res-title" id="r-title">Simulado Finalizado</h2>
+                <p class="res-sub" id="r-sub"></p>
+            </div>
+            <div class="res-grid">
+                <div class="res-cell a">
+                    <div class="res-val" id="r-ac">0</div>
+                    <div class="res-lbl">Acertos</div>
+                </div>
+                <div class="res-cell b">
+                    <div class="res-val" id="r-er">0</div>
+                    <div class="res-lbl">Erros</div>
+                </div>
+                <div class="res-cell c">
+                    <div class="res-val" id="r-tot">0</div>
+                    <div class="res-lbl">Questões</div>
+                </div>
+                <div class="res-cell d">
+                    <div class="res-val" id="r-tempo">0s</div>
+                    <div class="res-lbl">Tempo Total</div>
+                </div>
+            </div>
+
+            <!-- Por nível -->
+            <div class="section" id="sec-nivel">
+                <div class="sec-hdr">
+                    <div class="sec-hdr-l"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <rect x="1" y="10" width="3" height="4" />
+                            <rect x="6" y="6" width="3" height="8" />
+                            <rect x="11" y="2" width="3" height="12" />
+                        </svg> Por Nível</div>
+                </div>
+                <div class="sec-body" id="sec-nivel-body"></div>
+            </div>
+
+            <!-- Por tema -->
+            <div class="section">
+                <div class="sec-hdr">
+                    <div class="sec-hdr-l"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <path d="M2 4a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" />
+                        </svg> Por Tema</div>
+                </div>
+                <div class="sec-body" id="sec-tema-body"></div>
+            </div>
+
+            <!-- Questões erradas -->
+            <div class="section" id="sec-erradas">
+                <div class="sec-hdr">
+                    <div class="sec-hdr-l"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M2 2l12 12M14 2L2 14" />
+                        </svg> Questões Erradas (<span id="r-erradas-count">0</span>)</div>
+                    <button onclick="toggleErradas()"
+                        style="background:none;border:1px solid var(--border2);border-radius:var(--r-xs);color:var(--text3);font-size:.72rem;padding:.2rem .55rem;cursor:pointer;"
+                        id="btn-erradas-toggle">Expandir</button>
+                </div>
+                <div class="hidden" id="erradas-body"></div>
+            </div>
+
+            <div class="res-actions">
+                <button class="btn btn-outline" onclick="irConfig()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                        <path d="M2 8A6 6 0 0114 5.5" />
+                        <path d="M14 8A6 6 0 012 10.5" />
+                        <path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2" />
+                    </svg>
+                    Novo Simulado
+                </button>
+                <button class="btn btn-gold" onclick="window.location.href='estatisticas.html'">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                        <rect x="1" y="10" width="3" height="4" />
+                        <rect x="6" y="6" width="3" height="8" />
+                        <rect x="11" y="2" width="3" height="12" />
+                    </svg>
+                    Ver Estatísticas
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-wrap" id="toast-wrap"></div>
+
+    <script>
+        const API = 'http://localhost:8090/api';
+        let sessaoId = null, questoes = [], respostas = {}, tempoQ = {}, inicioQ = {};
+        let cronInterval = null, inicioProva = null, acertos = 0, erros = 0;
+        let erradasExp = false;
+        let nivelModo = 'pct';
+
+        /* ── INIT ── */
+        async function init() {
+            try {
+                const [cargos, temas] = await Promise.all([
+                    apiFetch('/admin/cargos'), apiFetch('/admin/temas')
+                ]);
+                const sc = document.getElementById('c-cargo');
+                cargos.forEach(c => sc.add(new Option(c.nome, c.id)));
+                const st = document.getElementById('c-tema');
+                temas.forEach(t => st.add(new Option(t.nome, t.id)));
+            } catch (e) { toast('Backend não conectado', 'err'); }
+        }
+
+        /* ── MODO NÍVEL ── */
+        function modoNivel(el) {
+            document.querySelectorAll('.ntab').forEach(t => t.classList.remove('on'));
+            el.classList.add('on');
+            nivelModo = el.dataset.modo;
+            document.getElementById('pct-panel').classList.toggle('hidden', nivelModo !== 'pct');
+            document.getElementById('alea-panel').classList.toggle('hidden', nivelModo !== 'alea');
+            document.getElementById('foco-panel').classList.toggle('hidden', nivelModo !== 'foco');
+        }
+
+        function calcSum() {
+            const s = (+document.getElementById('p-facil').value || 0) + (+document.getElementById('p-medio').value || 0) + (+document.getElementById('p-dif').value || 0);
+            const el = document.getElementById('pct-sum');
+            el.textContent = 'Total: ' + s + '%';
+            el.className = 'pct-sum ' + (s === 100 ? 'ok' : 'err');
+        }
+
+        /* ── INICIAR PROVA ── */
+        async function iniciarProva() {
+            if (nivelModo === 'pct') {
+                const s = (+document.getElementById('p-facil').value || 0) + (+document.getElementById('p-medio').value || 0) + (+document.getElementById('p-dif').value || 0);
+                if (s !== 100) { toast('A soma dos % deve ser 100%', 'err'); return; }
+            }
+            const btn = document.getElementById('btn-iniciar');
+            btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Gerando...';
+            try {
+                const body = {
+                    cargoId: +document.getElementById('c-cargo').value || null,
+                    temaIds: document.getElementById('c-tema').value ? [+document.getElementById('c-tema').value] : null,
+                    totalQuestoes: +document.getElementById('c-qtd').value || 20,
+                    aleatorio: nivelModo === 'alea',
+                    focarDificuldades: nivelModo === 'foco',
+                    pctFacil: nivelModo === 'pct' ? +document.getElementById('p-facil').value : null,
+                    pctMedio: nivelModo === 'pct' ? +document.getElementById('p-medio').value : null,
+                    pctDificil: nivelModo === 'pct' ? +document.getElementById('p-dif').value : null,
+                };
+                const data = await apiFetch('/prova/sessao', 'POST', body);
+                sessaoId = data.sessaoId; questoes = data.questoes;
+                respostas = {}; tempoQ = {}; inicioQ = {}; acertos = 0; erros = 0;
+                renderProva();
+                showScreen('s-prova');
+                iniciarCronometro();
+                atualizarStrip();
+            } catch (e) { toast('Erro: ' + e.message, 'err'); }
+            finally { btn.disabled = false; btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18"><polygon points="5 3 13 8 5 13"/></svg> Iniciar Simulado'; }
+        }
+
+        /* ── CRONÔMETRO ── */
+        function iniciarCronometro() {
+            inicioProva = Date.now();
+            if (cronInterval) clearInterval(cronInterval);
+            cronInterval = setInterval(() => {
+                const ms = Date.now() - inicioProva;
+                const s = Math.floor(ms / 1000) % 60, m = Math.floor(ms / 60000) % 60, h = Math.floor(ms / 3600000);
+                const el = document.getElementById('cron-display');
+                el.textContent = `${z(h)}:${z(m)}:${z(s)}`;
+                el.className = 'cron-display' + (h > 0 || m >= 30 ? ' critico' : m >= 15 ? ' alerta' : '');
+            }, 500);
+        }
+        function z(n) { return String(n).padStart(2, '0'); }
+
+        /* ── RENDER PROVA ── */
+        function renderProva() {
+            const lista = document.getElementById('lista-questoes');
+            lista.innerHTML = questoes.map((q, i) => renderCard(q, i + 1)).join('');
+            questoes.forEach(q => { inicioQ[q.id] = Date.now(); });
+        }
+
+        function nBadge(n) {
+            const m = { 'FACIL': 'b-facil Fácil', 'MEDIO': 'b-medio Médio', 'DIFICIL': 'b-dificil Difícil' };
+            const v = m[n] || 'b-sub ' + n; const [cls, txt] = v.split(' ');
+            return `<span class="badge ${cls}">${txt}</span>`;
+        }
+
+        function renderCard(q, num) {
+            return `<div class="q-outer" id="qo-${q.id}" style="animation-delay:${Math.min(num * .025, .5)}s">
+    <div class="q-card" id="qc-${q.id}">
+      <div class="q-head">
+        <span class="q-n">Q${num}</span>
+        <span class="badge b-tema">${q.tema}</span>
+        <span class="badge b-sub">${q.subtema}</span>
+        ${nBadge(q.nivelDificuldade)}
+      </div>
+      <div class="q-body">
+        <div class="q-enunciado">${q.enunciado}</div>
+        <div class="q-btns" id="qb-${q.id}">
+          <button class="btn-resp btn-certo" onclick="responder(${q.id},true)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16"><path d="M2 8l4 4 8-8"/></svg> CERTO
+          </button>
+          <button class="btn-resp btn-errado" onclick="responder(${q.id},false)">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16"><path d="M2 2l12 12M14 2L2 14"/></svg> ERRADO
+          </button>
+        </div>
+        <div id="gb-${q.id}"></div>
+      </div>
+    </div>
+  </div>`;
+        }
+
+        /* ── RESPONDER ── */
+        async function responder(qId, resp) {
+            if (respostas[qId]) return;
+            const ms = Date.now() - (inicioQ[qId] || Date.now());
+            tempoQ[qId] = ms;
+            try {
+                const data = await apiFetch(`/prova/sessao/${sessaoId}/responder`, 'POST', { questaoId: qId, resposta: resp, tempoMs: ms });
+                respostas[qId] = { ...data, tempoMs: ms };
+                const ac = data.acertou; if (ac) acertos++; else erros++;
+                // Desabilita botões
+                document.getElementById(`qb-${qId}`).querySelectorAll('.btn-resp').forEach(b => b.disabled = true);
+                // Estiliza card
+                const card = document.getElementById(`qc-${qId}`);
+                card.classList.add(ac ? 'ok' : 'err');
+                // Atualiza badge nível com tempo
+                const head = card.querySelector('.q-head');
+                head.innerHTML += `<span class="badge b-tempo">${formatMs(ms)}</span>`;
+                if (data.tipoPegadinha) head.innerHTML += `<span class="badge b-pegad">🪤 ${data.tipoPegadinha}</span>`;
+                // Mostra gabarito
+                const gb = document.getElementById(`gb-${qId}`);
+                const gabTxt = data.gabarito ? 'CERTO' : 'ERRADO';
+                gb.innerHTML = `<div class="gab-reveal ${ac ? 'gab-ok' : 'gab-err'}">
+      <div class="gab-hdr">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14">${ac ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+        ${ac ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
+      </div>
+      <div class="gab-body">
+        ${data.explicacao}
+        ${data.artigoRef ? `<div class="art-tag">📖 ${data.artigoRef}</div>` : ''}
+      </div>
+    </div>`;
+                atualizarStrip();
+                if (Object.keys(respostas).length === questoes.length) {
+                    document.getElementById('btn-fin').classList.remove('hidden');
+                    setTimeout(() => document.getElementById('btn-fin').scrollIntoView({ behavior: 'smooth', block: 'center' }), 400);
+                }
+            } catch (e) { toast('Erro ao registrar resposta', 'err'); }
+        }
+
+        function atualizarStrip() {
+            const total = questoes.length, resp = Object.keys(respostas).length;
+            document.getElementById('p-acertos').textContent = acertos;
+            document.getElementById('p-erros').textContent = erros;
+            document.getElementById('p-pend').textContent = total - resp;
+            document.getElementById('prog-fill').style.width = (resp / total * 100) + '%';
+        }
+
+        function formatMs(ms) {
+            if (ms < 60000) return (ms / 1000).toFixed(1) + 's';
+            return Math.floor(ms / 60000) + 'm' + (Math.floor(ms / 1000) % 60) + 's';
+        }
+
+        /* ── RESULTADO ── */
+        async function irResultado() {
+            clearInterval(cronInterval);
+            const tempoTotal = Date.now() - inicioProva;
+            try { await apiFetch(`/prova/sessao/${sessaoId}/finalizar`, 'POST'); } catch (e) { }
+
+            const total = questoes.length;
+            const pct = total > 0 ? Math.round(acertos / total * 100) : 0;
+
+            // Ring
+            const circ = 2 * Math.PI * 55;
+            const ring = document.getElementById('ring-fg');
+            ring.className.baseVal = 'ring-fg ' + (pct >= 70 ? 'a' : pct >= 60 ? 'b' : 'c');
+            setTimeout(() => ring.setAttribute('stroke-dasharray', `${pct / 100 * circ} ${circ}`), 200);
+
+            document.getElementById('r-pct').textContent = pct + '%';
+            document.getElementById('r-ac').textContent = acertos;
+            document.getElementById('r-er').textContent = erros;
+            document.getElementById('r-tot').textContent = total;
+            document.getElementById('r-tempo').textContent = formatMs(tempoTotal);
+
+            const msgs = [[90, 'Excelente!', 'Domínio total.'], [70, 'Aprovado!', 'Resultado sólido.'], [60, 'No limite.', 'Atenção a alguns temas.'], [0, 'Precisa melhorar.', 'Revise os erros.']];
+            const [, ti, su] = msgs.find(([m]) => pct >= m);
+            document.getElementById('r-title').textContent = ti;
+            document.getElementById('r-sub').textContent = su;
+
+            // Por nível
+            const nivMap = {};
+            questoes.forEach(q => {
+                const r = respostas[q.id]; if (!r) return;
+                if (!nivMap[q.nivelDificuldade]) nivMap[q.nivelDificuldade] = { t: 0, a: 0 };
+                nivMap[q.nivelDificuldade].t++;
+                if (r.acertou) nivMap[q.nivelDificuldade].a++;
+            });
+            const nivCor = { 'FACIL': ['var(--green)', '#34d399'], 'MEDIO': ['var(--amber)', '#fbbf24'], 'DIFICIL': ['var(--red)', '#f87171'] };
+            const nivLabel = { 'FACIL': 'Fácil', 'MEDIO': 'Médio', 'DIFICIL': 'Difícil' };
+            document.getElementById('sec-nivel-body').innerHTML = Object.entries(nivMap).map(([n, d]) => {
+                const p = Math.round(d.a / d.t * 100); const c = nivCor[n] || ['var(--blue)', '#60a5fa'];
+                return `<div class="brow-row"><div class="brow-name">${nivLabel[n] || n} (${d.t})</div><div class="brow-bar"><div class="brow-fill" data-pct="${p}" style="background:${c[1]};width:0%"></div></div><div class="brow-pct" style="color:${c[0]}">${p}%</div></div>`;
+            }).join('');
+
+            // Por tema
+            const tMap = {};
+            questoes.forEach(q => {
+                const r = respostas[q.id]; if (!r) return;
+                if (!tMap[q.tema]) tMap[q.tema] = { t: 0, a: 0 };
+                tMap[q.tema].t++;
+                if (r.acertou) tMap[q.tema].a++;
+            });
+            document.getElementById('sec-tema-body').innerHTML = Object.entries(tMap).sort((a, b) => a[1].a / a[1].t - b[1].a / b[1].t).map(([nm, d]) => {
+                const p = Math.round(d.a / d.t * 100); const c = p >= 70 ? '#34d399' : p >= 50 ? '#fbbf24' : '#f87171';
+                return `<div class="brow-row"><div class="brow-name" title="${nm}">${nm}</div><div class="brow-bar"><div class="brow-fill" data-pct="${p}" style="background:${c};width:0%"></div></div><div class="brow-pct" style="color:${c}">${p}%</div></div>`;
+            }).join('');
+
+            // Erradas
+            const erradas = questoes.filter(q => respostas[q.id] && !respostas[q.id].acertou);
+            document.getElementById('r-erradas-count').textContent = erradas.length;
+            document.getElementById('erradas-body').innerHTML = `<div style="padding:.75rem 1.1rem;">` + erradas.map(q => {
+                const r = respostas[q.id];
+                return `<div class="errada-item">
+      <div class="errada-head">
+        <span class="badge b-sub">${q.subtema}</span>
+        ${nBadge(q.nivelDificuldade)}
+        ${r.tipoPegadinha ? `<span class="badge b-pegad">🪤 ${r.tipoPegadinha}</span>` : ''}
+        <span class="badge b-tempo" style="margin-left:auto;">${formatMs(tempoQ[q.id] || 0)}</span>
+      </div>
+      <div class="errada-enu">${q.enunciado}</div>
+      <div class="errada-exp">Gabarito: <strong>${r.gabarito ? 'CERTO' : 'ERRADO'}</strong> — ${r.explicacao}</div>
+      ${r.artigoRef ? `<div class="art-tag">📖 ${r.artigoRef}</div>` : ''}
+    </div>`;
+            }).join('') + `</div>`;
+
+            showScreen('s-result');
+            setTimeout(() => {
+                document.querySelectorAll('.brow-fill').forEach(el => { el.style.width = el.dataset.pct + '%'; });
+            }, 350);
+        }
+
+        function toggleErradas() {
+            erradasExp = !erradasExp;
+            document.getElementById('erradas-body').classList.toggle('hidden', !erradasExp);
+            document.getElementById('btn-erradas-toggle').textContent = erradasExp ? 'Recolher' : 'Expandir';
+        }
+
+        /* ── NAV ── */
+        function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('on')); document.getElementById(id).classList.add('on'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function irConfig() { clearInterval(cronInterval); showScreen('s-config'); }
+
+        /* ── UTILS ── */
+        async function apiFetch(p, m = 'GET', b = null) {
+            const o = { method: m, headers: { 'Content-Type': 'application/json' } };
+            if (b) o.body = JSON.stringify(b);
+            const r = await fetch(API + p, o);
+            if (r.status === 204) return null;
+            if (!r.ok) throw new Error(await r.text().catch(() => r.statusText));
+            return r.json();
+        }
+        function toast(msg, type = '') {
+            const w = document.getElementById('toast-wrap');
+            const el = document.createElement('div');
+            el.className = 'toast ' + (type || ''); el.textContent = msg; w.appendChild(el);
+            setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .2s'; setTimeout(() => el.remove(), 220); }, 3000);
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

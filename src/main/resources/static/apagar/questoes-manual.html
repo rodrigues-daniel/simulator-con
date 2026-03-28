@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Questões — CEBRASPE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0d0f14;
+            --ink-2: #1c2030;
+            --ink-3: #2a2f42;
+            --surface: #f7f6f2;
+            --surface-2: #eeecea;
+            --surface-3: #e4e1dc;
+            --accent: #d4550a;
+            --accent-2: #f5ede6;
+            --accent-3: #fdf8f5;
+            --green: #1a6e3c;
+            --green-bg: #e8f5ee;
+            --red: #b82020;
+            --red-bg: #fdecea;
+            --amber: #a05c00;
+            --amber-bg: #fff4e0;
+            --blue: #1848a0;
+            --blue-bg: #e8f0fd;
+            --border: rgba(13, 15, 20, .1);
+            --border-strong: rgba(13, 15, 20, .2);
+            --shadow: 0 2px 12px rgba(13, 15, 20, .08);
+            --shadow-lg: 0 8px 32px rgba(13, 15, 20, .14);
+            --r: 10px;
+            --r-sm: 6px;
+            --font: 'Sora', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--surface);
+            color: var(--ink);
+            min-height: 100vh;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ── HEADER ── */
+        .site-header {
+            background: var(--ink);
+            color: white;
+            padding: 0 2rem;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .header-brand-mark {
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: -.5px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .header-brand-name {
+            font-size: .9rem;
+            font-weight: 600;
+            letter-spacing: -.2px;
+        }
+
+        .header-brand-sep {
+            width: 1px;
+            height: 18px;
+            background: rgba(255, 255, 255, .2);
+        }
+
+        .header-brand-sub {
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .5);
+            font-weight: 300;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .4rem .9rem;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: transparent;
+            color: rgba(255, 255, 255, .75);
+            font-size: .82rem;
+            font-family: var(--font);
+            font-weight: 400;
+            cursor: pointer;
+            transition: all .18s;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, .1);
+            color: white;
+        }
+
+        .nav-btn.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-btn.primary:hover {
+            background: #b84808;
+        }
+
+        /* ── LAYOUT ── */
+        .layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: calc(100vh - 58px);
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            background: white;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 58px;
+            height: calc(100vh - 58px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            padding: 1.25rem 1.25rem .75rem;
+        }
+
+        .sidebar-title {
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(13, 15, 20, .35);
+            margin-bottom: .75rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .stat-card {
+            padding: .75rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            font-family: var(--mono);
+            color: var(--ink);
+        }
+
+        .stat-label {
+            font-size: .72rem;
+            color: rgba(13, 15, 20, .45);
+            margin-top: .2rem;
+            font-weight: 400;
+        }
+
+        .stat-card.total {
+            grid-column: 1/-1;
+            background: var(--ink);
+        }
+
+        .stat-card.total .stat-value {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .stat-card.total .stat-label {
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .stat-card.certas .stat-value {
+            color: var(--green);
+        }
+
+        .stat-card.erradas .stat-value {
+            color: var(--red);
+        }
+
+        /* Filtros */
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: .5rem .75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            background: var(--surface);
+            font-family: var(--font);
+            font-size: .85rem;
+            color: var(--ink);
+            cursor: pointer;
+            outline: none;
+            transition: border .15s;
+        }
+
+        .filter-select:focus {
+            border-color: var(--accent);
+        }
+
+        .filter-search {
+            width: 100%;
+            padding: .5rem .75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            background: var(--surface);
+            font-family: var(--font);
+            font-size: .85rem;
+            color: var(--ink);
+            outline: none;
+            transition: border .15s;
+        }
+
+        .filter-search:focus {
+            border-color: var(--accent);
+        }
+
+        .filter-search::placeholder {
+            color: rgba(13, 15, 20, .3);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border);
+            margin: .25rem 1.25rem;
+        }
+
+        .btn-add-sidebar {
+            margin: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .7rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--font);
+            font-weight: 600;
+            font-size: .85rem;
+            cursor: pointer;
+            transition: background .18s;
+            width: calc(100% - 2.5rem);
+        }
+
+        .btn-add-sidebar:hover {
+            background: #b84808;
+        }
+
+        .btn-add-sidebar svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Pegadinhas filter chips */
+        .chips-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .35rem;
+        }
+
+        .chip {
+            padding: .25rem .6rem;
+            border-radius: 99px;
+            font-size: .72rem;
+            font-weight: 600;
+            border: 1.5px solid;
+            cursor: pointer;
+            transition: all .15s;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .chip.gabarito-chip {
+            border-color: var(--border);
+            color: rgba(13, 15, 20, .5);
+            background: transparent;
+        }
+
+        .chip.gabarito-chip:hover,
+        .chip.gabarito-chip.on {
+            background: var(--ink);
+            color: white;
+            border-color: var(--ink);
+        }
+
+        .chip.certo-chip {
+            border-color: #b2d8c4;
+            color: var(--green);
+            background: transparent;
+        }
+
+        .chip.certo-chip:hover,
+        .chip.certo-chip.on {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+        }
+
+        .chip.errado-chip {
+            border-color: #f4b8b3;
+            color: var(--red);
+            background: transparent;
+        }
+
+        .chip.errado-chip:hover,
+        .chip.errado-chip.on {
+            background: var(--red);
+            color: white;
+            border-color: var(--red);
+        }
+
+        /* ── MAIN ── */
+        .main {
+            padding: 2rem;
+            min-width: 0;
+        }
+
+        .main-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1.75rem;
+            gap: 1rem;
+        }
+
+        .main-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -.4px;
+        }
+
+        .main-sub {
+            font-size: .85rem;
+            color: rgba(13, 15, 20, .45);
+            margin-top: .2rem;
+            font-weight: 300;
+        }
+
+        /* ── QUESTÃO CARD ── */
+        .questao-list {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+        }
+
+        .q-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: box-shadow .18s, border-color .18s;
+            animation: fadeUp .25s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .q-card:hover {
+            box-shadow: var(--shadow);
+            border-color: var(--border-strong);
+        }
+
+        .q-card-head {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            padding: .9rem 1.1rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .q-num {
+            font-family: var(--mono);
+            font-weight: 600;
+            font-size: .72rem;
+            color: rgba(13, 15, 20, .35);
+            min-width: 28px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            padding: .2rem .65rem;
+            border-radius: 99px;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .2px;
+        }
+
+        .badge-certo {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .badge-errado {
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        .badge-tema {
+            background: var(--blue-bg);
+            color: var(--blue);
+        }
+
+        .badge-subtema {
+            background: var(--surface-3);
+            color: rgba(13, 15, 20, .6);
+        }
+
+        .badge-pegadinha {
+            background: var(--amber-bg);
+            color: var(--amber);
+        }
+
+        .q-card-head-right {
+            margin-left: auto;
+            display: flex;
+            gap: .4rem;
+        }
+
+        .icon-btn {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            background: white;
+            cursor: pointer;
+            color: rgba(13, 15, 20, .45);
+            transition: all .15s;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--border-strong);
+            color: var(--ink);
+            background: var(--surface);
+        }
+
+        .icon-btn.danger:hover {
+            border-color: #f4b8b3;
+            color: var(--red);
+            background: var(--red-bg);
+        }
+
+        .icon-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .q-card-body {
+            padding: 1rem 1.1rem;
+        }
+
+        .q-enunciado {
+            font-size: .92rem;
+            line-height: 1.7;
+            color: var(--ink);
+            margin-bottom: .85rem;
+        }
+
+        .q-explicacao {
+            font-size: .82rem;
+            line-height: 1.65;
+            color: rgba(13, 15, 20, .6);
+            padding: .7rem .9rem;
+            border-left: 3px solid var(--border-strong);
+            border-radius: 0 var(--r-sm) var(--r-sm) 0;
+            background: var(--surface);
+        }
+
+        .q-artigo {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            margin-top: .6rem;
+            font-size: .75rem;
+            font-family: var(--mono);
+            color: rgba(13, 15, 20, .4);
+            background: var(--surface-2);
+            padding: .2rem .5rem;
+            border-radius: 4px;
+        }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: rgba(13, 15, 20, .35);
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--surface-2);
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .empty-icon svg {
+            width: 28px;
+            height: 28px;
+            color: rgba(13, 15, 20, .25);
+        }
+
+        .empty-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: .4rem;
+        }
+
+        .empty-sub {
+            font-size: .85rem;
+        }
+
+        /* ── MODAL ── */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(13, 15, 20, .55);
+            backdrop-filter: blur(3px);
+            z-index: 200;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+        }
+
+        .modal-backdrop.hidden {
+            display: none;
+        }
+
+        .modal {
+            background: white;
+            border-radius: var(--r);
+            width: 100%;
+            max-width: 680px;
+            box-shadow: var(--shadow-lg);
+            animation: modalIn .22s ease;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(-16px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--ink);
+            color: white;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -.2px;
+        }
+
+        .modal-subtitle {
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .5);
+            margin-top: .1rem;
+            font-weight: 300;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: var(--r-sm);
+            background: transparent;
+            color: rgba(255, 255, 255, .6);
+            cursor: pointer;
+            transition: all .15s;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, .1);
+            color: white;
+        }
+
+        .modal-close svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: .6rem;
+            justify-content: flex-end;
+            background: var(--surface);
+        }
+
+        /* FORM */
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .9rem;
+        }
+
+        .field-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: .9rem;
+        }
+
+        .field label {
+            font-size: .78rem;
+            font-weight: 600;
+            color: rgba(13, 15, 20, .55);
+            letter-spacing: .3px;
+            text-transform: uppercase;
+        }
+
+        .field label .req {
+            color: var(--accent);
+            margin-left: .2rem;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            padding: .6rem .85rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-sm);
+            font-family: var(--font);
+            font-size: .9rem;
+            color: var(--ink);
+            background: white;
+            outline: none;
+            transition: border-color .15s, box-shadow .15s;
+            width: 100%;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 85, 10, .12);
+        }
+
+        .field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .field-hint {
+            font-size: .75rem;
+            color: rgba(13, 15, 20, .35);
+            margin-top: -.15rem;
+        }
+
+        /* Gabarito toggle */
+        .gabarito-toggle {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .gt-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .65rem;
+            border-radius: var(--r-sm);
+            border: 2px solid var(--border);
+            background: transparent;
+            font-family: var(--font);
+            font-size: .88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s;
+            color: rgba(13, 15, 20, .45);
+        }
+
+        .gt-btn:hover {
+            border-color: var(--border-strong);
+        }
+
+        .gt-btn.certo-btn.selected {
+            background: var(--green-bg);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .gt-btn.errado-btn.selected {
+            background: var(--red-bg);
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        /* Pegadinha section (condicional) */
+        .pegadinha-section {
+            padding: .9rem 1rem;
+            background: var(--amber-bg);
+            border: 1px solid #ffcc80;
+            border-radius: var(--r-sm);
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+            transition: all .25s;
+        }
+
+        .pegadinha-section.hidden {
+            display: none;
+        }
+
+        .pegadinha-label {
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--amber);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .pegadinha-label svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Pegadinha chips seletor */
+        .pegadinha-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+        }
+
+        .p-chip {
+            padding: .3rem .7rem;
+            border-radius: 99px;
+            font-size: .75rem;
+            font-weight: 600;
+            border: 1.5px solid #ffcc80;
+            color: var(--amber);
+            background: white;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .p-chip:hover {
+            background: var(--amber-bg);
+        }
+
+        .p-chip.selected {
+            background: var(--amber);
+            color: white;
+            border-color: var(--amber);
+        }
+
+        /* Action btns */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .6rem 1.2rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--font);
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s;
+            white-space: nowrap;
+        }
+
+        .btn svg {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+        }
+
+        .btn-ghost {
+            border-color: var(--border);
+            background: white;
+            color: rgba(13, 15, 20, .6);
+        }
+
+        .btn-ghost:hover {
+            background: var(--surface);
+            border-color: var(--border-strong);
+            color: var(--ink);
+        }
+
+        .btn-accent {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: #b84808;
+            border-color: #b84808;
+        }
+
+        .btn-accent:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .btn-danger {
+            border-color: #f4b8b3;
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        .btn-danger:hover {
+            background: var(--red);
+            color: white;
+            border-color: var(--red);
+        }
+
+        /* Toast */
+        .toast-wrap {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            z-index: 500;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .75rem 1rem;
+            background: var(--ink);
+            color: white;
+            border-radius: var(--r-sm);
+            font-size: .85rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            animation: slideIn .22s ease;
+            min-width: 260px;
+        }
+
+        .toast.success {
+            background: var(--green);
+        }
+
+        .toast.error {
+            background: var(--red);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .toast-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, .3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Confirm modal */
+        .confirm-modal {
+            background: white;
+            border-radius: var(--r);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: modalIn .22s ease;
+            margin: auto;
+        }
+
+        .confirm-body {
+            padding: 1.75rem;
+            text-align: center;
+        }
+
+        .confirm-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--red-bg);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 1rem;
+        }
+
+        .confirm-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--red);
+        }
+
+        .confirm-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: .4rem;
+        }
+
+        .confirm-msg {
+            font-size: .85rem;
+            color: rgba(13, 15, 20, .55);
+            line-height: 1.6;
+        }
+
+        .confirm-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: .6rem;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+
+            .field-row,
+            .field-row-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Inativo */
+        .q-card.inativo {
+            opacity: .5;
+        }
+
+        .q-card.inativo .q-card-head {
+            background: var(--surface-3);
+        }
+
+        /* Count badge */
+        .count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            height: 22px;
+            padding: 0 6px;
+            background: var(--accent);
+            color: white;
+            font-size: .7rem;
+            font-weight: 700;
+            border-radius: 99px;
+            font-family: var(--mono);
+            flex-shrink: 0;
+        }
+
+        .pegadinha-ref-select {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <a href="index.html" class="header-brand">
+            <div class="header-brand-mark">CB</div>
+            <div class="header-brand-sep"></div>
+            <div>
+                <div class="header-brand-name">Simulado CEBRASPE</div>
+            </div>
+        </a>
+        <nav class="header-nav">
+            <a href="index.html" class="nav-btn">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" width="13" height="13">
+                    <path d="M2 8L8 2l6 6" />
+                    <path d="M4 6v7h3v-4h2v4h3V6" />
+                </svg>
+                Simulador
+            </a>
+            <button class="nav-btn primary" onclick="abrirModalCriar()">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                    <path d="M8 2v12M2 8h12" />
+                </svg>
+                Nova Questão
+            </button>
+        </nav>
+    </header>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Banco de Questões</div>
+                <div class="stats-grid" id="stats-grid">
+                    <div class="stat-card total">
+                        <div class="stat-value" id="stat-total">—</div>
+                        <div class="stat-label">questões ativas</div>
+                    </div>
+                    <div class="stat-card certas">
+                        <div class="stat-value" id="stat-certas">—</div>
+                        <div class="stat-label">gabarito CERTO</div>
+                    </div>
+                    <div class="stat-card erradas">
+                        <div class="stat-value" id="stat-erradas">—</div>
+                        <div class="stat-label">gabarito ERRADO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Filtrar</div>
+                <div class="filter-group">
+                    <input type="text" class="filter-search" id="f-busca" placeholder="Buscar no enunciado..."
+                        oninput="aplicarFiltros()">
+                    <select class="filter-select" id="f-tema" onchange="onTemaChange(); aplicarFiltros()">
+                        <option value="">Todos os temas</option>
+                    </select>
+                    <select class="filter-select" id="f-subtema" onchange="aplicarFiltros()">
+                        <option value="">Todos os subtemas</option>
+                    </select>
+                    <select class="filter-select" id="f-cargo" onchange="aplicarFiltros()">
+                        <option value="">Todos os cargos</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Gabarito</div>
+                <div class="chips-wrap">
+                    <span class="chip gabarito-chip on" data-val="" onclick="toggleGabaritoFiltro(this)">Todos</span>
+                    <span class="chip certo-chip" data-val="true" onclick="toggleGabaritoFiltro(this)">✓ Certo</span>
+                    <span class="chip errado-chip" data-val="false" onclick="toggleGabaritoFiltro(this)">✗ Errado</span>
+                </div>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <button class="btn-add-sidebar" onclick="abrirModalCriar()">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <path d="M8 2v12M2 8h12" />
+                </svg>
+                Inserir Nova Questão
+            </button>
+
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <div class="main-header">
+                <div>
+                    <div class="main-title">
+                        Banco Manual
+                        <span class="count-badge" id="count-visible">0</span>
+                    </div>
+                    <div class="main-sub" id="main-sub-text">Questões inseridas manualmente no banco</div>
+                </div>
+            </div>
+
+            <div class="questao-list" id="questao-list">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0120 9.414V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div class="empty-title">Carregando questões...</div>
+                    <div class="empty-sub">Buscando banco de questões</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODAL CRIAR / EDITAR                            -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div class="modal-backdrop hidden" id="modal-backdrop" onclick="fecharModal(event)">
+        <div class="modal" id="modal-form">
+
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title" id="modal-titulo">Nova Questão</div>
+                    <div class="modal-subtitle" id="modal-subtitulo">Insira os dados da questão manualmente</div>
+                </div>
+                <button class="modal-close" onclick="fecharModalForce()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- CARGO + TEMA + SUBTEMA -->
+                <div class="field-row-3">
+                    <div class="field">
+                        <label>Cargo</label>
+                        <select id="f-cargo-modal" onchange="atualizarSubtemasModal()">
+                            <option value="">Todos os cargos</option>
+                        </select>
+                        <span class="field-hint">Deixe em branco para qualquer cargo</span>
+                    </div>
+                    <div class="field">
+                        <label>Tema <span class="req">*</span></label>
+                        <select id="f-tema-modal" onchange="atualizarSubtemasModal()">
+                            <option value="">Selecione o tema</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Subtema <span class="req">*</span></label>
+                        <select id="f-subtema-modal">
+                            <option value="">Selecione o subtema</option>
+                        </select>
+                        <input type="text" id="f-subtema-texto" placeholder="ou digite um subtema novo"
+                            style="margin-top:.4rem;">
+                    </div>
+                </div>
+
+                <!-- ENUNCIADO -->
+                <div class="field">
+                    <label>Enunciado da Assertiva <span class="req">*</span></label>
+                    <textarea id="f-enunciado" rows="4"
+                        placeholder="Digite a assertiva exatamente como seria apresentada na prova CEBRASPE..."></textarea>
+                    <span class="field-hint">Escreva no estilo declarativo. A banca afirma algo e o candidato julga se é
+                        certo ou errado.</span>
+                </div>
+
+                <!-- GABARITO -->
+                <div class="field">
+                    <label>Gabarito <span class="req">*</span></label>
+                    <div class="gabarito-toggle">
+                        <button type="button" class="gt-btn certo-btn" id="btn-certo"
+                            onclick="selecionarGabarito(true)">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="16"
+                                height="16">
+                                <path d="M2 8l4 4 8-8" />
+                            </svg>
+                            CERTO
+                        </button>
+                        <button type="button" class="gt-btn errado-btn" id="btn-errado"
+                            onclick="selecionarGabarito(false)">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="16"
+                                height="16">
+                                <path d="M2 2l12 12M14 2L2 14" />
+                            </svg>
+                            ERRADO
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PEGADINHA (só aparece se ERRADO) -->
+                <div class="pegadinha-section hidden" id="pegadinha-section">
+                    <div class="pegadinha-label">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M8 1a4 4 0 014 4c0 1.5-.8 3-2 4l-2 2-2-2a6 6 0 01-2-4 4 4 0 014-4z" />
+                            <circle cx="8" cy="5" r="1.2" fill="currentColor" />
+                        </svg>
+                        Tipo de Pegadinha CEBRASPE
+                    </div>
+                    <div class="pegadinha-chips">
+                        <span class="p-chip" data-val="TROCA_CONCEITO" onclick="selecionarPegadinha(this)">Troca de
+                            Conceito</span>
+                        <span class="p-chip" data-val="INVERSAO_EFEITO" onclick="selecionarPegadinha(this)">Inversão de
+                            Efeito</span>
+                        <span class="p-chip" data-val="GENERALIZACAO_INDEVIDA"
+                            onclick="selecionarPegadinha(this)">Generalização Indevida</span>
+                        <span class="p-chip" data-val="OMISSAO_CONDICAO" onclick="selecionarPegadinha(this)">Omissão de
+                            Condição</span>
+                        <span class="p-chip" data-val="HIERARQUIA_FICTICIA"
+                            onclick="selecionarPegadinha(this)">Hierarquia Fictícia</span>
+                        <span class="p-chip" data-val="TROCA_PALAVRA_CHAVE" onclick="selecionarPegadinha(this)">Troca de
+                            Palavra-chave</span>
+                    </div>
+                    <input type="hidden" id="f-pegadinha">
+                </div>
+
+                <!-- EXPLICAÇÃO -->
+                <div class="field">
+                    <label>Explicação Detalhada <span class="req">*</span></label>
+                    <textarea id="f-explicacao" rows="4"
+                        placeholder="Explique por que a assertiva é correta ou incorreta. Se for errada, identifique a pegadinha usada pela banca..."></textarea>
+                    <span class="field-hint">A explicação é exibida ao candidato após ele responder. Seja didático e
+                        cite a base legal.</span>
+                </div>
+
+                <!-- ARTIGO DE REFERÊNCIA -->
+                <div class="field">
+                    <label>Referência Legal</label>
+                    <input type="text" id="f-artigo"
+                        placeholder="Ex: Art. 37, caput, CF/88 — Art. 2º da Lei 9.784/1999">
+                    <span class="field-hint">Artigo, inciso ou parágrafo que fundamenta o gabarito.</span>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="fecharModalForce()">Cancelar</button>
+                <button class="btn btn-accent" id="btn-salvar" onclick="salvarQuestao()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                        <path d="M13 2H4a1 1 0 00-1 1v10a1 1 0 001 1h9a1 1 0 001-1V5l-2-3z" />
+                        <path d="M9 2v4H4" />
+                        <path d="M5 9h6M5 12h4" />
+                    </svg>
+                    Salvar Questão
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL CONFIRMAR DELETE -->
+    <div class="modal-backdrop hidden" id="confirm-backdrop">
+        <div class="confirm-modal">
+            <div class="confirm-body">
+                <div class="confirm-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6m5 0V4a1 1 0 011-1h2a1 1 0 011 1v2" />
+                    </svg>
+                </div>
+                <div class="confirm-title">Desativar questão?</div>
+                <div class="confirm-msg">A questão será desativada e não aparecerá nos simulados. Esta ação pode ser
+                    desfeita editando a questão.</div>
+            </div>
+            <div class="confirm-footer">
+                <button class="btn btn-ghost" onclick="fecharConfirm()">Cancelar</button>
+                <button class="btn btn-danger" id="btn-confirm-del" onclick="confirmarDelete()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                        <polyline points="2 4 4 4 14 4" />
+                        <path
+                            d="M12 4l-.667 9.333A1 1 0 0110.337 14H5.663a1 1 0 01-.996-.667L4 4m3 0V2.667A.667.667 0 017.667 2h.666A.667.667 0 019 2.667V4" />
+                    </svg>
+                    Desativar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOASTS -->
+    <div class="toast-wrap" id="toast-wrap"></div>
+
+    <script>
+        const API = 'http://localhost:8080/api';
+
+        const TEMAS = {
+            'Direito Administrativo': ['Princípios da Administração Pública', 'Atos Administrativos', 'Poderes Administrativos', 'Servidores Públicos', 'Licitação e Contratos', 'Controle da Administração'],
+            'Língua Portuguesa': ['Interpretação de Texto', 'Ortografia', 'Sintaxe', 'Morfologia', 'Semântica', 'Concordância Verbal e Nominal'],
+            'Noções de Informática': ['Sistemas Operacionais', 'Pacote Office', 'Segurança da Informação', 'Redes de Computadores', 'Internet e Navegadores', 'Hardware e Software'],
+            'Raciocínio Lógico': ['Lógica Proposicional', 'Conjuntos', 'Sequências e Progressões', 'Probabilidade', 'Geometria', 'Porcentagem']
+        };
+
+        const PEGADINHAS_LABEL = {
+            TROCA_CONCEITO: 'Troca de Conceito',
+            INVERSAO_EFEITO: 'Inversão de Efeito',
+            GENERALIZACAO_INDEVIDA: 'Generalização Indevida',
+            OMISSAO_CONDICAO: 'Omissão de Condição',
+            HIERARQUIA_FICTICIA: 'Hierarquia Fictícia',
+            TROCA_PALAVRA_CHAVE: 'Troca de Palavra-chave'
+        };
+
+        let todasQuestoes = [];
+        let cargos = [];
+        let modoEdicao = false;
+        let editandoId = null;
+        let deletandoId = null;
+        let gabaritoAtual = null;
+        let filtroGabarito = '';
+
+        /* ═══ INIT ═══ */
+        async function init() {
+            await Promise.all([carregarCargos(), carregarQuestoes(), carregarEstatisticas()]);
+            popularFiltroTemas();
+            popularModalTemas();
+        }
+
+        async function carregarCargos() {
+            try {
+                cargos = await apiFetch('/cargos');
+                const sFiltro = document.getElementById('f-cargo');
+                const sModal = document.getElementById('f-cargo-modal');
+                cargos.forEach(c => {
+                    sFiltro.add(new Option(c.nome, c.id));
+                    sModal.add(new Option(c.nome, c.id));
+                });
+            } catch (e) { console.warn('Cargos não disponíveis'); }
+        }
+
+        async function carregarQuestoes() {
+            try {
+                todasQuestoes = await apiFetch('/banco-questoes');
+                renderLista(todasQuestoes);
+            } catch (e) {
+                renderVazio('Não foi possível carregar as questões', 'Verifique se o backend está rodando');
+            }
+        }
+
+        async function carregarEstatisticas() {
+            try {
+                const s = await apiFetch('/banco-questoes/estatisticas');
+                document.getElementById('stat-total').textContent = s.total ?? 0;
+                document.getElementById('stat-certas').textContent = s.certas ?? 0;
+                document.getElementById('stat-erradas').textContent = s.erradas ?? 0;
+            } catch (e) { }
+        }
+
+        /* ═══ POPULARES FILTROS / SELECTS ═══ */
+        function popularFiltroTemas() {
+            const s = document.getElementById('f-tema');
+            Object.keys(TEMAS).forEach(t => s.add(new Option(t, t)));
+        }
+
+        function popularModalTemas() {
+            const s = document.getElementById('f-tema-modal');
+            Object.keys(TEMAS).forEach(t => s.add(new Option(t, t)));
+        }
+
+        function onTemaChange() {
+            const tema = document.getElementById('f-tema').value;
+            const s = document.getElementById('f-subtema');
+            s.innerHTML = '<option value="">Todos os subtemas</option>';
+            if (tema && TEMAS[tema]) TEMAS[tema].forEach(sub => s.add(new Option(sub, sub)));
+        }
+
+        function atualizarSubtemasModal() {
+            const tema = document.getElementById('f-tema-modal').value;
+            const s = document.getElementById('f-subtema-modal');
+            s.innerHTML = '<option value="">Selecione o subtema</option>';
+            if (tema && TEMAS[tema]) TEMAS[tema].forEach(sub => s.add(new Option(sub, sub)));
+        }
+
+        /* ═══ RENDER LISTA ═══ */
+        function renderLista(questoes) {
+            const el = document.getElementById('questao-list');
+            document.getElementById('count-visible').textContent = questoes.length;
+
+            if (!questoes.length) {
+                renderVazio('Nenhuma questão encontrada', 'Ajuste os filtros ou insira uma nova questão');
+                return;
+            }
+
+            el.innerHTML = questoes.map((q, i) => `
+    <div class="q-card${q.ativa === false ? ' inativo' : ''}" id="qcard-${q.id}" style="animation-delay:${Math.min(i * 0.03, 0.3)}s">
+      <div class="q-card-head">
+        <span class="q-num">#${q.id}</span>
+        <span class="badge ${q.gabarito ? 'badge-certo' : 'badge-errado'}">
+          ${q.gabarito ? '✓ CERTO' : '✗ ERRADO'}
+        </span>
+        <span class="badge badge-tema">${q.tema}</span>
+        <span class="badge badge-subtema">${q.subtema}</span>
+        ${q.tipoPegadinha ? `<span class="badge badge-pegadinha">🪤 ${PEGADINHAS_LABEL[q.tipoPegadinha] || q.tipoPegadinha}</span>` : ''}
+        ${q.ativa === false ? '<span class="badge" style="background:#e5e5e5;color:#888">Inativa</span>' : ''}
+        <div class="q-card-head-right">
+          <button class="icon-btn" title="Editar" onclick="abrirModalEditar(${q.id})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+          </button>
+          <button class="icon-btn danger" title="Desativar" onclick="pedirDelete(${q.id})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="2 4 3.3 4 14 4"/><path d="M12.7 4L12 13.333A.667.667 0 0111.337 14H4.663a.667.667 0 01-.663-.667L3.3 4m2.7 0V2.667A.667.667 0 016.667 2h2.666A.667.667 0 0110 2.667V4"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="q-card-body">
+        <div class="q-enunciado">${q.enunciado}</div>
+        <div class="q-explicacao">${q.explicacao}</div>
+        ${q.artigoRef ? `<div class="q-artigo">📖 ${q.artigoRef}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+        }
+
+        function renderVazio(titulo, sub) {
+            document.getElementById('questao-list').innerHTML = `
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414A1 1 0 0120 9.414V19a2 2 0 01-2 2z"/>
+        </svg>
+      </div>
+      <div class="empty-title">${titulo}</div>
+      <div class="empty-sub">${sub}</div>
+    </div>`;
+            document.getElementById('count-visible').textContent = 0;
+        }
+
+        /* ═══ FILTROS ═══ */
+        function aplicarFiltros() {
+            const busca = document.getElementById('f-busca').value.toLowerCase();
+            const tema = document.getElementById('f-tema').value;
+            const subtema = document.getElementById('f-subtema').value;
+            const cargoNm = document.getElementById('f-cargo').value;
+
+            let filtradas = todasQuestoes.filter(q => {
+                if (busca && !q.enunciado.toLowerCase().includes(busca) && !q.explicacao.toLowerCase().includes(busca)) return false;
+                if (tema && q.tema !== tema) return false;
+                if (subtema && q.subtema !== subtema) return false;
+                if (cargoNm && q.cargo !== document.getElementById('f-cargo').options[document.getElementById('f-cargo').selectedIndex]?.text && cargoNm) {
+                    const cargoSel = cargos.find(c => c.id == cargoNm);
+                    if (cargoSel && q.cargo !== cargoSel.nome && q.cargo !== null) return false;
+                }
+                if (filtroGabarito !== '') {
+                    if (filtroGabarito === 'true' && !q.gabarito) return false;
+                    if (filtroGabarito === 'false' && q.gabarito) return false;
+                }
+                return true;
+            });
+
+            renderLista(filtradas);
+            const total = filtradas.length;
+            document.getElementById('main-sub-text').textContent =
+                total === todasQuestoes.length
+                    ? 'Questões inseridas manualmente no banco'
+                    : `${total} de ${todasQuestoes.length} questões exibidas`;
+        }
+
+        function toggleGabaritoFiltro(el) {
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+            el.classList.add('on');
+            filtroGabarito = el.dataset.val;
+            aplicarFiltros();
+        }
+
+        /* ═══ MODAL CRIAR ═══ */
+        function abrirModalCriar() {
+            modoEdicao = false;
+            editandoId = null;
+            gabaritoAtual = null;
+            document.getElementById('modal-titulo').textContent = 'Nova Questão';
+            document.getElementById('modal-subtitulo').textContent = 'Insira os dados manualmente';
+            document.getElementById('btn-salvar').innerHTML = `
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M13 2H4a1 1 0 00-1 1v10a1 1 0 001 1h9a1 1 0 001-1V5l-2-3z"/><path d="M9 2v4H4"/><path d="M5 9h6M5 12h4"/></svg>
+    Salvar Questão`;
+            limparModal();
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+            document.getElementById('f-enunciado').focus();
+        }
+
+        function abrirModalEditar(id) {
+            const q = todasQuestoes.find(x => x.id === id);
+            if (!q) return;
+
+            modoEdicao = true;
+            editandoId = id;
+            document.getElementById('modal-titulo').textContent = `Editar Questão #${id}`;
+            document.getElementById('modal-subtitulo').textContent = 'Altere os dados e salve';
+            document.getElementById('btn-salvar').innerHTML = `
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+    Salvar Alterações`;
+
+            // Popular campos
+            const cargoId = cargos.find(c => c.nome === q.cargo)?.id || '';
+            document.getElementById('f-cargo-modal').value = cargoId;
+
+            // Tema
+            const tmSel = document.getElementById('f-tema-modal');
+            tmSel.value = q.tema;
+            atualizarSubtemasModal();
+
+            // Subtema
+            setTimeout(() => {
+                const sbSel = document.getElementById('f-subtema-modal');
+                const opt = [...sbSel.options].find(o => o.value === q.subtema);
+                if (opt) { sbSel.value = q.subtema; }
+                else { document.getElementById('f-subtema-texto').value = q.subtema; }
+            }, 50);
+
+            document.getElementById('f-enunciado').value = q.enunciado;
+            document.getElementById('f-explicacao').value = q.explicacao;
+            document.getElementById('f-artigo').value = q.artigoRef || '';
+
+            selecionarGabarito(q.gabarito);
+
+            if (!q.gabarito && q.tipoPegadinha) {
+                const chip = document.querySelector(`.p-chip[data-val="${q.tipoPegadinha}"]`);
+                if (chip) selecionarPegadinha(chip);
+            }
+
+            document.getElementById('modal-backdrop').classList.remove('hidden');
+        }
+
+        function limparModal() {
+            ['f-cargo-modal', 'f-tema-modal', 'f-subtema-modal'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            ['f-subtema-texto', 'f-enunciado', 'f-explicacao', 'f-artigo', 'f-pegadinha'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            document.getElementById('f-subtema-modal').innerHTML = '<option value="">Selecione o subtema</option>';
+            document.getElementById('btn-certo').classList.remove('selected');
+            document.getElementById('btn-errado').classList.remove('selected');
+            document.getElementById('pegadinha-section').classList.add('hidden');
+            document.querySelectorAll('.p-chip').forEach(c => c.classList.remove('selected'));
+            gabaritoAtual = null;
+        }
+
+        function fecharModal(e) {
+            if (e.target === document.getElementById('modal-backdrop')) fecharModalForce();
+        }
+
+        function fecharModalForce() {
+            document.getElementById('modal-backdrop').classList.add('hidden');
+        }
+
+        /* ═══ GABARITO TOGGLE ═══ */
+        function selecionarGabarito(val) {
+            gabaritoAtual = val;
+            document.getElementById('btn-certo').classList.toggle('selected', val === true);
+            document.getElementById('btn-errado').classList.toggle('selected', val === false);
+            const sec = document.getElementById('pegadinha-section');
+            if (val === false) { sec.classList.remove('hidden'); }
+            else {
+                sec.classList.add('hidden');
+                document.getElementById('f-pegadinha').value = '';
+                document.querySelectorAll('.p-chip').forEach(c => c.classList.remove('selected'));
+            }
+        }
+
+        function selecionarPegadinha(el) {
+            document.querySelectorAll('.p-chip').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('f-pegadinha').value = el.dataset.val;
+        }
+
+        /* ═══ SALVAR ═══ */
+        async function salvarQuestao() {
+            const tema = document.getElementById('f-tema-modal').value;
+            const subtemaSelect = document.getElementById('f-subtema-modal').value;
+            const subtemaTexto = document.getElementById('f-subtema-texto').value.trim();
+            const subtema = subtemaTexto || subtemaSelect;
+            const enunciado = document.getElementById('f-enunciado').value.trim();
+            const explicacao = document.getElementById('f-explicacao').value.trim();
+            const artigo = document.getElementById('f-artigo').value.trim();
+            const pegadinha = document.getElementById('f-pegadinha').value || null;
+            const cargoIdRaw = document.getElementById('f-cargo-modal').value;
+            const cargoId = cargoIdRaw ? +cargoIdRaw : null;
+
+            if (!tema) return toast('Selecione o tema', 'error');
+            if (!subtema) return toast('Selecione ou digite o subtema', 'error');
+            if (!enunciado) return toast('Digite o enunciado da assertiva', 'error');
+            if (gabaritoAtual === null) return toast('Selecione o gabarito (CERTO ou ERRADO)', 'error');
+            if (!explicacao) return toast('Digite a explicação', 'error');
+
+            const btn = document.getElementById('btn-salvar');
+            const textoOriginal = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Salvando...';
+
+            const payload = {
+                cargoId, tema, subtema, enunciado, gabarito: gabaritoAtual, explicacao,
+                tipoPegadinha: gabaritoAtual === false ? pegadinha : null,
+                artigoRef: artigo || null
+            };
+
+            try {
+                if (modoEdicao) {
+                    const atualizada = await apiFetch(`/banco-questoes/${editandoId}`, 'PUT', payload);
+                    const idx = todasQuestoes.findIndex(q => q.id === editandoId);
+                    if (idx !== -1) todasQuestoes[idx] = atualizada;
+                    toast('Questão atualizada com sucesso!', 'success');
+                } else {
+                    const nova = await apiFetch('/banco-questoes', 'POST', payload);
+                    todasQuestoes.unshift(nova);
+                    toast('Questão inserida com sucesso!', 'success');
+                    await carregarEstatisticas();
+                }
+                fecharModalForce();
+                aplicarFiltros();
+            } catch (e) {
+                toast('Erro ao salvar: ' + (e.message || 'Tente novamente'), 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = textoOriginal;
+            }
+        }
+
+        /* ═══ DELETE ═══ */
+        function pedirDelete(id) {
+            deletandoId = id;
+            document.getElementById('confirm-backdrop').classList.remove('hidden');
+        }
+
+        function fecharConfirm() {
+            deletandoId = null;
+            document.getElementById('confirm-backdrop').classList.add('hidden');
+        }
+
+        async function confirmarDelete() {
+            if (!deletandoId) return;
+            const btn = document.getElementById('btn-confirm-del');
+            btn.disabled = true;
+            try {
+                await apiFetch(`/banco-questoes/${deletandoId}`, 'DELETE');
+                const idx = todasQuestoes.findIndex(q => q.id === deletandoId);
+                if (idx !== -1) todasQuestoes[idx] = { ...todasQuestoes[idx], ativa: false };
+                fecharConfirm();
+                aplicarFiltros();
+                await carregarEstatisticas();
+                toast('Questão desativada', 'success');
+            } catch (e) {
+                toast('Erro ao desativar', 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        /* ═══ TOAST ═══ */
+        function toast(msg, type = 'info') {
+            const wrap = document.getElementById('toast-wrap');
+            const el = document.createElement('div');
+            el.className = `toast ${type}`;
+            const icons = {
+                success: '<svg class="toast-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>',
+                error: '<svg class="toast-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l12 12M16 4L4 16"/></svg>',
+                info: '<svg class="toast-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M10 6v4M10 14h.01"/></svg>'
+            };
+            el.innerHTML = (icons[type] || icons.info) + `<span>${msg}</span>`;
+            wrap.appendChild(el);
+            setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateX(16px)'; el.style.transition = 'all .25s'; setTimeout(() => el.remove(), 300); }, 3200);
+        }
+
+        /* ═══ API ═══ */
+        async function apiFetch(path, method = 'GET', body = null) {
+            const opts = { method, headers: { 'Content-Type': 'application/json' } };
+            if (body) opts.body = JSON.stringify(body);
+            const res = await fetch(API + path, opts);
+            if (res.status === 204) return null;
+            if (!res.ok) {
+                const err = await res.text().catch(() => res.statusText);
+                throw new Error(err || 'Erro na requisição');
+            }
+            return res.json();
+        }
+
+        /* ═══ CLOSE CONFIRM ON BACKDROP ═══ */
+        document.getElementById('confirm-backdrop').addEventListener('click', function (e) {
+            if (e.target === this) fecharConfirm();
+        });
+
+        init();
+    </script>
+</body>
+
+</html>

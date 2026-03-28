@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importar Questões — CEBRASPE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0d0f14;
+            --ink2: #1c2030;
+            --ink3: #2a2f42;
+            --sf: #f7f6f2;
+            --sf2: #eeecea;
+            --sf3: #e4e1dc;
+            --accent: #d4550a;
+            --accent2: #f5ede6;
+            --accent3: #fdf8f5;
+            --green: #1a6e3c;
+            --green-bg: #e8f5ee;
+            --green-bd: #b2d8c4;
+            --red: #b82020;
+            --red-bg: #fdecea;
+            --red-bd: #f4b8b3;
+            --amber: #a05c00;
+            --amber-bg: #fff4e0;
+            --amber-bd: #ffcc80;
+            --blue: #1848a0;
+            --blue-bg: #e8f0fd;
+            --blue-bd: #b8cef5;
+            --border: rgba(13, 15, 20, .1);
+            --border2: rgba(13, 15, 20, .18);
+            --r: 10px;
+            --r-sm: 6px;
+            --font: 'Sora', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--sf);
+            color: var(--ink);
+            min-height: 100vh;
+            font-size: 15px;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--ink);
+            color: white;
+            padding: 0 2rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .brand-mark {
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: grid;
+            place-items: center;
+            font-family: var(--mono);
+            font-weight: 500;
+            font-size: 11px;
+            color: white;
+        }
+
+        .brand-name {
+            font-size: .88rem;
+            font-weight: 600;
+        }
+
+        .brand-sep {
+            width: 1px;
+            height: 16px;
+            background: rgba(255, 255, 255, .2);
+        }
+
+        .brand-sub {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .45);
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .nav-link {
+            padding: .38rem .85rem;
+            border-radius: var(--r-sm);
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: transparent;
+            color: rgba(255, 255, 255, .7);
+            font-size: .8rem;
+            font-family: var(--font);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .15s;
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, .1);
+            color: white;
+        }
+
+        .nav-link svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        /* LAYOUT */
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        /* HERO */
+        .hero {
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .28rem .8rem;
+            border-radius: 99px;
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -.4px;
+            margin-bottom: .4rem;
+        }
+
+        .hero-sub {
+            font-size: .9rem;
+            color: rgba(13, 15, 20, .5);
+            font-weight: 300;
+            max-width: 540px;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* CARDS */
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: .9rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--sf);
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+        }
+
+        .card-header svg {
+            width: 15px;
+            height: 15px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: .85rem;
+            font-weight: 700;
+            letter-spacing: -.1px;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        /* EDITOR */
+        .editor-wrap {
+            position: relative;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem .85rem;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: var(--r-sm) var(--r-sm) 0 0;
+            background: var(--sf2);
+            flex-wrap: wrap;
+        }
+
+        .tb-btn {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .3rem .7rem;
+            border-radius: 4px;
+            border: 1px solid var(--border2);
+            background: white;
+            font-family: var(--font);
+            font-size: .75rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--ink);
+            transition: all .15s;
+        }
+
+        .tb-btn:hover {
+            background: var(--sf3);
+            border-color: var(--border2);
+        }
+
+        .tb-btn svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .tb-sep {
+            width: 1px;
+            height: 18px;
+            background: var(--border2);
+        }
+
+        .tb-info {
+            font-size: .72rem;
+            color: rgba(13, 15, 20, .35);
+            margin-left: auto;
+            font-family: var(--mono);
+        }
+
+        .json-textarea {
+            width: 100%;
+            min-height: 420px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0 0 var(--r-sm) var(--r-sm);
+            font-family: var(--mono);
+            font-size: .83rem;
+            line-height: 1.7;
+            color: var(--ink);
+            background: #fafaf9;
+            resize: vertical;
+            outline: none;
+            transition: border-color .15s, box-shadow .15s;
+            tab-size: 2;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .json-textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 85, 10, .1);
+        }
+
+        .json-textarea.erro {
+            border-color: var(--red);
+        }
+
+        .json-textarea.ok {
+            border-color: var(--green);
+        }
+
+        /* Validação ao vivo */
+        .val-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .25rem .65rem;
+            border-radius: 99px;
+            font-size: .72rem;
+            font-weight: 600;
+            margin-top: .5rem;
+        }
+
+        .val-badge.ok {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .val-badge.erro {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .val-badge.info {
+            background: var(--blue-bg);
+            border: 1px solid var(--blue-bd);
+            color: var(--blue);
+        }
+
+        /* BOTÃO IMPORTAR */
+        .btn-importar {
+            width: 100%;
+            padding: .9rem;
+            margin-top: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--font);
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .55rem;
+            transition: all .2s;
+            letter-spacing: -.1px;
+        }
+
+        .btn-importar:hover:not(:disabled) {
+            background: #b84808;
+        }
+
+        .btn-importar:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+        }
+
+        .btn-importar svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        /* PAINEL RESULTADO */
+        .resultado-panel {
+            margin-top: 1.25rem;
+            border-radius: var(--r-sm);
+            overflow: hidden;
+        }
+
+        .resultado-panel.hidden {
+            display: none;
+        }
+
+        .res-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .5rem;
+            margin-bottom: .75rem;
+        }
+
+        .res-stat {
+            padding: .75rem;
+            border-radius: var(--r-sm);
+            text-align: center;
+        }
+
+        .res-stat .v {
+            font-family: var(--mono);
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .res-stat .l {
+            font-size: .72rem;
+            margin-top: .2rem;
+        }
+
+        .res-stat.imp {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+        }
+
+        .res-stat.imp .v {
+            color: var(--green);
+        }
+
+        .res-stat.imp .l {
+            color: var(--green);
+        }
+
+        .res-stat.ign {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+        }
+
+        .res-stat.ign .v {
+            color: var(--amber);
+        }
+
+        .res-stat.ign .l {
+            color: var(--amber);
+        }
+
+        .res-stat.tot {
+            background: var(--blue-bg);
+            border: 1px solid var(--blue-bd);
+        }
+
+        .res-stat.tot .v {
+            color: var(--blue);
+        }
+
+        .res-stat.tot .l {
+            color: var(--blue);
+        }
+
+        .erros-list {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            border-radius: var(--r-sm);
+            padding: .85rem 1rem;
+        }
+
+        .erros-title {
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: .5rem;
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .erros-title svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .erro-item {
+            font-size: .78rem;
+            font-family: var(--mono);
+            color: var(--red);
+            line-height: 1.55;
+            padding: .2rem 0;
+            border-top: 1px solid var(--red-bd);
+        }
+
+        .erro-item:first-of-type {
+            border-top: none;
+        }
+
+        /* SIDEBAR */
+        .schema-block {
+            margin-bottom: 1rem;
+        }
+
+        .schema-label {
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: rgba(13, 15, 20, .4);
+            margin-bottom: .4rem;
+        }
+
+        .schema-json {
+            background: var(--sf);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            padding: .75rem .9rem;
+            font-family: var(--mono);
+            font-size: .75rem;
+            line-height: 1.7;
+            color: var(--ink2);
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .schema-json .key {
+            color: var(--blue);
+        }
+
+        .schema-json .val {
+            color: var(--green);
+        }
+
+        .schema-json .req {
+            color: var(--accent);
+        }
+
+        .schema-json .opt {
+            color: var(--amber);
+        }
+
+        .schema-json .bool {
+            color: #7c3aed;
+        }
+
+        .schema-json .null {
+            color: rgba(13, 15, 20, .3);
+        }
+
+        .schema-json .cmt {
+            color: rgba(13, 15, 20, .3);
+            font-style: italic;
+        }
+
+        .campo-list {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .campo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: .55rem;
+            padding: .5rem .65rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border);
+            background: var(--sf);
+        }
+
+        .campo-item .cn {
+            font-family: var(--mono);
+            font-size: .78rem;
+            font-weight: 500;
+            color: var(--ink);
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .campo-item .cd {
+            font-size: .78rem;
+            color: rgba(13, 15, 20, .5);
+            line-height: 1.45;
+        }
+
+        .campo-item.req-campo {
+            border-left: 2px solid var(--accent);
+        }
+
+        .campo-item.opt-campo {
+            border-left: 2px solid var(--amber-bd);
+        }
+
+        .pill {
+            display: inline-block;
+            padding: .1rem .45rem;
+            border-radius: 99px;
+            font-size: .65rem;
+            font-weight: 700;
+        }
+
+        .pill.req {
+            background: var(--accent2);
+            color: var(--accent);
+        }
+
+        .pill.opt {
+            background: var(--amber-bg);
+            color: var(--amber);
+        }
+
+        .pill.bool {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .pegad-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .3rem;
+            margin-top: .65rem;
+        }
+
+        .pegad-chip {
+            font-family: var(--mono);
+            font-size: .68rem;
+            padding: .2rem .5rem;
+            border-radius: 4px;
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, .3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="index.html" class="brand">
+            <div class="brand-mark">CB</div>
+            <div class="brand-sep"></div>
+            <span class="brand-name">Simulado CEBRASPE</span>
+            <div class="brand-sep"></div>
+            <span class="brand-sub">Importação em Lote</span>
+        </a>
+        <div class="nav-links">
+            <a href="questoes-manual.html" class="nav-link">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6l-4-4z" />
+                    <path d="M9 2v4h4" />
+                </svg>
+                Banco de Questões
+            </a>
+            <a href="simulado-banco.html" class="nav-link">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <polygon points="5 3 13 8 5 13" />
+                </svg>
+                Simulador
+            </a>
+        </div>
+    </header>
+
+    <div class="page">
+
+        <div class="hero">
+            <div class="hero-eyebrow">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 1L1 5v6l7 4 7-4V5L8 1zm0 2.18L13 6.1v3.8L8 12.82 3 9.9V6.1L8 3.18z" />
+                </svg>
+                Importação em Lote
+            </div>
+            <h1 class="hero-title">Cole um array JSON e importe múltiplas questões de uma vez</h1>
+            <p class="hero-sub">O sistema valida cada item individualmente — erros em uma questão não bloqueiam as
+                demais.</p>
+        </div>
+
+        <div class="grid">
+
+            <!-- COLUNA PRINCIPAL -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <path d="M2 12V4a1 1 0 011-1h6l4 4v5a1 1 0 01-1 1H3a1 1 0 01-1-1z" />
+                            <path d="M9 3v4h4" />
+                        </svg>
+                        <span class="card-title">JSON de Questões</span>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="editor-wrap">
+                            <div class="editor-toolbar">
+                                <button class="tb-btn" onclick="colarExemplo()">
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7">
+                                        <rect x="5" y="3" width="8" height="10" rx="1" />
+                                        <path d="M3 5H2a1 1 0 00-1 1v7a1 1 0 001 1h8a1 1 0 001-1v-1" />
+                                    </svg>
+                                    Colar Exemplo
+                                </button>
+                                <button class="tb-btn" onclick="formatarJson()">
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7">
+                                        <path d="M3 4h10M3 8h7M3 12h5" />
+                                    </svg>
+                                    Formatar
+                                </button>
+                                <button class="tb-btn" onclick="limpar()">
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7">
+                                        <path d="M3 4h10l-1 9H4L3 4zM1 4h14M6 4V2h4v2" />
+                                    </svg>
+                                    Limpar
+                                </button>
+                                <div class="tb-sep"></div>
+                                <span class="tb-info" id="tb-contador">0 questões</span>
+                            </div>
+                            <textarea class="json-textarea" id="json-input" placeholder='[
+  {
+    "tema": "Direito Administrativo",
+    "subtema": "Princípios da Administração Pública",
+    "enunciado": "Segundo a CF/88, a administração pública direta e indireta obedece, entre outros, ao princípio da moralidade.",
+    "gabarito": true,
+    "explicacao": "Correto. O art. 37, caput, da CF/88 lista expressamente a moralidade como um dos princípios da Administração Pública.",
+    "tipoPegadinha": null,
+    "artigoRef": "Art. 37, caput, CF/88",
+    "cargo": "Técnico Administrativo"
+  }
+]' oninput="validarAoVivo()" onkeydown="tratarTab(event)" spellcheck="false"></textarea>
+                        </div>
+
+                        <div id="val-badge-wrap" style="min-height:28px;margin-top:.5rem;"></div>
+
+                        <button class="btn-importar" id="btn-importar" onclick="importar()" disabled>
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 2v9M4 7l4 4 4-4" />
+                                <path d="M2 13h12" />
+                            </svg>
+                            Importar para o Banco
+                        </button>
+
+                        <div class="resultado-panel hidden" id="resultado-panel">
+                            <div class="res-stats">
+                                <div class="res-stat imp">
+                                    <div class="v" id="res-imp">0</div>
+                                    <div class="l">importadas</div>
+                                </div>
+                                <div class="res-stat ign">
+                                    <div class="v" id="res-ign">0</div>
+                                    <div class="l">ignoradas</div>
+                                </div>
+                                <div class="res-stat tot">
+                                    <div class="v" id="res-tot">0</div>
+                                    <div class="l">total</div>
+                                </div>
+                            </div>
+                            <div class="erros-list hidden" id="erros-list">
+                                <div class="erros-title">
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <circle cx="8" cy="8" r="6" />
+                                        <path d="M8 5v3M8 11h.01" />
+                                    </svg>
+                                    Problemas encontrados
+                                </div>
+                                <div id="erros-items"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+
+                <!-- Schema -->
+                <div class="card">
+                    <div class="card-header">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <path d="M2 4a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" />
+                            <path d="M5 7h6M5 10h4" />
+                        </svg>
+                        <span class="card-title">Estrutura de cada item</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="schema-block">
+                            <div class="schema-label">Formato JSON</div>
+                            <div class="schema-json"><span class="cmt">// cada item do array:</span>
+                                {
+                                <span class="key">"tema"</span>: <span class="req">"..." </span><span class="cmt">//
+                                    obrigatório</span>
+                                <span class="key">"subtema"</span>: <span class="req">"..." </span><span class="cmt">//
+                                    obrigatório</span>
+                                <span class="key">"enunciado"</span>: <span class="req">"..." </span><span
+                                    class="cmt">// obrigatório</span>
+                                <span class="key">"gabarito"</span>: <span class="bool">true|false </span><span
+                                    class="cmt">// obrigatório</span>
+                                <span class="key">"explicacao"</span>: <span class="req">"..." </span><span
+                                    class="cmt">// obrigatório</span>
+                                <span class="key">"tipoPegadinha"</span>:<span class="opt">"..." </span><span
+                                    class="cmt">// opcional</span>
+                                <span class="key">"artigoRef"</span>: <span class="opt">"..." </span><span
+                                    class="cmt">// opcional</span>
+                                <span class="key">"cargo"</span>: <span class="opt">"..." </span><span class="cmt">//
+                                    opcional</span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="campo-list">
+                            <div class="campo-item req-campo">
+                                <span class="cn">tema</span>
+                                <div><span class="pill req">obrigatório</span><br><span class="cd">Ex: "Direito
+                                        Administrativo"</span></div>
+                            </div>
+                            <div class="campo-item req-campo">
+                                <span class="cn">subtema</span>
+                                <div><span class="pill req">obrigatório</span><br><span class="cd">Ex: "Atos
+                                        Administrativos"</span></div>
+                            </div>
+                            <div class="campo-item req-campo">
+                                <span class="cn">enunciado</span>
+                                <div><span class="pill req">obrigatório</span><br><span class="cd">Texto completo da
+                                        assertiva</span></div>
+                            </div>
+                            <div class="campo-item req-campo">
+                                <span class="cn">gabarito</span>
+                                <div><span class="pill req">obrigatório</span> <span
+                                        class="pill bool">boolean</span><br><span class="cd">true = CERTO · false =
+                                        ERRADO</span></div>
+                            </div>
+                            <div class="campo-item req-campo">
+                                <span class="cn">explicacao</span>
+                                <div><span class="pill req">obrigatório</span><br><span class="cd">Justificativa
+                                        detalhada</span></div>
+                            </div>
+                            <div class="campo-item opt-campo">
+                                <span class="cn">tipoPegadinha</span>
+                                <div><span class="pill opt">opcional</span><br><span class="cd">Apenas quando gabarito =
+                                        false</span></div>
+                            </div>
+                            <div class="campo-item opt-campo">
+                                <span class="cn">artigoRef</span>
+                                <div><span class="pill opt">opcional</span><br><span class="cd">Ex: "Art. 37, caput,
+                                        CF/88"</span></div>
+                            </div>
+                            <div class="campo-item opt-campo">
+                                <span class="cn">cargo</span>
+                                <div><span class="pill opt">opcional</span><br><span class="cd">Nome exato do cargo
+                                        cadastrado</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pegadinhas válidas -->
+                <div class="card">
+                    <div class="card-header">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <path d="M8 1a4 4 0 014 4c0 1.5-.8 3-2 4l-2 2-2-2a6 6 0 01-2-4 4 4 0 014-4z" />
+                        </svg>
+                        <span class="card-title">Valores de tipoPegadinha</span>
+                    </div>
+                    <div class="card-body" style="padding:.9rem 1.25rem;">
+                        <div class="pegad-chips">
+                            <span class="pegad-chip">TROCA_CONCEITO</span>
+                            <span class="pegad-chip">INVERSAO_EFEITO</span>
+                            <span class="pegad-chip">GENERALIZACAO_INDEVIDA</span>
+                            <span class="pegad-chip">OMISSAO_CONDICAO</span>
+                            <span class="pegad-chip">HIERARQUIA_FICTICIA</span>
+                            <span class="pegad-chip">TROCA_PALAVRA_CHAVE</span>
+                        </div>
+                        <p style="font-size:.75rem;color:rgba(13,15,20,.4);margin-top:.75rem;line-height:1.5;">
+                            Use null ou omita o campo quando gabarito = true.<br>
+                            O backend ignora tipoPegadinha se gabarito = true.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = 'http://localhost:8080/api';
+
+        let jsonValido = false;
+        let qtdDetectada = 0;
+
+        const EXEMPLO = JSON.stringify([
+            {
+                "tema": "Direito Administrativo",
+                "subtema": "Princípios da Administração Pública",
+                "enunciado": "Segundo a Constituição Federal de 1988, a administração pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência.",
+                "gabarito": true,
+                "explicacao": "Correto. O art. 37, caput, da CF/88 elenca exatamente esses cinco princípios. Questão que cobra literalidade da norma constitucional.",
+                "tipoPegadinha": null,
+                "artigoRef": "Art. 37, caput, CF/88",
+                "cargo": "Técnico Administrativo"
+            },
+            {
+                "tema": "Direito Administrativo",
+                "subtema": "Princípios da Administração Pública",
+                "enunciado": "O princípio da publicidade, previsto no art. 37 da CF/88, impede que qualquer ato da administração pública seja sigiloso, tornando obrigatória a divulgação irrestrita de todo e qualquer documento público.",
+                "gabarito": false,
+                "explicacao": "Errado. O princípio da publicidade não é absoluto. A própria CF/88 prevê exceções, como o sigilo necessário à segurança da sociedade e do Estado (art. 5º, XXXIII) e as hipóteses de sigilo fiscal e bancário. A questão incorre em generalização indevida ao afirmar que 'qualquer ato' deve ser divulgado de forma irrestrita.",
+                "tipoPegadinha": "GENERALIZACAO_INDEVIDA",
+                "artigoRef": "Art. 37, caput, e art. 5º, XXXIII, CF/88",
+                "cargo": "Técnico Administrativo"
+            },
+            {
+                "tema": "Direito Administrativo",
+                "subtema": "Atos Administrativos",
+                "enunciado": "A revogação de ato administrativo opera efeitos ex tunc, desfazendo retroativamente todos os efeitos jurídicos produzidos pelo ato desde sua origem.",
+                "gabarito": false,
+                "explicacao": "Errado. A revogação opera efeitos ex nunc (não retroativos), pois retira do ordenamento um ato lícito por razões de conveniência e oportunidade, respeitando os efeitos já produzidos. Os efeitos ex tunc são próprios da anulação. A banca trocou os conceitos de revogação e anulação.",
+                "tipoPegadinha": "TROCA_CONCEITO",
+                "artigoRef": "Súmula 473 do STF",
+                "cargo": null
+            }
+        ], null, 2);
+
+        /* ── VALIDAÇÃO AO VIVO ── */
+        function validarAoVivo() {
+            const input = document.getElementById('json-input');
+            const wrap = document.getElementById('val-badge-wrap');
+            const btn = document.getElementById('btn-importar');
+            const valor = input.value.trim();
+
+            if (!valor) {
+                wrap.innerHTML = '';
+                input.className = 'json-textarea';
+                jsonValido = false;
+                btn.disabled = true;
+                document.getElementById('tb-contador').textContent = '0 questões';
+                return;
+            }
+
+            try {
+                let limpo = valor;
+                if (limpo.startsWith('```')) {
+                    limpo = limpo.replace(/^```[a-zA-Z]*\n?/, '').replace(/```$/, '').trim();
+                }
+                const parsed = JSON.parse(limpo);
+
+                if (!Array.isArray(parsed)) {
+                    throw new Error('O JSON deve ser um array [ { ... } ]');
+                }
+
+                qtdDetectada = parsed.length;
+                jsonValido = true;
+                input.className = 'json-textarea ok';
+                btn.disabled = false;
+                document.getElementById('tb-contador').textContent = qtdDetectada + ' questão' + (qtdDetectada !== 1 ? 'ões' : '');
+                wrap.innerHTML = `<span class="val-badge ok">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6l3 3 5-5"/></svg>
+      JSON válido · ${qtdDetectada} questão${qtdDetectada !== 1 ? 'ões' : ''}
+    </span>`;
+
+            } catch (e) {
+                jsonValido = false;
+                input.className = 'json-textarea erro';
+                btn.disabled = true;
+                document.getElementById('tb-contador').textContent = '— erro';
+                wrap.innerHTML = `<span class="val-badge erro">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 2l8 8M10 2L2 10"/></svg>
+      ${sanitize(e.message)}
+    </span>`;
+            }
+        }
+
+        /* ── IMPORTAR ── */
+        async function importar() {
+            if (!jsonValido) return;
+            const btn = document.getElementById('btn-importar');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Importando...';
+
+            try {
+                const resp = await fetch(API + '/banco-questoes/importar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: document.getElementById('json-input').value.trim()
+                });
+
+                if (!resp.ok) throw new Error(await resp.text());
+                const data = await resp.json();
+                mostrarResultado(data);
+
+            } catch (e) {
+                mostrarResultado({ total: 0, importadas: 0, ignoradas: 0, erros: ['Falha na comunicação com o servidor: ' + e.message] });
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M8 2v9M4 7l4 4 4-4"/><path d="M2 13h12"/></svg>
+      Importar para o Banco`;
+            }
+        }
+
+        function mostrarResultado(data) {
+            document.getElementById('res-imp').textContent = data.importadas;
+            document.getElementById('res-ign').textContent = data.ignoradas;
+            document.getElementById('res-tot').textContent = data.total;
+
+            const errosEl = document.getElementById('erros-list');
+            const errosItems = document.getElementById('erros-items');
+
+            if (data.erros && data.erros.length) {
+                errosEl.classList.remove('hidden');
+                errosItems.innerHTML = data.erros.map(e =>
+                    `<div class="erro-item">${sanitize(e)}</div>`
+                ).join('');
+            } else {
+                errosEl.classList.add('hidden');
+            }
+
+            document.getElementById('resultado-panel').classList.remove('hidden');
+            document.getElementById('resultado-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /* ── TOOLBAR ── */
+        function colarExemplo() {
+            document.getElementById('json-input').value = EXEMPLO;
+            validarAoVivo();
+        }
+
+        function formatarJson() {
+            const el = document.getElementById('json-input');
+            try {
+                let limpo = el.value.trim();
+                if (limpo.startsWith('```')) limpo = limpo.replace(/^```[a-zA-Z]*\n?/, '').replace(/```$/, '').trim();
+                el.value = JSON.stringify(JSON.parse(limpo), null, 2);
+                validarAoVivo();
+            } catch (e) { /* já mostra erro no validarAoVivo */ }
+        }
+
+        function limpar() {
+            document.getElementById('json-input').value = '';
+            document.getElementById('resultado-panel').classList.add('hidden');
+            validarAoVivo();
+        }
+
+        function tratarTab(e) {
+            if (e.key !== 'Tab') return;
+            e.preventDefault();
+            const el = document.getElementById('json-input');
+            const s = el.selectionStart, f = el.selectionEnd;
+            el.value = el.value.substring(0, s) + '  ' + el.value.substring(f);
+            el.selectionStart = el.selectionEnd = s + 2;
+        }
+
+        function sanitize(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+    </script>
+</body>
+
+</html>

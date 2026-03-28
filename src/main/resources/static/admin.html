@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin · CEBRASPE Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ── TEMAS ── */
+        [data-tema="escuro"] {
+            --bg: #06080f;
+            --bg2: #0d1120;
+            --bg3: #141929;
+            --surface: #1a2035;
+            --surface2: #202740;
+            --border: rgba(255, 255, 255, .07);
+            --border2: rgba(255, 255, 255, .13);
+            --text: #dde2f0;
+            --text2: #7e8aaa;
+            --text3: #414d6b;
+            --shadow: 0 8px 32px rgba(0, 0, 0, .45);
+        }
+
+        [data-tema="claro"] {
+            --bg: #f2f3f7;
+            --bg2: #ffffff;
+            --bg3: #ecedf2;
+            --surface: #e4e6ed;
+            --surface2: #d8dae4;
+            --border: rgba(0, 0, 0, .08);
+            --border2: rgba(0, 0, 0, .14);
+            --text: #1a1d2e;
+            --text2: #555c7a;
+            --text3: #9099b8;
+            --shadow: 0 8px 32px rgba(0, 0, 0, .10);
+        }
+
+        :root {
+            --gold: #f5c842;
+            --gold2: #fde98a;
+            --gold-bg: rgba(245, 200, 66, .12);
+            --gold-bd: rgba(245, 200, 66, .28);
+            --green: #34d399;
+            --green-bg: rgba(52, 211, 153, .12);
+            --green-bd: rgba(52, 211, 153, .28);
+            --red: #f87171;
+            --red-bg: rgba(248, 113, 113, .12);
+            --red-bd: rgba(248, 113, 113, .28);
+            --blue: #60a5fa;
+            --blue-bg: rgba(96, 165, 250, .12);
+            --blue-bd: rgba(96, 165, 250, .28);
+            --amber: #fbbf24;
+            --amber-bg: rgba(251, 191, 36, .12);
+            --amber-bd: rgba(251, 191, 36, .28);
+            --purple: #a78bfa;
+            --purple-bg: rgba(167, 139, 250, .12);
+            --purple-bd: rgba(167, 139, 250, .28);
+            --sans: 'Outfit', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --r: 12px;
+            --r-sm: 8px;
+            --r-xs: 5px;
+            --transition: background .22s, color .22s, border-color .22s;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        /* ── HEADER ── */
+        .hdr {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 1.5rem;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            transition: var(--transition);
+        }
+
+        .hdr-brand {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .hdr-mark {
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 7px;
+            display: grid;
+            place-items: center;
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: #06080f;
+            flex-shrink: 0;
+        }
+
+        .hdr-name {
+            font-weight: 700;
+            font-size: .9rem;
+            letter-spacing: -.2px;
+        }
+
+        .hdr-sep {
+            width: 1px;
+            height: 15px;
+            background: var(--border2);
+            flex-shrink: 0;
+        }
+
+        .hdr-sub {
+            font-size: .75rem;
+            color: var(--text3);
+            font-weight: 300;
+        }
+
+        .hdr-right {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+        }
+
+        .hdr-link {
+            padding: .35rem .8rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border2);
+            color: var(--text2);
+            font-size: .78rem;
+            font-family: var(--sans);
+            text-decoration: none;
+            transition: all .15s;
+        }
+
+        .hdr-link:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .tema-btn {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border2);
+            background: transparent;
+            color: var(--text2);
+            cursor: pointer;
+            transition: all .15s;
+            font-size: 17px;
+            line-height: 1;
+        }
+
+        .tema-btn:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        /* ── LAYOUT ── */
+        .layout {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            min-height: calc(100vh - 54px);
+        }
+
+        @media(max-width:700px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            background: var(--bg2);
+            border-right: 1px solid var(--border);
+            padding: 1rem .75rem;
+            position: sticky;
+            top: 54px;
+            height: calc(100vh - 54px);
+            overflow-y: auto;
+            transition: var(--transition);
+        }
+
+        .sb-section-title {
+            font-size: .66rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: var(--text3);
+            padding: .2rem .6rem;
+            margin-bottom: .35rem;
+        }
+
+        .sb-btn {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            padding: .52rem .8rem;
+            border-radius: var(--r-sm);
+            border: none;
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--sans);
+            font-size: .84rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            transition: all .15s;
+        }
+
+        .sb-btn:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .sb-btn.on {
+            background: var(--gold-bg);
+            border: 1px solid var(--gold-bd);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .sb-btn svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .sb-sep {
+            height: 1px;
+            background: var(--border);
+            margin: .55rem 0;
+        }
+
+        /* ── RESUMO TOPO ── */
+        .resumo-strip {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: .5rem;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg2);
+            transition: var(--transition);
+        }
+
+        @media(max-width:900px) {
+            .resumo-strip {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media(max-width:500px) {
+            .resumo-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .res-mini {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            padding: .65rem .75rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .res-mini-val {
+            font-family: var(--mono);
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: .18rem;
+        }
+
+        .res-mini-lbl {
+            font-size: .65rem;
+            color: var(--text3);
+        }
+
+        /* ── MAIN ── */
+        .main {
+            padding: 1.5rem;
+            min-width: 0;
+        }
+
+        .main-hdr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.1rem;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .main-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -.2px;
+        }
+
+        /* ── TAB CONTENT ── */
+        .tab-content {
+            animation: fadeIn .18s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── TABELA ── */
+        .tbl-wrap {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tbl th {
+            padding: .6rem .9rem;
+            text-align: left;
+            font-size: .68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: var(--text3);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg3);
+            transition: var(--transition);
+        }
+
+        .tbl td {
+            padding: .6rem .9rem;
+            font-size: .84rem;
+            color: var(--text2);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .tbl tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tbl tr:hover td {
+            background: var(--surface);
+        }
+
+        .tbl td.mono {
+            font-family: var(--mono);
+            font-size: .77rem;
+        }
+
+        .tbl-empty {
+            text-align: center;
+            color: var(--text3);
+            padding: 3rem;
+            font-size: .88rem;
+        }
+
+        /* ── BADGES ── */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: .18rem .55rem;
+            border-radius: 99px;
+            font-size: .68rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .b-facil {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-medio {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        .b-dif {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .b-edital {
+            background: var(--blue-bg);
+            border: 1px solid var(--blue-bd);
+            color: var(--blue);
+        }
+
+        .b-banca {
+            background: var(--gold-bg);
+            border: 1px solid var(--gold-bd);
+            color: var(--gold);
+        }
+
+        .b-ok {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-off {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            color: var(--text3);
+        }
+
+        .b-certo {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-errado {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        /* ── BOTÕES ── */
+        .btn-add {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .48rem 1rem;
+            background: var(--gold);
+            color: #06080f;
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--sans);
+            font-size: .82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s;
+            white-space: nowrap;
+        }
+
+        .btn-add:hover {
+            background: var(--gold2);
+        }
+
+        .btn-add svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .icon-btn {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border2);
+            border-radius: var(--r-xs);
+            background: transparent;
+            color: var(--text3);
+            cursor: pointer;
+            transition: all .15s;
+            flex-shrink: 0;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--border2);
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        .icon-btn.del:hover {
+            border-color: var(--red-bd);
+            color: var(--red);
+            background: var(--red-bg);
+        }
+
+        .icon-btn svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .act-btns {
+            display: flex;
+            gap: .3rem;
+        }
+
+        /* ── IMPORT AREA ── */
+        .import-area {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-bottom: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .ia-hdr {
+            padding: .8rem 1.1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: .77rem;
+            font-weight: 700;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--bg3);
+            transition: var(--transition);
+        }
+
+        .ia-hdr svg {
+            width: 13px;
+            height: 13px;
+            color: var(--gold);
+        }
+
+        .ia-body {
+            padding: 1.1rem;
+        }
+
+        .json-ta {
+            width: 100%;
+            min-height: 220px;
+            padding: .85rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            font-family: var(--mono);
+            font-size: .78rem;
+            line-height: 1.65;
+            color: var(--text);
+            resize: vertical;
+            outline: none;
+            tab-size: 2;
+            transition: border-color .15s, background .22s, color .22s;
+        }
+
+        .json-ta:focus {
+            border-color: var(--gold);
+        }
+
+        .ia-actions {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-top: .75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-imp {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .55rem 1.1rem;
+            background: var(--gold);
+            color: #06080f;
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--sans);
+            font-size: .83rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .btn-imp:hover {
+            background: var(--gold2);
+        }
+
+        .btn-imp:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+
+        .ia-hint {
+            font-size: .74rem;
+            color: var(--text3);
+        }
+
+        .imp-result {
+            margin-top: .75rem;
+            padding: .7rem .9rem;
+            border-radius: var(--r-sm);
+            font-size: .82rem;
+            line-height: 1.6;
+        }
+
+        .imp-result.ok {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .imp-result.err {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .imp-erros {
+            margin-top: .4rem;
+            font-size: .73rem;
+            font-family: var(--mono);
+            line-height: 1.6;
+        }
+
+        .schema-box {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .schema-body {
+            padding: 1rem 1.1rem;
+            font-family: var(--mono);
+            font-size: .74rem;
+            line-height: 1.9;
+            color: var(--text2);
+        }
+
+        .schema-body .k {
+            color: var(--gold);
+        }
+
+        .schema-body .c {
+            color: var(--text3);
+            font-style: italic;
+        }
+
+        /* ── MODAL ── */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 8, 15, .72);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+        }
+
+        .modal-bg.hidden {
+            display: none;
+        }
+
+        .modal {
+            background: var(--bg2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            width: 100%;
+            max-width: 620px;
+            margin: auto;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: mIn .2s ease;
+            transition: var(--transition);
+        }
+
+        @keyframes mIn {
+            from {
+                opacity: 0;
+                transform: translateY(-14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-hdr {
+            padding: 1rem 1.3rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg3);
+            transition: var(--transition);
+        }
+
+        .modal-title {
+            font-size: .93rem;
+            font-weight: 700;
+            letter-spacing: -.1px;
+        }
+
+        .modal-close {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border2);
+            border-radius: var(--r-xs);
+            background: transparent;
+            color: var(--text3);
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        .modal-close svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .modal-body {
+            padding: 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: .85rem;
+        }
+
+        .modal-foot {
+            padding: .9rem 1.3rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: .5rem;
+            justify-content: flex-end;
+            background: var(--bg3);
+            transition: var(--transition);
+        }
+
+        /* ── FORM ── */
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: .38rem;
+        }
+
+        .fg label {
+            font-size: .69rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            color: var(--text3);
+        }
+
+        .fg label .req {
+            color: var(--gold);
+        }
+
+        .fg input,
+        .fg select,
+        .fg textarea {
+            padding: .54rem .82rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: .88rem;
+            outline: none;
+            width: 100%;
+            transition: border-color .15s, background .22s, color .22s;
+        }
+
+        .fg input:focus,
+        .fg select:focus,
+        .fg textarea:focus {
+            border-color: var(--gold);
+        }
+
+        .fg textarea {
+            resize: vertical;
+            min-height: 72px;
+        }
+
+        .fg select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%238899bb' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right .7rem center;
+            background-size: 15px;
+            padding-right: 2rem;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+
+        [data-tema="claro"] .fg select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23555c7a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+        }
+
+        .fg select option {
+            background: var(--bg3);
+            color: var(--text);
+        }
+
+        .fgrow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem;
+        }
+
+        .fgrow3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: .75rem;
+        }
+
+        @media(max-width:540px) {
+
+            .fgrow,
+            .fgrow3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Gabarito toggle */
+        .gab-tog {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .45rem;
+        }
+
+        .gbt {
+            padding: .52rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-sm);
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--sans);
+            font-size: .84rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all .18s;
+        }
+
+        .gbt:hover {
+            border-color: var(--border2);
+            background: var(--surface);
+        }
+
+        .gbt.on-c {
+            border-color: var(--green-bd);
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .gbt.on-e {
+            border-color: var(--red-bd);
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        /* Modal btns */
+        .btn-m {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .52rem 1rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--sans);
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s;
+            white-space: nowrap;
+        }
+
+        .btn-ghost {
+            border-color: var(--border2);
+            background: transparent;
+            color: var(--text2);
+        }
+
+        .btn-ghost:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .btn-primary {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: #06080f;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold2);
+            border-color: var(--gold2);
+        }
+
+        .btn-primary:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+
+        /* Confirm dialog */
+        .confirm-wrap {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .confirm-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--red-bg);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto .9rem;
+        }
+
+        .confirm-icon svg {
+            width: 22px;
+            height: 22px;
+            color: var(--red);
+        }
+
+        .confirm-title {
+            font-weight: 700;
+            font-size: .95rem;
+            margin-bottom: .35rem;
+        }
+
+        .confirm-msg {
+            font-size: .83rem;
+            color: var(--text2);
+            line-height: 1.55;
+        }
+
+        /* Misc */
+        .hidden {
+            display: none !important;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border: 2px solid rgba(245, 200, 66, .25);
+            border-top-color: #06080f;
+            border-radius: 50%;
+            animation: sp .7s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes sp {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Toast */
+        .toast-wrap {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: .45rem;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .62rem .9rem;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-size: .82rem;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            min-width: 220px;
+            animation: tin .18s ease;
+        }
+
+        @keyframes tin {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .toast.ok {
+            background: var(--green-bg);
+            border-color: var(--green-bd);
+            color: var(--green);
+        }
+
+        .toast.err {
+            background: var(--red-bg);
+            border-color: var(--red-bd);
+            color: var(--red);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══════ HEADER ══════ -->
+    <header class="hdr">
+        <a href="prova.html" class="hdr-brand">
+            <div class="hdr-mark">CP</div>
+            <div class="hdr-sep"></div>
+            <span class="hdr-name">CEBRASPE Pro</span>
+            <div class="hdr-sep"></div>
+            <span class="hdr-sub">Administração</span>
+        </a>
+        <div class="hdr-right">
+            <a href="prova.html" class="hdr-link">🎯 Simulado</a>
+            <a href="estatisticas.html" class="hdr-link">📊 Stats</a>
+            <button class="tema-btn" id="tema-btn" onclick="toggleTema()" title="Alternar tema">🌙</button>
+        </div>
+    </header>
+
+    <!-- ══════ LAYOUT ══════ -->
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sb-section-title">Catálogo</div>
+            <button class="sb-btn on" data-tab="questoes" onclick="mudarTab(this)">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6l-4-4z" />
+                    <path d="M9 2v4h4" />
+                </svg>
+                Questões
+            </button>
+            <button class="sb-btn" data-tab="temas" onclick="mudarTab(this)">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="2" y="3" width="12" height="10" rx="2" />
+                    <path d="M5 7h6M5 10h4" />
+                </svg>
+                Temas
+            </button>
+            <button class="sb-btn" data-tab="subtemas" onclick="mudarTab(this)">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M3 4h10M3 8h7M3 12h5" />
+                </svg>
+                Subtemas
+            </button>
+            <button class="sb-btn" data-tab="cargos" onclick="mudarTab(this)">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <circle cx="8" cy="5" r="3" />
+                    <path d="M2 14a6 6 0 0112 0" />
+                </svg>
+                Cargos
+            </button>
+            <div class="sb-sep"></div>
+            <div class="sb-section-title">Importação</div>
+            <button class="sb-btn" data-tab="importar" onclick="mudarTab(this)">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <path d="M8 2v9M4 7l4 4 4-4" />
+                    <path d="M2 13h12" />
+                </svg>
+                Importar JSON
+            </button>
+        </aside>
+
+        <!-- CONTEÚDO -->
+        <div>
+
+            <!-- Resumo strip -->
+            <div class="resumo-strip">
+                <div class="res-mini">
+                    <div class="res-mini-val" id="rs-questoes">—</div>
+                    <div class="res-mini-lbl">Questões</div>
+                </div>
+                <div class="res-mini">
+                    <div class="res-mini-val" id="rs-facil">—</div>
+                    <div class="res-mini-lbl">Fácil</div>
+                </div>
+                <div class="res-mini">
+                    <div class="res-mini-val" id="rs-medio">—</div>
+                    <div class="res-mini-lbl">Médio</div>
+                </div>
+                <div class="res-mini">
+                    <div class="res-mini-val" id="rs-dificil">—</div>
+                    <div class="res-mini-lbl">Difícil</div>
+                </div>
+                <div class="res-mini">
+                    <div class="res-mini-val" id="rs-temas">—</div>
+                    <div class="res-mini-lbl">Temas</div>
+                </div>
+                <div class="res-mini">
+                    <div class="res-mini-val" id="rs-subtemas">—</div>
+                    <div class="res-mini-lbl">Subtemas</div>
+                </div>
+                <div class="res-mini">
+                    <div class="res-mini-val" id="rs-cargos">—</div>
+                    <div class="res-mini-lbl">Cargos</div>
+                </div>
+            </div>
+
+            <div class="main">
+
+                <!-- ── TAB QUESTÕES ── -->
+                <div id="tab-questoes" class="tab-content">
+                    <div class="main-hdr">
+                        <span class="main-title">Questões</span>
+                        <button class="btn-add" onclick="abrirModalQuestao()">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M8 2v12M2 8h12" />
+                            </svg>
+                            Nova Questão
+                        </button>
+                    </div>
+                    <div class="tbl-wrap">
+                        <table class="tbl">
+                            <thead>
+                                <tr>
+                                    <th style="width:36%">Enunciado</th>
+                                    <th>Tema / Subtema</th>
+                                    <th>Gabarito</th>
+                                    <th>Nível</th>
+                                    <th>Grupo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-questoes">
+                                <tr>
+                                    <td colspan="6" class="tbl-empty">Carregando…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ── TAB TEMAS ── -->
+                <div id="tab-temas" class="tab-content hidden">
+                    <div class="main-hdr">
+                        <span class="main-title">Temas</span>
+                        <button class="btn-add" onclick="abrirModalTema()">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M8 2v12M2 8h12" />
+                            </svg>
+                            Novo Tema
+                        </button>
+                    </div>
+                    <div class="tbl-wrap">
+                        <table class="tbl">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-temas"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ── TAB SUBTEMAS ── -->
+                <div id="tab-subtemas" class="tab-content hidden">
+                    <div class="main-hdr">
+                        <span class="main-title">Subtemas</span>
+                        <button class="btn-add" onclick="abrirModalSubtema()">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M8 2v12M2 8h12" />
+                            </svg>
+                            Novo Subtema
+                        </button>
+                    </div>
+                    <div class="tbl-wrap">
+                        <table class="tbl">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Tema</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-subtemas"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ── TAB CARGOS ── -->
+                <div id="tab-cargos" class="tab-content hidden">
+                    <div class="main-hdr">
+                        <span class="main-title">Cargos</span>
+                        <button class="btn-add" onclick="abrirModalCargo()">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M8 2v12M2 8h12" />
+                            </svg>
+                            Novo Cargo
+                        </button>
+                    </div>
+                    <div class="tbl-wrap">
+                        <table class="tbl">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Órgão</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-cargos"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ── TAB IMPORTAR ── -->
+                <div id="tab-importar" class="tab-content hidden">
+                    <div class="main-hdr"><span class="main-title">Importar Questões via JSON</span></div>
+
+                    <div class="import-area">
+                        <div class="ia-hdr">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                                <path d="M8 2v9M4 7l4 4 4-4" />
+                                <path d="M2 13h12" />
+                            </svg>
+                            Cole o array JSON abaixo
+                        </div>
+                        <div class="ia-body">
+                            <textarea class="json-ta" id="json-imp" spellcheck="false"
+                                placeholder='[{"tema":"...","subtema":"...","enunciado":"...","gabarito":"certo","explicacao":"...","tipoPegadinha":"...","artigoRef":"...","cargo":"...","nivel_dificuldade":"Médio","grupo":"EDITAL"}]'></textarea>
+                            <div class="ia-actions">
+                                <button class="btn-imp" id="btn-imp" onclick="importarJson()">
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+                                        width="14" height="14">
+                                        <path d="M8 2v9M4 7l4 4 4-4" />
+                                        <path d="M2 13h12" />
+                                    </svg>
+                                    Importar
+                                </button>
+                                <span class="ia-hint">Temas e subtemas novos são criados automaticamente.</span>
+                            </div>
+                            <div id="imp-result" class="imp-result hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="schema-box">
+                        <div class="ia-hdr">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+                                <path d="M2 4a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" />
+                            </svg>
+                            Campos por item
+                        </div>
+                        <div class="schema-body">
+                            <span class="k">tema</span> — obrigatório<br>
+                            <span class="k">subtema</span> — obrigatório<br>
+                            <span class="k">enunciado</span> — obrigatório<br>
+                            <span class="k">gabarito</span> — obrigatório · <span
+                                class="c">"certo"|"errado"|true|false</span><br>
+                            <span class="k">explicacao</span> — obrigatório<br>
+                            <span class="c">tipoPegadinha</span> — opcional<br>
+                            <span class="c">artigoRef</span> — opcional<br>
+                            <span class="c">cargo</span> — opcional · nome exato do cargo<br>
+                            <span class="c">nivel_dificuldade</span> — opcional · <span
+                                class="c">Fácil|Médio|Difícil</span><br>
+                            <span class="c">grupo</span> — opcional · <span class="c">EDITAL|BANCA</span> (padrão:
+                            EDITAL)
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /main -->
+        </div><!-- /conteúdo -->
+    </div><!-- /layout -->
+
+    <!-- ══════════════════════════════════
+     MODAIS
+══════════════════════════════════ -->
+
+    <!-- Modal Questão -->
+    <div class="modal-bg hidden" id="modal-questao">
+        <div class="modal">
+            <div class="modal-hdr">
+                <span class="modal-title" id="mq-titulo">Nova Questão</span>
+                <button class="modal-close" onclick="fecharModal('modal-questao')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="fgrow3">
+                    <div class="fg">
+                        <label>Cargo</label>
+                        <select id="mq-cargo">
+                            <option value="">Nenhum</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label>Tema <span class="req">*</span></label>
+                        <select id="mq-tema" onchange="carregarSubtemasModal()">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label>Subtema <span class="req">*</span></label>
+                        <select id="mq-subtema">
+                            <option value="">— selecione o tema —</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="fg">
+                    <label>Enunciado <span class="req">*</span></label>
+                    <textarea id="mq-enu" rows="4" placeholder="Texto completo da assertiva…"></textarea>
+                </div>
+                <div class="fg">
+                    <label>Gabarito <span class="req">*</span></label>
+                    <div class="gab-tog">
+                        <button type="button" class="gbt" id="gbt-c" onclick="selGab(true)">✓ CERTO</button>
+                        <button type="button" class="gbt" id="gbt-e" onclick="selGab(false)">✗ ERRADO</button>
+                    </div>
+                </div>
+                <div class="fg">
+                    <label>Explicação <span class="req">*</span></label>
+                    <textarea id="mq-exp" rows="3" placeholder="Justificativa detalhada…"></textarea>
+                </div>
+                <div class="fgrow">
+                    <div class="fg">
+                        <label>Tipo de Pegadinha</label>
+                        <input type="text" id="mq-peg" placeholder="Ex: Generalização Indevida">
+                    </div>
+                    <div class="fg">
+                        <label>Artigo de Referência</label>
+                        <input type="text" id="mq-art" placeholder="Ex: Art. 37, CF/88">
+                    </div>
+                </div>
+                <div class="fgrow">
+                    <div class="fg">
+                        <label>Nível <span class="req">*</span></label>
+                        <select id="mq-nivel">
+                            <option value="FACIL">Fácil</option>
+                            <option value="MEDIO" selected>Médio</option>
+                            <option value="DIFICIL">Difícil</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label>Grupo <span class="req">*</span></label>
+                        <select id="mq-grupo">
+                            <option value="EDITAL" selected>📚 Edital</option>
+                            <option value="BANCA">🏛️ Banca Real</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-foot">
+                <button class="btn-m btn-ghost" onclick="fecharModal('modal-questao')">Cancelar</button>
+                <button class="btn-m btn-primary" id="mq-btn-save" onclick="salvarQuestao()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tema -->
+    <div class="modal-bg hidden" id="modal-tema">
+        <div class="modal">
+            <div class="modal-hdr">
+                <span class="modal-title" id="mt-titulo">Novo Tema</span>
+                <button class="modal-close" onclick="fecharModal('modal-tema')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="fg">
+                    <label>Nome <span class="req">*</span></label>
+                    <input type="text" id="mt-nome" placeholder="Ex: Direito Administrativo">
+                </div>
+                <div class="fg" id="mt-ativo-row" style="display:none;">
+                    <label>Status</label>
+                    <select id="mt-ativo">
+                        <option value="true">Ativo</option>
+                        <option value="false">Inativo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-foot">
+                <button class="btn-m btn-ghost" onclick="fecharModal('modal-tema')">Cancelar</button>
+                <button class="btn-m btn-primary" onclick="salvarTema()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Subtema -->
+    <div class="modal-bg hidden" id="modal-subtema">
+        <div class="modal">
+            <div class="modal-hdr">
+                <span class="modal-title" id="ms-titulo">Novo Subtema</span>
+                <button class="modal-close" onclick="fecharModal('modal-subtema')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="fg">
+                    <label>Tema <span class="req">*</span></label>
+                    <select id="ms-tema">
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="fg">
+                    <label>Nome <span class="req">*</span></label>
+                    <input type="text" id="ms-nome" placeholder="Ex: Atos Administrativos">
+                </div>
+                <div class="fg" id="ms-ativo-row" style="display:none;">
+                    <label>Status</label>
+                    <select id="ms-ativo">
+                        <option value="true">Ativo</option>
+                        <option value="false">Inativo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-foot">
+                <button class="btn-m btn-ghost" onclick="fecharModal('modal-subtema')">Cancelar</button>
+                <button class="btn-m btn-primary" onclick="salvarSubtema()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cargo -->
+    <div class="modal-bg hidden" id="modal-cargo">
+        <div class="modal">
+            <div class="modal-hdr">
+                <span class="modal-title" id="mc-titulo">Novo Cargo</span>
+                <button class="modal-close" onclick="fecharModal('modal-cargo')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="fg">
+                    <label>Nome <span class="req">*</span></label>
+                    <input type="text" id="mc-nome" placeholder="Ex: Técnico Administrativo">
+                </div>
+                <div class="fg">
+                    <label>Órgão</label>
+                    <input type="text" id="mc-orgao" placeholder="Ex: Receita Federal">
+                </div>
+            </div>
+            <div class="modal-foot">
+                <button class="btn-m btn-ghost" onclick="fecharModal('modal-cargo')">Cancelar</button>
+                <button class="btn-m btn-primary" onclick="salvarCargo()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmar exclusão -->
+    <div class="modal-bg hidden" id="modal-confirm">
+        <div class="modal" style="max-width:400px;">
+            <div class="modal-body" style="padding:0;">
+                <div class="confirm-wrap">
+                    <div class="confirm-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <polyline points="3 6 5 6 21 6" />
+                            <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6m5 0V4a1 1 0 011-1h2a1 1 0 011 1v2" />
+                        </svg>
+                    </div>
+                    <div class="confirm-title" id="confirm-title">Desativar item?</div>
+                    <div class="confirm-msg" id="confirm-msg">Esta ação pode ser desfeita editando o registro.</div>
+                </div>
+            </div>
+            <div class="modal-foot" style="justify-content:center;">
+                <button class="btn-m btn-ghost" onclick="fecharModal('modal-confirm')">Cancelar</button>
+                <button class="btn-m" style="border-color:var(--red-bd);background:var(--red-bg);color:var(--red);"
+                    id="confirm-ok-btn" onclick="executarConfirm()">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toasts -->
+    <div class="toast-wrap" id="toast-wrap"></div>
+
+    <script>
+        const API = 'http://localhost:8090/api';
+
+        /* ─── Estado global ─────────────────────────────────────────────────── */
+        let temas = [], subtemas = [], cargos = [], questoes = [];
+        let editMode = false, editId = null, gabAtual = null;
+        let confirmCallback = null;
+
+        /* ─── INIT ──────────────────────────────────────────────────────────── */
+        async function init() {
+            const prefs = await apiFetch('/preferencias').catch(() => ({}));
+            aplicarTema(prefs.tema_visual || 'escuro');
+
+            await Promise.all([
+                carregarTemas(),
+                carregarCargos(),
+                carregarResumo()
+            ]);
+            await carregarSubtemas();
+            await carregarQuestoes();
+        }
+
+        /* ─── TEMA ──────────────────────────────────────────────────────────── */
+        function aplicarTema(t) {
+            document.documentElement.setAttribute('data-tema', t);
+            document.getElementById('tema-btn').textContent = t === 'escuro' ? '☀️' : '🌙';
+        }
+
+        async function toggleTema() {
+            const atual = document.documentElement.getAttribute('data-tema');
+            const novo = atual === 'escuro' ? 'claro' : 'escuro';
+            aplicarTema(novo);
+            try {
+                await apiFetch('/preferencias/tema_visual', 'PUT', { valor: novo });
+            } catch (e) { /* silencioso */ }
+        }
+
+        /* ─── TABS ──────────────────────────────────────────────────────────── */
+        function mudarTab(el) {
+            document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('on'));
+            el.classList.add('on');
+            const tab = el.dataset.tab;
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById('tab-' + tab).classList.remove('hidden');
+
+            if (tab === 'temas') renderTblTemas();
+            if (tab === 'subtemas') renderTblSubtemas();
+            if (tab === 'cargos') renderTblCargos();
+        }
+
+        /* ─── CARREGAMENTO ──────────────────────────────────────────────────── */
+        async function carregarResumo() {
+            try {
+                const r = await apiFetch('/admin/resumo');
+                document.getElementById('rs-questoes').textContent = r.questoes ?? '—';
+                document.getElementById('rs-facil').textContent = r.facil ?? '—';
+                document.getElementById('rs-medio').textContent = r.medio ?? '—';
+                document.getElementById('rs-dificil').textContent = r.dificil ?? '—';
+                document.getElementById('rs-temas').textContent = r.temas ?? '—';
+                document.getElementById('rs-subtemas').textContent = r.subtemas ?? '—';
+                document.getElementById('rs-cargos').textContent = r.cargos ?? '—';
+            } catch (e) { /* silencioso */ }
+        }
+
+        async function carregarTemas() {
+            temas = await apiFetch('/admin/temas').catch(() => []);
+            ['mq-tema', 'ms-tema'].forEach(id => {
+                const s = document.getElementById(id);
+                if (!s) return;
+                const val = s.value;
+                s.innerHTML = '<option value="">Selecione</option>';
+                temas.forEach(t => s.add(new Option(t.nome, t.id)));
+                if (val) s.value = val;
+            });
+        }
+
+        async function carregarSubtemas() {
+            subtemas = await apiFetch('/admin/subtemas').catch(() => []);
+        }
+
+        async function carregarCargos() {
+            cargos = await apiFetch('/admin/cargos').catch(() => []);
+            const s = document.getElementById('mq-cargo');
+            if (s) {
+                s.innerHTML = '<option value="">Nenhum</option>';
+                cargos.forEach(c => s.add(new Option(c.nome, c.id)));
+            }
+        }
+
+        async function carregarQuestoes() {
+            questoes = await apiFetch('/admin/questoes').catch(() => []);
+            renderTblQuestoes();
+        }
+
+        /* ─── RENDER TABELAS ────────────────────────────────────────────────── */
+        function renderTblQuestoes() {
+            const b = document.getElementById('tbl-questoes');
+            if (!questoes.length) {
+                b.innerHTML = `<tr><td colspan="6" class="tbl-empty">Nenhuma questão cadastrada</td></tr>`;
+                return;
+            }
+            const nv = { FACIL: 'b-facil Fácil', MEDIO: 'b-medio Médio', DIFICIL: 'b-dif Difícil' };
+            const gr = { EDITAL: 'b-edital 📚 Edital', BANCA: 'b-banca 🏛️ Banca' };
+
+            b.innerHTML = questoes.map(q => {
+                const tema = temas.find(t => t.id === q.temaId);
+                const sub = subtemas.find(s => s.id === q.subtemaId);
+                const [nc, nl] = (nv[q.nivelDificuldade] || 'b-off —').split(' ');
+                const [gc, gt] = (gr[q.grupo] || 'b-off —').split(' ');
+                const enu = esc(q.enunciado || '');
+                const preview = q.enunciado?.length > 75
+                    ? esc(q.enunciado.slice(0, 75)) + '…'
+                    : enu;
+
+                return `<tr>
+      <td style="max-width:0;" title="${enu}">
+        <span style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${preview}</span>
+      </td>
+      <td>
+        <span style="display:block;font-size:.78rem;">${esc(tema?.nome || '—')}</span>
+        <span style="font-size:.71rem;color:var(--text3);">${esc(sub?.nome || '—')}</span>
+      </td>
+      <td><span class="badge ${q.gabarito ? 'b-certo' : 'b-errado'}">${q.gabarito ? 'CERTO' : 'ERRADO'}</span></td>
+      <td><span class="badge ${nc}">${nl}</span></td>
+      <td><span class="badge ${gc}">${gt}</span></td>
+      <td>
+        <div class="act-btns">
+          <button class="icon-btn" title="Editar" onclick="editarQuestao(${q.id})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+          </button>
+          <button class="icon-btn del" title="Desativar" onclick="pedirConfirm('questao',${q.id})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="2 4 3.3 4 14 4"/><path d="M12.7 4L12 13.3A.7.7 0 0111.3 14H4.7A.7.7 0 014 13.3L3.3 4m2.7 0V2.7A.7.7 0 017 2h2a.7.7 0 01.7.7V4"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`;
+            }).join('');
+        }
+
+        function renderTblTemas() {
+            const b = document.getElementById('tbl-temas');
+            if (!temas.length) { b.innerHTML = `<tr><td colspan="3" class="tbl-empty">Nenhum tema cadastrado</td></tr>`; return; }
+            b.innerHTML = temas.map(t => `
+    <tr>
+      <td>${esc(t.nome)}</td>
+      <td><span class="badge ${t.ativo ? 'b-ok' : 'b-off'}">${t.ativo ? 'Ativo' : 'Inativo'}</span></td>
+      <td>
+        <div class="act-btns">
+          <button class="icon-btn" onclick="editarTema(${t.id}, ${JSON.stringify(t.nome)}, ${t.ativo})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`).join('');
+        }
+
+        function renderTblSubtemas() {
+            const b = document.getElementById('tbl-subtemas');
+            if (!subtemas.length) { b.innerHTML = `<tr><td colspan="4" class="tbl-empty">Nenhum subtema cadastrado</td></tr>`; return; }
+            b.innerHTML = subtemas.map(s => {
+                const tema = temas.find(t => t.id === s.temaId);
+                return `<tr>
+      <td>${esc(s.nome)}</td>
+      <td style="font-size:.82rem;color:var(--text2);">${esc(tema?.nome || '—')}</td>
+      <td><span class="badge ${s.ativo ? 'b-ok' : 'b-off'}">${s.ativo ? 'Ativo' : 'Inativo'}</span></td>
+      <td>
+        <div class="act-btns">
+          <button class="icon-btn" onclick="editarSubtema(${s.id}, ${JSON.stringify(s.nome)}, ${s.ativo}, ${s.temaId})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`;
+            }).join('');
+        }
+
+        function renderTblCargos() {
+            const b = document.getElementById('tbl-cargos');
+            if (!cargos.length) { b.innerHTML = `<tr><td colspan="4" class="tbl-empty">Nenhum cargo cadastrado</td></tr>`; return; }
+            b.innerHTML = cargos.map(c => `
+    <tr>
+      <td>${esc(c.nome)}</td>
+      <td style="color:var(--text2);font-size:.83rem;">${esc(c.orgao || '—')}</td>
+      <td><span class="badge ${c.ativo ? 'b-ok' : 'b-off'}">${c.ativo ? 'Ativo' : 'Inativo'}</span></td>
+      <td>
+        <div class="act-btns">
+          <button class="icon-btn" onclick="editarCargo(${c.id}, ${JSON.stringify(c.nome)}, ${JSON.stringify(c.orgao || '')}, ${c.ativo})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 2l3 3-8 8H3v-3L11 2z"/></svg>
+          </button>
+          <button class="icon-btn del" onclick="pedirConfirm('cargo',${c.id})">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="2 4 3.3 4 14 4"/><path d="M12.7 4L12 13.3A.7.7 0 0111.3 14H4.7A.7.7 0 014 13.3L3.3 4m2.7 0V2.7A.7.7 0 017 2h2a.7.7 0 01.7.7V4"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`).join('');
+        }
+
+        /* ─── MODAL QUESTÃO ─────────────────────────────────────────────────── */
+        function abrirModalQuestao() {
+            editMode = false; editId = null; gabAtual = null;
+            document.getElementById('mq-titulo').textContent = 'Nova Questão';
+            document.getElementById('mq-btn-save').textContent = 'Salvar';
+            ['mq-enu', 'mq-exp', 'mq-peg', 'mq-art'].forEach(id => document.getElementById(id).value = '');
+            document.getElementById('mq-cargo').value = '';
+            document.getElementById('mq-tema').value = '';
+            document.getElementById('mq-nivel').value = 'MEDIO';
+            document.getElementById('mq-grupo').value = 'EDITAL';
+            document.getElementById('mq-subtema').innerHTML = '<option value="">— selecione o tema —</option>';
+            document.getElementById('gbt-c').className = 'gbt';
+            document.getElementById('gbt-e').className = 'gbt';
+            abrirModal('modal-questao');
+            document.getElementById('mq-enu').focus();
+        }
+
+        async function editarQuestao(id) {
+            const q = questoes.find(x => x.id === id);
+            if (!q) return;
+            editMode = true; editId = id;
+            document.getElementById('mq-titulo').textContent = 'Editar Questão #' + id;
+            document.getElementById('mq-btn-save').textContent = 'Salvar Alterações';
+            document.getElementById('mq-enu').value = q.enunciado || '';
+            document.getElementById('mq-exp').value = q.explicacao || '';
+            document.getElementById('mq-peg').value = q.tipoPegadinha || '';
+            document.getElementById('mq-art').value = q.artigoRef || '';
+            document.getElementById('mq-cargo').value = q.cargoId || '';
+            document.getElementById('mq-nivel').value = q.nivelDificuldade || 'MEDIO';
+            document.getElementById('mq-grupo').value = q.grupo || 'EDITAL';
+            document.getElementById('mq-tema').value = q.temaId || '';
+            await carregarSubtemasModal();
+            setTimeout(() => { document.getElementById('mq-subtema').value = q.subtemaId || ''; }, 80);
+            selGab(q.gabarito);
+            abrirModal('modal-questao');
+        }
+
+        async function carregarSubtemasModal() {
+            const temaId = document.getElementById('mq-tema').value;
+            const s = document.getElementById('mq-subtema');
+            s.innerHTML = '<option value="">Selecione</option>';
+            if (!temaId) { s.innerHTML = '<option value="">— selecione o tema —</option>'; return; }
+            const subs = subtemas.filter(x => x.temaId == temaId && x.ativo);
+            subs.forEach(x => s.add(new Option(x.nome, x.id)));
+        }
+
+        function selGab(val) {
+            gabAtual = val;
+            document.getElementById('gbt-c').className = 'gbt' + (val === true ? ' on-c' : '');
+            document.getElementById('gbt-e').className = 'gbt' + (val === false ? ' on-e' : '');
+        }
+
+        async function salvarQuestao() {
+            const temaId = +document.getElementById('mq-tema').value || null;
+            const subtemaId = +document.getElementById('mq-subtema').value || null;
+            const enunciado = document.getElementById('mq-enu').value.trim();
+            const explicacao = document.getElementById('mq-exp').value.trim();
+
+            if (!temaId) { toast('Selecione o tema', 'err'); return; }
+            if (!subtemaId) { toast('Selecione o subtema', 'err'); return; }
+            if (!enunciado) { toast('Digite o enunciado', 'err'); return; }
+            if (!explicacao) { toast('Digite a explicação', 'err'); return; }
+            if (gabAtual === null) { toast('Selecione o gabarito', 'err'); return; }
+
+            const body = {
+                cargoId: +document.getElementById('mq-cargo').value || null,
+                temaId, subtemaId,
+                enunciado, gabarito: gabAtual, explicacao,
+                tipoPegadinha: document.getElementById('mq-peg').value.trim() || null,
+                artigoRef: document.getElementById('mq-art').value.trim() || null,
+                nivelDificuldade: document.getElementById('mq-nivel').value,
+                grupo: document.getElementById('mq-grupo').value
+            };
+
+            const btn = document.getElementById('mq-btn-save');
+            btn.disabled = true;
+
+            try {
+                if (editMode) {
+                    await apiFetch('/admin/questoes/' + editId, 'PUT', body);
+                    toast('Questão atualizada', 'ok');
+                } else {
+                    await apiFetch('/admin/questoes', 'POST', body);
+                    toast('Questão criada', 'ok');
+                }
+                fecharModal('modal-questao');
+                await carregarQuestoes();
+                await carregarResumo();
+            } catch (e) {
+                toast('Erro: ' + e.message, 'err');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        /* ─── MODAL TEMA ────────────────────────────────────────────────────── */
+        function abrirModalTema() {
+            editMode = false; editId = null;
+            document.getElementById('mt-titulo').textContent = 'Novo Tema';
+            document.getElementById('mt-nome').value = '';
+            document.getElementById('mt-ativo-row').style.display = 'none';
+            abrirModal('modal-tema');
+            document.getElementById('mt-nome').focus();
+        }
+
+        function editarTema(id, nome, ativo) {
+            editMode = true; editId = id;
+            document.getElementById('mt-titulo').textContent = 'Editar Tema';
+            document.getElementById('mt-nome').value = nome;
+            document.getElementById('mt-ativo').value = String(ativo);
+            document.getElementById('mt-ativo-row').style.display = '';
+            abrirModal('modal-tema');
+        }
+
+        async function salvarTema() {
+            const nome = document.getElementById('mt-nome').value.trim();
+            if (!nome) { toast('Nome obrigatório', 'err'); return; }
+            try {
+                if (editMode) {
+                    await apiFetch('/admin/temas/' + editId, 'PUT', {
+                        nome, ativo: document.getElementById('mt-ativo').value === 'true'
+                    });
+                    toast('Tema atualizado', 'ok');
+                } else {
+                    await apiFetch('/admin/temas', 'POST', { nome });
+                    toast('Tema criado', 'ok');
+                }
+                fecharModal('modal-tema');
+                await carregarTemas();
+                renderTblTemas();
+                await carregarResumo();
+            } catch (e) { toast('Erro: ' + e.message, 'err'); }
+        }
+
+        /* ─── MODAL SUBTEMA ─────────────────────────────────────────────────── */
+        function abrirModalSubtema() {
+            editMode = false; editId = null;
+            document.getElementById('ms-titulo').textContent = 'Novo Subtema';
+            document.getElementById('ms-nome').value = '';
+            document.getElementById('ms-tema').value = '';
+            document.getElementById('ms-ativo-row').style.display = 'none';
+            abrirModal('modal-subtema');
+            document.getElementById('ms-nome').focus();
+        }
+
+        function editarSubtema(id, nome, ativo, temaId) {
+            editMode = true; editId = id;
+            document.getElementById('ms-titulo').textContent = 'Editar Subtema';
+            document.getElementById('ms-nome').value = nome;
+            document.getElementById('ms-tema').value = temaId;
+            document.getElementById('ms-ativo').value = String(ativo);
+            document.getElementById('ms-ativo-row').style.display = '';
+            abrirModal('modal-subtema');
+        }
+
+        async function salvarSubtema() {
+            const temaId = +document.getElementById('ms-tema').value || null;
+            const nome = document.getElementById('ms-nome').value.trim();
+            if (!temaId) { toast('Selecione o tema', 'err'); return; }
+            if (!nome) { toast('Nome obrigatório', 'err'); return; }
+            try {
+                if (editMode) {
+                    await apiFetch('/admin/subtemas/' + editId, 'PUT', {
+                        nome, ativo: document.getElementById('ms-ativo').value === 'true'
+                    });
+                    toast('Subtema atualizado', 'ok');
+                } else {
+                    await apiFetch('/admin/subtemas', 'POST', { temaId, nome });
+                    toast('Subtema criado', 'ok');
+                }
+                fecharModal('modal-subtema');
+                await carregarSubtemas();
+                renderTblSubtemas();
+                await carregarResumo();
+            } catch (e) { toast('Erro: ' + e.message, 'err'); }
+        }
+
+        /* ─── MODAL CARGO ───────────────────────────────────────────────────── */
+        function abrirModalCargo() {
+            editMode = false; editId = null;
+            document.getElementById('mc-titulo').textContent = 'Novo Cargo';
+            document.getElementById('mc-nome').value = '';
+            document.getElementById('mc-orgao').value = '';
+            abrirModal('modal-cargo');
+            document.getElementById('mc-nome').focus();
+        }
+
+        function editarCargo(id, nome, orgao, ativo) {
+            editMode = true; editId = id;
+            document.getElementById('mc-titulo').textContent = 'Editar Cargo';
+            document.getElementById('mc-nome').value = nome;
+            document.getElementById('mc-orgao').value = orgao;
+            abrirModal('modal-cargo');
+        }
+
+        async function salvarCargo() {
+            const nome = document.getElementById('mc-nome').value.trim();
+            const orgao = document.getElementById('mc-orgao').value.trim();
+            if (!nome) { toast('Nome obrigatório', 'err'); return; }
+            try {
+                if (editMode) {
+                    await apiFetch('/admin/cargos/' + editId, 'PUT', { nome, orgao, ativo: true });
+                    toast('Cargo atualizado', 'ok');
+                } else {
+                    await apiFetch('/admin/cargos', 'POST', { nome, orgao });
+                    toast('Cargo criado', 'ok');
+                }
+                fecharModal('modal-cargo');
+                await carregarCargos();
+                renderTblCargos();
+                await carregarResumo();
+            } catch (e) { toast('Erro: ' + e.message, 'err'); }
+        }
+
+        /* ─── CONFIRM / DELETE ──────────────────────────────────────────────── */
+        function pedirConfirm(tipo, id) {
+            const msgs = {
+                questao: ['Desativar questão?', 'A questão não aparecerá mais nos simulados.'],
+                cargo: ['Desativar cargo?', 'O cargo não estará disponível para novos simulados.'],
+            };
+            const [title, msg] = msgs[tipo] || ['Confirmar?', ''];
+            document.getElementById('confirm-title').textContent = title;
+            document.getElementById('confirm-msg').textContent = msg;
+            confirmCallback = () => executarDelete(tipo, id);
+            abrirModal('modal-confirm');
+        }
+
+        function executarConfirm() {
+            fecharModal('modal-confirm');
+            if (confirmCallback) { confirmCallback(); confirmCallback = null; }
+        }
+
+        async function executarDelete(tipo, id) {
+            try {
+                const ep = tipo === 'questao' ? '/admin/questoes/' : '/admin/cargos/';
+                await apiFetch(ep + id, 'DELETE');
+                toast('Item desativado', 'ok');
+                if (tipo === 'questao') { await carregarQuestoes(); }
+                else { await carregarCargos(); renderTblCargos(); }
+                await carregarResumo();
+            } catch (e) { toast('Erro ao desativar', 'err'); }
+        }
+
+        /* ─── IMPORTAR JSON ─────────────────────────────────────────────────── */
+        async function importarJson() {
+            const json = document.getElementById('json-imp').value.trim();
+            if (!json) { toast('Cole o JSON primeiro', 'err'); return; }
+
+            const btn = document.getElementById('btn-imp');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Importando…';
+
+            try {
+                const data = await fetch(API + '/importar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: json
+                }).then(r => r.json());
+
+                const el = document.getElementById('imp-result');
+                el.classList.remove('hidden', 'ok', 'err');
+                el.classList.add(data.ignoradas === 0 ? 'ok' : 'err');
+
+                const errosHtml = data.erros?.length
+                    ? `<div class="imp-erros">${data.erros.map(e => '• ' + esc(e)).join('<br>')}</div>`
+                    : '';
+
+                el.innerHTML =
+                    `✓ <strong>${data.importadas}</strong> importadas · ` +
+                    `${data.ignoradas} ignoradas · ` +
+                    `${data.temasNovos ?? 0} temas novos · ` +
+                    `${data.subtemasNovos ?? 0} subtemas novos` +
+                    errosHtml;
+
+                await Promise.all([carregarTemas(), carregarSubtemas(), carregarQuestoes(), carregarResumo()]);
+                toast(data.importadas + ' questões importadas', 'ok');
+            } catch (e) {
+                toast('Erro na importação: ' + e.message, 'err');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML =
+                    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M8 2v9M4 7l4 4 4-4"/><path d="M2 13h12"/></svg> Importar';
+            }
+        }
+
+        /* ─── MODAL utils ───────────────────────────────────────────────────── */
+        function abrirModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function fecharModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // Fechar clicando no backdrop
+        document.querySelectorAll('.modal-bg').forEach(bg =>
+            bg.addEventListener('click', e => { if (e.target === bg) bg.classList.add('hidden'); })
+        );
+
+        // Fechar com Escape
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Escape') return;
+            document.querySelectorAll('.modal-bg:not(.hidden)').forEach(m => m.classList.add('hidden'));
+        });
+
+        /* ─── Toast ─────────────────────────────────────────────────────────── */
+        function toast(msg, type = '') {
+            const w = document.getElementById('toast-wrap');
+            const el = document.createElement('div');
+            el.className = 'toast ' + (type || '');
+            el.textContent = msg;
+            w.appendChild(el);
+            setTimeout(() => {
+                el.style.opacity = '0';
+                el.style.transition = 'opacity .22s';
+                setTimeout(() => el.remove(), 240);
+            }, 3000);
+        }
+
+        /* ─── apiFetch ──────────────────────────────────────────────────────── */
+        async function apiFetch(path, method = 'GET', body = null) {
+            const opts = { method, headers: { 'Content-Type': 'application/json' } };
+            if (body) opts.body = JSON.stringify(body);
+            const res = await fetch(API + path, opts);
+            if (res.status === 204) return null;
+            if (!res.ok) throw new Error(await res.text().catch(() => res.statusText));
+            return res.json();
+        }
+
+        /* ─── Escape HTML ───────────────────────────────────────────────────── */
+        function esc(s) {
+            return String(s ?? '')
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        /* ─── START ─────────────────────────────────────────────────────────── */
+        init();
+    </script>
+</body>
+
+</html>

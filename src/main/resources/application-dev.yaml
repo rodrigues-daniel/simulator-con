@@ -1,0 +1,32 @@
+spring: 
+  application:
+    name: cebraspe-pro
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cebraspe_pro
+    username: ${DB_USER:admin}
+    password: ${DB_PASS:admin123}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  sql:
+    init:
+      mode: never   # Flyway cuida das migrations
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    com.simulado: DEBUG
+    org.springframework.jdbc: DEBUG

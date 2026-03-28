@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado CEBRASPE</title>
+    <style>
+        :root {
+            --verde: #1a7a4a;
+            --verde-claro: #e8f5ee;
+            --vermelho: #c0392b;
+            --vermelho-claro: #fdecea;
+            --azul: #1a4fa8;
+            --azul-claro: #e8f0fd;
+            --cinza: #f5f6f8;
+            --borda: #dde1e7;
+            --texto: #1a1d23;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--cinza);
+            color: var(--texto);
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--azul);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+        }
+
+        header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -.3px;
+        }
+
+        header span {
+            font-size: .85rem;
+            opacity: .8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* TELA DE CONFIGURAÇÃO */
+        .card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--borda);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .06);
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--azul);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media(max-width:600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .form-group label {
+            font-size: .85rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group select,
+        .form-group input {
+            padding: .6rem .8rem;
+            border: 1.5px solid var(--borda);
+            border-radius: 8px;
+            font-size: .95rem;
+            outline: none;
+            transition: border .2s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border-color: var(--azul);
+        }
+
+        .subtemas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: .5rem;
+            margin-top: .5rem;
+        }
+
+        .subtema-check {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .5rem .8rem;
+            border: 1.5px solid var(--borda);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: .88rem;
+            transition: all .2s;
+            user-select: none;
+        }
+
+        .subtema-check:hover {
+            border-color: var(--azul);
+            background: var(--azul-claro);
+        }
+
+        .subtema-check.selecionado {
+            border-color: var(--azul);
+            background: var(--azul-claro);
+            color: var(--azul);
+            font-weight: 600;
+        }
+
+        .subtema-check input {
+            accent-color: var(--azul);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: .95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .btn-primary {
+            background: var(--azul);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #153d85;
+        }
+
+        .btn-primary:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .btn-certo {
+            background: var(--verde);
+            color: white;
+            flex: 1;
+            justify-content: center;
+            font-size: 1rem;
+            padding: 1rem;
+        }
+
+        .btn-certo:hover:not(:disabled) {
+            background: #145c38;
+        }
+
+        .btn-errado {
+            background: var(--vermelho);
+            color: white;
+            flex: 1;
+            justify-content: center;
+            font-size: 1rem;
+            padding: 1rem;
+        }
+
+        .btn-errado:hover:not(:disabled) {
+            background: #962d22;
+        }
+
+        .btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        /* BARRA DE PROGRESSO */
+        .progresso-bar {
+            background: var(--borda);
+            border-radius: 99px;
+            height: 8px;
+            margin: .5rem 0;
+            overflow: hidden;
+        }
+
+        .progresso-fill {
+            height: 100%;
+            background: var(--azul);
+            border-radius: 99px;
+            transition: width .4s ease;
+        }
+
+        /* PLACAR */
+        .placar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .placar-item {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .placar-item.acertos {
+            background: var(--verde-claro);
+            border: 1.5px solid #b2d8c4;
+        }
+
+        .placar-item.erros {
+            background: var(--vermelho-claro);
+            border: 1.5px solid #f4b8b3;
+        }
+
+        .placar-item.pendentes {
+            background: var(--azul-claro);
+            border: 1.5px solid #b8cef5;
+        }
+
+        .placar-item .valor {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .placar-item .rotulo {
+            font-size: .8rem;
+            color: #666;
+            margin-top: .2rem;
+        }
+
+        .placar-item.acertos .valor {
+            color: var(--verde);
+        }
+
+        .placar-item.erros .valor {
+            color: var(--vermelho);
+        }
+
+        .placar-item.pendentes .valor {
+            color: var(--azul);
+        }
+
+        /* QUESTÃO */
+        .questao-card {
+            background: white;
+            border-radius: 12px;
+            border: 1.5px solid var(--borda);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .questao-header {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .numero-questao {
+            background: var(--azul);
+            color: white;
+            font-weight: 800;
+            font-size: .85rem;
+            border-radius: 6px;
+            padding: .25rem .6rem;
+            min-width: 42px;
+            text-align: center;
+        }
+
+        .badge-subtema {
+            padding: .25rem .75rem;
+            border-radius: 99px;
+            font-size: .78rem;
+            font-weight: 600;
+            background: #e8f0fd;
+            color: var(--azul);
+            border: 1px solid #b8cef5;
+        }
+
+        .badge-pegadinha {
+            padding: .25rem .75rem;
+            border-radius: 99px;
+            font-size: .78rem;
+            font-weight: 600;
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffcc80;
+        }
+
+        .enunciado {
+            font-size: .98rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            color: #1a1d23;
+        }
+
+        .botoes-resposta {
+            display: flex;
+            gap: .75rem;
+        }
+
+        .gabarito-box {
+            margin-top: 1rem;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-size: .9rem;
+            line-height: 1.6;
+        }
+
+        .gabarito-box.acertou {
+            background: var(--verde-claro);
+            border: 1.5px solid #b2d8c4;
+        }
+
+        .gabarito-box.errou {
+            background: var(--vermelho-claro);
+            border: 1.5px solid #f4b8b3;
+        }
+
+        .gabarito-titulo {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: .4rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .artigo-ref {
+            display: inline-block;
+            margin-top: .5rem;
+            font-size: .82rem;
+            background: rgba(0, 0, 0, .07);
+            padding: .2rem .6rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* FILTRO */
+        .filtro-bar {
+            display: flex;
+            gap: .75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-filtro {
+            padding: .5rem 1rem;
+            border-radius: 99px;
+            border: 1.5px solid var(--borda);
+            background: white;
+            font-size: .85rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all .2s;
+        }
+
+        .btn-filtro.ativo {
+            border-color: var(--azul);
+            background: var(--azul-claro);
+            color: var(--azul);
+        }
+
+        /* LOADING */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, .9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--borda);
+            border-top-color: var(--azul);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-texto {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* RESULTADO FINAL */
+        .resultado-card {
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        .resultado-nota {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--azul);
+            line-height: 1;
+        }
+
+        .resultado-subtitulo {
+            color: #666;
+            margin-top: .5rem;
+        }
+
+        /* UTILS */
+        .hidden {
+            display: none !important;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        .mt-1 {
+            margin-top: 1rem;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1>🎯 Simulado CEBRASPE</h1>
+            <span>Questões no estilo Certo / Errado</span>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- TELA DE CONFIGURAÇÃO -->
+        <div id="tela-config">
+            <div class="card">
+                <h2>⚙️ Configurar Simulado</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Cargo</label>
+                        <select id="sel-cargo">
+                            <option value="">Carregando...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tema</label>
+                        <select id="sel-tema">
+                            <option value="">Selecione o tema</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantidade de questões</label>
+                        <input type="number" id="inp-qtd" value="20" min="20" max="100" step="5">
+                    </div>
+                </div>
+
+                <div class="form-group mt-1">
+                    <label>Subtemas (deixe todos marcados para cobrir o tema completo)</label>
+                    <div class="subtemas-grid" id="subtemas-container"></div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary full-width" id="btn-iniciar" onclick="iniciarSimulado()">
+                🚀 Gerar Simulado com IA
+            </button>
+        </div>
+
+        <!-- TELA DO SIMULADO -->
+        <div id="tela-simulado" class="hidden">
+
+            <div class="card flex-between" style="padding: 1rem 1.5rem;">
+                <div>
+                    <div style="font-weight:700;font-size:1rem;" id="info-simulado-titulo"></div>
+                    <div style="font-size:.85rem;color:#666;" id="info-simulado-sub"></div>
+                </div>
+                <button class="btn btn-primary" id="btn-finalizar" onclick="finalizarSimulado()" style="display:none;">
+                    🏁 Finalizar
+                </button>
+            </div>
+
+            <!-- Placar -->
+            <div class="placar">
+                <div class="placar-item acertos">
+                    <div class="valor" id="contador-acertos">0</div>
+                    <div class="rotulo">✅ Acertos</div>
+                </div>
+                <div class="placar-item erros">
+                    <div class="valor" id="contador-erros">0</div>
+                    <div class="rotulo">❌ Erros</div>
+                </div>
+                <div class="placar-item pendentes">
+                    <div class="valor" id="contador-pendentes">0</div>
+                    <div class="rotulo">⏳ Pendentes</div>
+                </div>
+            </div>
+
+            <!-- Progresso -->
+            <div style="margin-bottom:1.5rem;">
+                <div class="flex-between" style="font-size:.85rem;color:#666;margin-bottom:.3rem;">
+                    <span id="progresso-texto">0 respondidas</span>
+                    <span id="aproveitamento-texto">0%</span>
+                </div>
+                <div class="progresso-bar">
+                    <div class="progresso-fill" id="progresso-fill" style="width:0%"></div>
+                </div>
+            </div>
+
+            <!-- Filtros (aparecem após finalizar) -->
+            <div class="filtro-bar hidden" id="filtro-bar">
+                <button class="btn-filtro ativo" onclick="filtrar('todas', this)">📋 Todas</button>
+                <button class="btn-filtro" onclick="filtrar('erradas', this)">❌ Apenas Erradas</button>
+                <button class="btn-filtro" onclick="filtrar('certas', this)">✅ Apenas Certas</button>
+            </div>
+
+            <!-- Lista de questões -->
+            <div id="lista-questoes"></div>
+
+            <!-- Resultado final -->
+            <div class="card resultado-card hidden" id="resultado-final">
+                <div class="resultado-nota" id="nota-final">0%</div>
+                <div class="resultado-subtitulo">de aproveitamento</div>
+                <div style="margin-top:1.5rem;font-size:.95rem;color:#444;" id="resultado-texto"></div>
+                <button class="btn btn-primary mt-1" onclick="novoSimulado()">🔄 Novo Simulado</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-overlay hidden" id="loading">
+        <div class="spinner"></div>
+        <div class="loading-texto" id="loading-texto">Gerando questões com IA...</div>
+    </div>
+
+    <script>
+        const API = 'http://localhost:8080/api';
+        let simuladoAtual = null;
+        let questoesState = {};
+        let temasDisponiveis = {};
+        let filtroAtivo = 'todas';
+
+        // ===================== INICIALIZAÇÃO =====================
+        async function init() {
+            await Promise.all([carregarCargos(), carregarTemas()]);
+        }
+
+        async function carregarCargos() {
+            const data = await apiFetch('/cargos');
+            const sel = document.getElementById('sel-cargo');
+            sel.innerHTML = data.map(c => `<option value="${c.id}">${c.nome}${c.orgao ? ' – ' + c.orgao : ''}</option>`).join('');
+        }
+
+        async function carregarTemas() {
+            temasDisponiveis = await apiFetch('/cargos/temas');
+            const sel = document.getElementById('sel-tema');
+            sel.innerHTML = '<option value="">Selecione o tema</option>' +
+                Object.keys(temasDisponiveis).map(t => `<option value="${t}">${t}</option>`).join('');
+            sel.addEventListener('change', () => renderSubtemas(sel.value));
+        }
+
+        function renderSubtemas(tema) {
+            const container = document.getElementById('subtemas-container');
+            if (!tema) { container.innerHTML = ''; return; }
+            const subs = temasDisponiveis[tema] || [];
+            container.innerHTML = subs.map(s => `
+    <label class="subtema-check selecionado">
+      <input type="checkbox" value="${s}" checked onchange="toggleSubtema(this)">
+      ${s}
+    </label>
+  `).join('');
+        }
+
+        function toggleSubtema(el) {
+            el.closest('.subtema-check').classList.toggle('selecionado', el.checked);
+        }
+
+        // ===================== CRIAR SIMULADO =====================
+        async function iniciarSimulado() {
+            const cargoId = +document.getElementById('sel-cargo').value;
+            const tema = document.getElementById('sel-tema').value;
+            const qtd = +document.getElementById('inp-qtd').value;
+
+            if (!tema) { alert('Selecione um tema.'); return; }
+            if (qtd < 20) { alert('Mínimo de 20 questões.'); return; }
+
+            const subtemasSel = [...document.querySelectorAll('#subtemas-container input:checked')]
+                .map(el => el.value);
+
+            mostrarLoading('⏳ Gerando ' + qtd + ' questões com IA CEBRASPE...');
+            document.getElementById('btn-iniciar').disabled = true;
+
+            try {
+                const simulado = await apiFetch('/simulados', 'POST', {
+                    cargoId, tema,
+                    subtemas: subtemasSel.length ? subtemasSel : null,
+                    totalQuestoes: qtd
+                });
+
+                simuladoAtual = simulado;
+                questoesState = {};
+                simulado.questoes.forEach(q => { questoesState[q.id] = q; });
+
+                renderTelaSimulado(simulado);
+                document.getElementById('tela-config').classList.add('hidden');
+                document.getElementById('tela-simulado').classList.remove('hidden');
+            } catch (e) {
+                alert('Erro ao gerar simulado: ' + e.message);
+            } finally {
+                esconderLoading();
+                document.getElementById('btn-iniciar').disabled = false;
+            }
+        }
+
+        // ===================== RENDER SIMULADO =====================
+        function renderTelaSimulado(simulado) {
+            document.getElementById('info-simulado-titulo').textContent =
+                `${simulado.cargo} – ${simulado.tema}`;
+            document.getElementById('info-simulado-sub').textContent =
+                `${simulado.totalQuestoes} questões • ${simulado.subtemas.join(', ')}`;
+            document.getElementById('contador-pendentes').textContent = simulado.totalQuestoes;
+            document.getElementById('contador-acertos').textContent = 0;
+            document.getElementById('contador-erros').textContent = 0;
+            document.getElementById('progresso-texto').textContent = `0 de ${simulado.totalQuestoes} respondidas`;
+
+            renderQuestoes(simulado.questoes);
+        }
+
+        function renderQuestoes(questoes) {
+            const lista = document.getElementById('lista-questoes');
+            lista.innerHTML = questoes.map(q => renderQuestaoCard(q)).join('');
+        }
+
+        function renderQuestaoCard(q) {
+            const respondida = q.respondida;
+            const acertou = q.acertou;
+            const gabarito = q.gabarito;
+
+            const pegadinhaHTML = q.tipoPegadinha
+                ? `<span class="badge-pegadinha">🪤 ${formatarPegadinha(q.tipoPegadinha)}</span>` : '';
+
+            const botoesHTML = respondida ? `
+    <div class="botoes-resposta">
+      <button class="btn btn-certo" disabled>✅ CERTO</button>
+      <button class="btn btn-errado" disabled>❌ ERRADO</button>
+    </div>` : `
+    <div class="botoes-resposta">
+      <button class="btn btn-certo" onclick="responder(${q.id}, true)">✅ CERTO</button>
+      <button class="btn btn-errado" onclick="responder(${q.id}, false)">❌ ERRADO</button>
+    </div>`;
+
+            let gabaritoHTML = '';
+            if (respondida) {
+                const cls = acertou ? 'acertou' : 'errou';
+                const icon = acertou ? '✅' : '❌';
+                const titulo = acertou ? 'CORRETO!' : 'INCORRETO!';
+                const gabTexto = gabarito ? 'CERTO' : 'ERRADO';
+                gabaritoHTML = `
+      <div class="gabarito-box ${cls}">
+        <div class="gabarito-titulo">${icon} ${titulo} — Gabarito: ${gabTexto}</div>
+        <div>${q.explicacao}</div>
+        ${q.artigoRef ? `<span class="artigo-ref">📖 ${q.artigoRef}</span>` : ''}
+      </div>`;
+            }
+
+            return `
+    <div class="questao-card" id="q-${q.id}" data-acertou="${acertou}" data-respondida="${respondida}">
+      <div class="questao-header">
+        <span class="numero-questao">Q${q.numero}</span>
+        <span class="badge-subtema">${q.subtema}</span>
+        ${pegadinhaHTML}
+      </div>
+      <div class="enunciado">${q.enunciado}</div>
+      ${botoesHTML}
+      ${gabaritoHTML}
+    </div>`;
+        }
+
+        function formatarPegadinha(tipo) {
+            const mapa = {
+                'TROCA_CONCEITO': 'Troca de Conceito',
+                'INVERSAO_EFEITO': 'Inversão de Efeito',
+                'GENERALIZACAO_INDEVIDA': 'Generalização Indevida',
+                'OMISSAO_CONDICAO': 'Omissão de Condição',
+                'HIERARQUIA_FICTICIA': 'Hierarquia Fictícia',
+                'TROCA_PALAVRA_CHAVE': 'Troca de Palavra-chave'
+            };
+            return mapa[tipo] || tipo;
+        }
+
+        // ===================== RESPONDER =====================
+        async function responder(questaoId, resposta) {
+            if (!simuladoAtual) return;
+
+            const card = document.getElementById(`q-${questaoId}`);
+            const btns = card.querySelectorAll('.btn');
+            btns.forEach(b => b.disabled = true);
+
+            try {
+                const resultado = await apiFetch(`/simulados/${simuladoAtual.id}/responder`, 'POST', {
+                    questaoId, resposta
+                });
+
+                questoesState[questaoId] = { ...questoesState[questaoId], ...resultado };
+                card.outerHTML = renderQuestaoCard(resultado);
+                atualizarContadores(resultado.acertou);
+                verificarFinalizacao();
+            } catch (e) {
+                alert('Erro ao registrar resposta.');
+                btns.forEach(b => b.disabled = false);
+            }
+        }
+
+        let acertosLocal = 0, errosLocal = 0;
+
+        function atualizarContadores(acertou) {
+            if (acertou) acertosLocal++; else errosLocal++;
+            const total = simuladoAtual.totalQuestoes;
+            const respondidas = acertosLocal + errosLocal;
+            const pendentes = total - respondidas;
+            const aproveitamento = respondidas > 0 ? Math.round(acertosLocal * 100 / total) : 0;
+
+            document.getElementById('contador-acertos').textContent = acertosLocal;
+            document.getElementById('contador-erros').textContent = errosLocal;
+            document.getElementById('contador-pendentes').textContent = pendentes;
+            document.getElementById('progresso-texto').textContent = `${respondidas} de ${total} respondidas`;
+            document.getElementById('aproveitamento-texto').textContent = aproveitamento + '%';
+            document.getElementById('progresso-fill').style.width = (respondidas * 100 / total) + '%';
+        }
+
+        function verificarFinalizacao() {
+            const total = simuladoAtual.totalQuestoes;
+            if (acertosLocal + errosLocal >= total) {
+                document.getElementById('btn-finalizar').style.display = 'inline-flex';
+            }
+        }
+
+        // ===================== FINALIZAR =====================
+        async function finalizarSimulado() {
+            mostrarLoading('Calculando resultado...');
+            try {
+                const resultado = await apiFetch(`/simulados/${simuladoAtual.id}/finalizar`, 'POST');
+                renderResultado(resultado);
+            } catch (e) {
+                alert('Erro ao finalizar: ' + e.message);
+            } finally {
+                esconderLoading();
+            }
+        }
+
+        function renderResultado(resultado) {
+            const pct = Math.round(resultado.aproveitamento);
+            document.getElementById('nota-final').textContent = pct + '%';
+
+            let msg = '';
+            if (pct >= 70) msg = '🏆 Excelente! Aprovado com folga!';
+            else if (pct >= 60) msg = '✅ Bom resultado! Limiar de aprovação.';
+            else if (pct >= 50) msg = '⚠️ Precisa melhorar para passar.';
+            else msg = '📚 Estude mais os temas com erros.';
+
+            document.getElementById('resultado-texto').innerHTML = `
+    <strong>${resultado.acertos}</strong> acertos de <strong>${resultado.totalQuestoes}</strong> questões.<br>${msg}
+  `;
+
+            document.getElementById('resultado-final').classList.remove('hidden');
+            document.getElementById('filtro-bar').classList.remove('hidden');
+            document.getElementById('btn-finalizar').style.display = 'none';
+        }
+
+        // ===================== FILTROS =====================
+        function filtrar(tipo, btn) {
+            filtroAtivo = tipo;
+            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+
+            document.querySelectorAll('.questao-card').forEach(card => {
+                const respondida = card.dataset.respondida === 'true';
+                const acertou = card.dataset.acertou === 'true';
+                if (tipo === 'todas') card.style.display = '';
+                else if (tipo === 'erradas') card.style.display = (respondida && !acertou) ? '' : 'none';
+                else if (tipo === 'certas') card.style.display = (respondida && acertou) ? '' : 'none';
+            });
+        }
+
+        function novoSimulado() {
+            simuladoAtual = null;
+            questoesState = {};
+            acertosLocal = 0;
+            errosLocal = 0;
+            filtroAtivo = 'todas';
+            document.getElementById('tela-simulado').classList.add('hidden');
+            document.getElementById('resultado-final').classList.add('hidden');
+            document.getElementById('filtro-bar').classList.add('hidden');
+            document.getElementById('tela-config').classList.remove('hidden');
+        }
+
+        // ===================== UTILS =====================
+        async function apiFetch(path, method = 'GET', body = null) {
+            const opts = {
+                method,
+                headers: { 'Content-Type': 'application/json' }
+            };
+            if (body) opts.body = JSON.stringify(body);
+            const res = await fetch(API + path, opts);
+            if (!res.ok) {
+                const err = await res.text();
+                throw new Error(err || res.statusText);
+            }
+            return res.json();
+        }
+
+        function mostrarLoading(texto) {
+            document.getElementById('loading-texto').textContent = texto;
+            document.getElementById('loading').classList.remove('hidden');
+        }
+
+        function esconderLoading() {
+            document.getElementById('loading').classList.add('hidden');
+        }
+
+        // ===================== START =====================
+        init();
+    </script>
+</body>
+
+</html>
