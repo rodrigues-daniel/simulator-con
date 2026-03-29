@@ -379,4 +379,22 @@ public class LeiSecaService {
     private boolean blank(String s) {
         return s == null || s.isBlank();
     }
+
+    @Transactional
+    public QuestaoLei adicionarQuestaoTopico(Long topicoId, Map<String, Object> body) {
+        String gabaritRaw = String.valueOf(body.get("gabarito"));
+        Boolean gabarito = "true".equals(gabaritRaw) || Boolean.TRUE.equals(body.get("gabarito"));
+        String nivelRaw = (String) body.getOrDefault("nivel", "MEDIO");
+        return questaoLeiRepo.save(new QuestaoLei(
+                null, topicoId, null,
+                (String) body.get("enunciado"), gabarito,
+                (String) body.get("comentario"),
+                (String) body.getOrDefault("resumoEstudo", null),
+                (String) body.getOrDefault("tipoPegadinha", null),
+                (String) body.getOrDefault("artigoRef", null),
+                resolverNivel(nivelRaw), null,
+                (String) body.getOrDefault("orgaoProva", null),
+                body.get("recorrencia") != null ? ((Number) body.get("recorrencia")).intValue() : 1,
+                true, LocalDateTime.now()));
+    }
 }

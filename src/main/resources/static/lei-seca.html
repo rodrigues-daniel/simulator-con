@@ -316,6 +316,7 @@
         }
 
         /* ═══════ TELA 2: MATÉRIAS ═══════ */
+        /* Stats topo */
         .stats-strip {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -371,6 +372,7 @@
             color: var(--purple);
         }
 
+        /* Barra progresso geral */
         .prog-geral {
             background: var(--bg2);
             border: 1px solid var(--border);
@@ -511,6 +513,8 @@
             background: var(--surface);
         }
 
+        .topico-l {}
+
         .topico-nome {
             font-size: .9rem;
             font-weight: 500;
@@ -601,6 +605,7 @@
         }
 
         /* ═══════ TELA 3: TÓPICO / ESTUDO ═══════ */
+        /* Nav breadcrumb */
         .breadcrumb {
             display: flex;
             align-items: center;
@@ -631,6 +636,7 @@
             font-size: .75rem;
         }
 
+        /* Topico header */
         .topico-detail-hdr {
             background: var(--bg2);
             border: 1px solid var(--border);
@@ -696,6 +702,7 @@
             height: 14px;
         }
 
+        /* Score bar */
         .score-bar {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -742,6 +749,7 @@
             color: var(--teal);
         }
 
+        /* Tabs de conteúdo */
         .content-tabs {
             display: flex;
             gap: .3rem;
@@ -775,6 +783,7 @@
             font-weight: 700;
         }
 
+        /* Resumo de estudo */
         .resumo-box {
             background: var(--bg2);
             border: 1px solid var(--teal-bd);
@@ -834,6 +843,7 @@
             color: var(--teal);
         }
 
+        /* Artigo */
         .artigo-item {
             background: var(--bg2);
             border: 1px solid var(--border);
@@ -873,6 +883,7 @@
             color: var(--text);
         }
 
+        /* Questão lei */
         .qlei-outer {
             margin-bottom: .75rem;
             animation: qin .22s ease both;
@@ -1003,6 +1014,7 @@
             height: 15px;
         }
 
+        /* Gabarito reveal */
         .gab-reveal {
             margin-top: .85rem;
             border-radius: var(--r-sm);
@@ -1101,6 +1113,7 @@
             border: 1px solid var(--border);
         }
 
+        /* Anotações */
         .anot-form {
             display: flex;
             flex-direction: column;
@@ -1470,6 +1483,459 @@
             border-color: var(--red-bd);
             color: var(--red);
         }
+
+        /* ═══ BUSCA / FILTRO ═══ */
+        .busca-bar {
+            display: flex;
+            gap: .6rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .busca-input {
+            flex: 1;
+            min-width: 220px;
+            padding: .55rem .9rem;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: .9rem;
+            outline: none;
+            transition: border-color .15s;
+        }
+
+        .busca-input:focus {
+            border-color: var(--teal);
+        }
+
+        .busca-input::placeholder {
+            color: var(--text3);
+        }
+
+        .busca-sel {
+            padding: .55rem .85rem;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: .85rem;
+            outline: none;
+            cursor: pointer;
+            transition: border-color .15s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%238899bb' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right .6rem center;
+            background-size: 14px;
+            padding-right: 1.8rem;
+            -webkit-appearance: none;
+        }
+
+        .busca-sel:focus {
+            border-color: var(--teal);
+        }
+
+        .busca-sel option {
+            background: var(--bg3);
+        }
+
+        .busca-resultado {
+            font-size: .78rem;
+            color: var(--text3);
+            padding: .25rem 0;
+        }
+
+        .highlight {
+            background: rgba(45, 212, 191, .25);
+            border-radius: 3px;
+            padding: 0 2px;
+        }
+
+        /* ═══ SIMULADO POR MATÉRIA ═══ */
+        .sim-mat-btn {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .45rem .9rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--teal-bd);
+            background: var(--teal-bg);
+            color: var(--teal);
+            font-family: var(--sans);
+            font-size: .8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s;
+            white-space: nowrap;
+        }
+
+        .sim-mat-btn:hover {
+            background: var(--teal);
+            color: #06080f;
+        }
+
+        .sim-mat-btn svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .modal-sim-body {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: .85rem;
+        }
+
+        .sim-topico-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: .55rem .8rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            gap: .5rem;
+        }
+
+        .sim-topico-nome {
+            font-size: .85rem;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .sim-qtd-input {
+            width: 70px;
+            padding: .35rem .55rem;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-xs);
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: .85rem;
+            text-align: center;
+            outline: none;
+            transition: border-color .15s;
+        }
+
+        .sim-qtd-input:focus {
+            border-color: var(--teal);
+        }
+
+        .sim-embaralhar {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .85rem;
+            color: var(--text2);
+        }
+
+        .sim-embaralhar input[type=checkbox] {
+            accent-color: var(--teal);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ═══ ADICIONAR QUESTÃO AO TÓPICO ═══ */
+        .add-q-btn {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .38rem .8rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--teal-bd);
+            background: var(--teal-bg);
+            color: var(--teal);
+            font-family: var(--sans);
+            font-size: .78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .add-q-btn:hover {
+            background: var(--teal);
+            color: #06080f;
+        }
+
+        .add-q-btn svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* ═══ ESTATÍSTICA "ONDE MELHORAR" ═══ */
+        .estat-btn {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .45rem .9rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--purple-bd);
+            background: var(--purple-bg);
+            color: var(--purple);
+            font-family: var(--sans);
+            font-size: .8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s;
+            white-space: nowrap;
+        }
+
+        .estat-btn:hover {
+            background: var(--purple);
+            color: white;
+        }
+
+        .estat-btn svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .estat-section {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-bottom: 1rem;
+            transition: var(--tr);
+        }
+
+        .estat-hdr {
+            padding: .8rem 1.1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: .75rem;
+            font-weight: 700;
+            color: var(--text2);
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+        }
+
+        .estat-hdr svg {
+            width: 13px;
+            height: 13px;
+            color: var(--purple);
+        }
+
+        .estat-body {
+            padding: .9rem 1.1rem;
+        }
+
+        .estat-row {
+            display: grid;
+            grid-template-columns: 1fr 160px 52px;
+            align-items: center;
+            gap: .65rem;
+            margin-bottom: .55rem;
+            font-size: .82rem;
+        }
+
+        @media(max-width:500px) {
+            .estat-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .estat-nome {
+            color: var(--text2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .estat-bar-w {
+            height: 6px;
+            background: var(--surface2);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .estat-bar-f {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 1s ease;
+        }
+
+        .estat-pct {
+            font-family: var(--mono);
+            font-size: .72rem;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .priority-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .2rem;
+            padding: .15rem .5rem;
+            border-radius: 99px;
+            font-size: .65rem;
+            font-weight: 700;
+        }
+
+        .priority-1 {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .priority-2 {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        .priority-3 {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .tudo-certo {
+            text-align: center;
+            padding: 2rem;
+            color: var(--green);
+            font-size: .9rem;
+        }
+
+        /* ═══ MODAL ADD QUESTÃO ═══ */
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .field-group label {
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            color: var(--text3);
+        }
+
+        .field-group label .req {
+            color: var(--teal);
+        }
+
+        .field-group input,
+        .field-group select,
+        .field-group textarea {
+            padding: .52rem .82rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: .88rem;
+            outline: none;
+            width: 100%;
+            transition: border-color .15s, var(--tr);
+        }
+
+        .field-group input:focus,
+        .field-group select:focus,
+        .field-group textarea:focus {
+            border-color: var(--teal);
+        }
+
+        .field-group textarea {
+            resize: vertical;
+            min-height: 72px;
+        }
+
+        .field-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%238899bb' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right .7rem center;
+            background-size: 14px;
+            padding-right: 2rem;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .field-group select option {
+            background: var(--bg3);
+        }
+
+        .frow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem;
+        }
+
+        .frow3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: .75rem;
+        }
+
+        @media(max-width:520px) {
+
+            .frow,
+            .frow3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gab-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .gab-opt {
+            padding: .52rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-sm);
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--sans);
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all .18s;
+        }
+
+        .gab-opt:hover {
+            border-color: var(--border2);
+            background: var(--surface);
+        }
+
+        .gab-opt.sel-c {
+            border-color: var(--green-bd);
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .gab-opt.sel-e {
+            border-color: var(--red-bd);
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        /* ═══ SIMULADO VIEW ═══ */
+        #s-simulado-mat .prova-header {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: .65rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 54px;
+            z-index: 40;
+            transition: var(--tr);
+        }
+
+        #s-simulado-mat .prova-placar {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -1492,7 +1958,9 @@
         </div>
     </header>
 
-    <!-- TELA 1: ESCOLHA DE CARGO -->
+    <!-- ═══════════════════════════
+     TELA 1: ESCOLHA DE CARGO
+═══════════════════════════ -->
     <div id="s-cargo" class="screen on">
         <div class="hero">
             <div class="hero-eyebrow">⚖️ Lei Seca</div>
@@ -1511,25 +1979,53 @@
         </div>
     </div>
 
-    <!-- TELA 2: MATÉRIAS -->
+    <!-- ═══════════════════════════
+     TELA 2: MATÉRIAS
+═══════════════════════════ -->
     <div id="s-materias" class="screen">
         <div class="page">
+
             <div
-                style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem;">
+                style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;">
                 <div>
                     <div style="font-family:var(--serif);font-size:1.5rem;font-style:italic;" id="mat-titulo">Matérias
                     </div>
                     <div style="font-size:.82rem;color:var(--text3);" id="mat-cargo-label"></div>
                 </div>
-                <button onclick="voltarCargo()"
-                    style="display:flex;align-items:center;gap:.35rem;padding:.4rem .85rem;border-radius:var(--r-sm);border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--sans);font-size:.8rem;cursor:pointer;transition:all .15s;">
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
-                        <path d="M10 4L6 8l4 4" />
-                    </svg>
-                    Trocar cargo
-                </button>
+                <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
+                    <button class="estat-btn" onclick="abrirEstat()">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7">
+                            <circle cx="8" cy="8" r="6" />
+                            <path d="M8 5v3l2 1.5" />
+                        </svg>
+                        Onde Melhorar
+                    </button>
+                    <button onclick="voltarCargo()"
+                        style="display:flex;align-items:center;gap:.35rem;padding:.4rem .85rem;border-radius:var(--r-sm);border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--sans);font-size:.8rem;cursor:pointer;transition:all .15s;">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13"
+                            height="13">
+                            <path d="M10 4L6 8l4 4" />
+                        </svg>
+                        Trocar cargo
+                    </button>
+                </div>
             </div>
 
+            <!-- Busca -->
+            <div class="busca-bar">
+                <input class="busca-input" id="busca-input" type="text"
+                    placeholder="🔍  Buscar matéria, tópico ou assunto..." oninput="buscarConteudo()"
+                    autocomplete="off">
+                <select class="busca-sel" id="busca-status-filtro" onchange="buscarConteudo()">
+                    <option value="">Todos os status</option>
+                    <option value="PENDENTE">⏳ Pendente</option>
+                    <option value="EM_ESTUDO">✏️ Em Estudo</option>
+                    <option value="CONCLUIDO">✓ Concluído</option>
+                </select>
+            </div>
+            <div class="busca-resultado" id="busca-resultado"></div>
+
+            <!-- Stats -->
             <div class="stats-strip">
                 <div class="stat-c teal">
                     <div class="stat-v" id="st-materias">—</div>
@@ -1553,6 +2049,7 @@
                 </div>
             </div>
 
+            <!-- Progresso geral -->
             <div class="prog-geral">
                 <div class="prog-geral-info">
                     <div class="prog-geral-label">Progresso geral de estudo</div>
@@ -1563,19 +2060,26 @@
                 <div class="prog-pct" id="prog-geral-pct">0%</div>
             </div>
 
+            <!-- Lista de matérias -->
             <div id="lista-materias">
                 <div class="page-loading"><span class="spinner-lg"></span> Carregando matérias…</div>
             </div>
+
         </div>
     </div>
 
-    <!-- TELA 3: TÓPICO -->
+    <!-- ═══════════════════════════
+     TELA 3: TÓPICO
+═══════════════════════════ -->
     <div id="s-topico" class="screen">
         <div class="page">
+
             <div class="breadcrumb" id="breadcrumb"></div>
 
+            <!-- Header do tópico -->
             <div class="topico-detail-hdr" id="topico-hdr"></div>
 
+            <!-- Tabs -->
             <div class="content-tabs">
                 <button class="ctab on" data-tab="resumo" onclick="ctab(this)">📖 Resumo</button>
                 <button class="ctab" data-tab="artigos" onclick="ctab(this)">📜 Artigos</button>
@@ -1583,21 +2087,24 @@
                 <button class="ctab" data-tab="anotacoes" onclick="ctab(this)">📝 Anotações</button>
             </div>
 
+            <!-- Tab Resumo -->
             <div id="ct-resumo" class="ct-panel">
                 <div class="resumo-box" id="resumo-content"></div>
             </div>
 
+            <!-- Tab Artigos -->
             <div id="ct-artigos" class="ct-panel hidden">
                 <div id="artigos-list"></div>
             </div>
 
+            <!-- Tab Questões -->
             <div id="ct-questoes" class="ct-panel hidden">
                 <div
                     style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem;">
                     <div style="font-size:.82rem;color:var(--text2);" id="q-count-label"></div>
                     <div style="display:flex;gap:.4rem;">
                         <button onclick="filtrarQuestoes('todas')" id="fq-todas"
-                            style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--teal-bd);background:var(--teal-bg);color:var(--teal);font-size:.75rem;font-weight:700;cursor:pointer;font-family:var(--sans);">Todas</button>
+                            style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--border2);background:var(--teal-bg);border-color:var(--teal-bd);color:var(--teal);font-size:.75rem;font-weight:700;cursor:pointer;font-family:var(--sans);">Todas</button>
                         <button onclick="filtrarQuestoes('erradas')" id="fq-erradas"
                             style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:.75rem;font-weight:600;cursor:pointer;font-family:var(--sans);">Erradas</button>
                         <button onclick="filtrarQuestoes('certas')" id="fq-certas"
@@ -1607,6 +2114,7 @@
                 <div id="questoes-list"></div>
             </div>
 
+            <!-- Tab Anotações -->
             <div id="ct-anotacoes" class="ct-panel hidden">
                 <div class="anot-form">
                     <textarea class="anot-textarea" id="anot-input"
@@ -1621,10 +2129,13 @@
                 </div>
                 <div id="anotacoes-list"></div>
             </div>
+
         </div>
     </div>
 
-    <!-- MODAL IMPORTAR -->
+    <!-- ═══════════════════════════
+     MODAL IMPORTAR
+═══════════════════════════ -->
     <div class="modal-bg hidden" id="modal-imp">
         <div class="modal">
             <div class="modal-hdr">
@@ -1679,6 +2190,183 @@
         </div>
     </div>
 
+
+    <!-- ═══════════════════════════
+     TELA 4: SIMULADO POR MATÉRIA (embaralhado)
+═══════════════════════════ -->
+    <div id="s-simulado-mat" class="screen">
+        <div class="prova-header">
+            <div style="display:flex;align-items:center;gap:.75rem;">
+                <button onclick="voltarMateriasDoSim()"
+                    style="display:flex;align-items:center;gap:.3rem;padding:.35rem .75rem;border-radius:var(--r-sm);border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--sans);font-size:.8rem;cursor:pointer;">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                        <path d="M10 4L6 8l4 4" />
+                    </svg>
+                    Voltar
+                </button>
+                <span style="font-size:.85rem;font-weight:600;" id="sim-mat-titulo">Simulado</span>
+            </div>
+            <div class="prova-placar">
+                <span id="sim-sc-ac"
+                    style="padding:.2rem .6rem;border-radius:99px;font-size:.75rem;font-weight:700;font-family:var(--mono);background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);">0
+                    ✓</span>
+                <span id="sim-sc-er"
+                    style="padding:.2rem .6rem;border-radius:99px;font-size:.75rem;font-weight:700;font-family:var(--mono);background:var(--red-bg);border:1px solid var(--red-bd);color:var(--red);">0
+                    ✗</span>
+                <span id="sim-sc-rest"
+                    style="padding:.2rem .6rem;border-radius:99px;font-size:.75rem;font-weight:700;font-family:var(--mono);background:var(--gold-bg);border:1px solid var(--gold-bd);color:var(--gold);">—
+                    pend.</span>
+                <div style="width:120px;height:5px;background:var(--surface2);border-radius:99px;overflow:hidden;">
+                    <div id="sim-prog-fill"
+                        style="height:100%;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:99px;width:0%;transition:width .4s;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="max-width:860px;margin:0 auto;padding:1.5rem 1.5rem 5rem;">
+            <div id="sim-mat-lista"></div>
+            <button id="sim-mat-finalizar" class="btn-entrar hidden" onclick="finalizarSimMat()"
+                style="max-width:360px;margin:1.5rem auto 0;">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17">
+                    <path d="M13 2H4a1 1 0 00-1 1v10a1 1 0 001 1h9a1 1 0 001-1V5l-2-3z" />
+                </svg>
+                Ver Resultado
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════
+     MODAL: SIMULADO POR MATÉRIA
+═══════════════════════════ -->
+    <div class="modal-bg hidden" id="modal-sim-mat">
+        <div class="modal" style="max-width:560px;">
+            <div class="modal-hdr">
+                <span class="modal-title">🎯 Simulado por Matéria</span>
+                <button class="modal-close" onclick="fecharModalSimMat()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-sim-body" id="modal-sim-body">
+                <div style="font-size:.82rem;color:var(--text2);">Configure quantas questões quer de cada tópico. Use 0
+                    para excluir o tópico.</div>
+                <div id="sim-topicos-config"></div>
+                <label class="sim-embaralhar">
+                    <input type="checkbox" id="sim-embaralhar" checked>
+                    Embaralhar questões entre todos os tópicos
+                </label>
+            </div>
+            <div class="modal-foot">
+                <button class="btn-m btn-ghost" onclick="fecharModalSimMat()">Cancelar</button>
+                <button class="btn-m btn-teal" onclick="iniciarSimMat()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                        <polygon points="5 3 13 8 5 13" />
+                    </svg>
+                    Iniciar Simulado
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════
+     MODAL: ADICIONAR QUESTÃO AO TÓPICO
+═══════════════════════════ -->
+    <div class="modal-bg hidden" id="modal-add-q">
+        <div class="modal">
+            <div class="modal-hdr">
+                <span class="modal-title">➕ Adicionar Questão ao Tópico</span>
+                <button class="modal-close" onclick="fecharModalAddQ()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" style="display:flex;flex-direction:column;gap:.85rem;">
+                <div class="field-group">
+                    <label>Enunciado <span class="req">*</span></label>
+                    <textarea id="aq-enunciado" rows="4"
+                        placeholder="Texto completo da assertiva CEBRASPE..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>Gabarito <span class="req">*</span></label>
+                    <div class="gab-row">
+                        <button type="button" class="gab-opt" id="aq-gab-c" onclick="selGabQ(true)">✓ CERTO</button>
+                        <button type="button" class="gab-opt" id="aq-gab-e" onclick="selGabQ(false)">✗ ERRADO</button>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label>Comentário / Análise <span class="req">*</span></label>
+                    <textarea id="aq-comentario" rows="4"
+                        placeholder="Explique por que é certo ou errado, identifique a pegadinha..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>Resumo de Estudo</label>
+                    <textarea id="aq-resumo" rows="2"
+                        placeholder="Síntese para memorizar a resposta (aceita **negrito**)..."></textarea>
+                </div>
+                <div class="frow3">
+                    <div class="field-group">
+                        <label>Nível</label>
+                        <select id="aq-nivel">
+                            <option value="FACIL">Fácil</option>
+                            <option value="MEDIO" selected>Médio</option>
+                            <option value="DIFICIL">Difícil</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label>Órgão / Prova</label>
+                        <input type="text" id="aq-orgao" placeholder="TCU 2024">
+                    </div>
+                    <div class="field-group">
+                        <label>Recorrência</label>
+                        <input type="number" id="aq-recorr" value="1" min="1" max="99">
+                    </div>
+                </div>
+                <div class="frow">
+                    <div class="field-group">
+                        <label>Tipo de Pegadinha</label>
+                        <input type="text" id="aq-pegadinha" placeholder="Ex: Omissão de Condição">
+                    </div>
+                    <div class="field-group">
+                        <label>Artigo de Referência</label>
+                        <input type="text" id="aq-artigo-ref" placeholder="Ex: Lei 8.112/90, Art. 8º">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-foot">
+                <button class="btn-m btn-ghost" onclick="fecharModalAddQ()">Cancelar</button>
+                <button class="btn-m btn-teal" id="aq-btn-save" onclick="salvarQuestaoTopico()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                        <path d="M13 2H4a1 1 0 00-1 1v10a1 1 0 001 1h9a1 1 0 001-1V5l-2-3z" />
+                        <path d="M9 2v4h4" />
+                    </svg>
+                    Salvar Questão
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════
+     MODAL: ESTATÍSTICA "ONDE MELHORAR"
+═══════════════════════════ -->
+    <div class="modal-bg hidden" id="modal-estat">
+        <div class="modal" style="max-width:700px;">
+            <div class="modal-hdr">
+                <span class="modal-title">📊 Onde Preciso Melhorar</span>
+                <button class="modal-close" onclick="document.getElementById('modal-estat').classList.add('hidden')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-estat-body"
+                style="max-height:72vh;overflow-y:auto;padding:1.25rem;display:flex;flex-direction:column;gap:1rem;">
+                <div class="page-loading"><span class="spinner-lg"></span> Calculando...</div>
+            </div>
+        </div>
+    </div>
+
     <div class="toast-wrap" id="toast-wrap"></div>
 
     <script>
@@ -1688,9 +2376,8 @@
         let cargoAtual = null;
         let topicoAtual = null;
         let materiaAtual = null;
-        let respostasTopico = {};
+        let respostasTopico = {};   // questaoId -> { acertou, gabarito, comentario, ... }
         let filtroQuestoes = 'todas';
-        let questoesAtivas = [];
 
         /* ══ INIT ══ */
         async function init() {
@@ -1721,10 +2408,10 @@
                     return;
                 }
                 grid.innerHTML = cargos.map(c => `
-                    <div class="cargo-card" data-id="${c.id}" data-nome="${esc(c.nome)}" onclick="selCargo(this)">
-                        <div class="cargo-nome">${esc(c.nome)}</div>
-                        <div class="cargo-orgao">${esc(c.orgao || 'Geral')}</div>
-                    </div>`).join('');
+      <div class="cargo-card" data-id="${c.id}" data-nome="${esc(c.nome)}" onclick="selCargo(this)">
+        <div class="cargo-nome">${esc(c.nome)}</div>
+        <div class="cargo-orgao">${esc(c.orgao || 'Geral')}</div>
+      </div>`).join('');
             } catch (e) {
                 document.getElementById('cargo-grid').innerHTML =
                     '<div class="empty"><div>Erro ao conectar ao backend.</div></div>';
@@ -1758,6 +2445,7 @@
                     apiFetch('/lei-seca/stats?cargoId=' + cargoAtual.id)
                 ]);
 
+                // Stats
                 document.getElementById('st-materias').textContent = stats.materias ?? 0;
                 document.getElementById('st-topicos').textContent = stats.topicos ?? 0;
                 document.getElementById('st-concluidos').textContent = stats.concluidos ?? 0;
@@ -1772,8 +2460,11 @@
                     return;
                 }
 
+                _materiasCache = materias;
+                _materiasCache = materias;  // popula cache para busca e estatísticas
                 document.getElementById('lista-materias').innerHTML = materias.map(m => renderMateriaCard(m)).join('');
 
+                // Animar barras
                 setTimeout(() => {
                     document.querySelectorAll('.materia-mini-bar[data-pct]').forEach(el => {
                         el.style.width = el.dataset.pct + '%';
@@ -1785,10 +2476,12 @@
             }
         }
 
+        // Mapa de tópicos indexado por id para lookup seguro no click
         const _topicoMeta = {};
 
         function renderMateriaCard(m) {
             const pct = Math.round(m.progressoPct || 0);
+
             const statusCls = { PENDENTE: 'b-pendente', EM_ESTUDO: 'b-estudando', CONCLUIDO: 'b-concluido' };
             const statusTxt = { PENDENTE: '⏳ Pendente', EM_ESTUDO: '✏️ Em Estudo', CONCLUIDO: '✓ Concluído' };
 
@@ -1805,37 +2498,41 @@
                     : 'var(--text3)';
 
                 return `<div class="topico-row" data-topico-id="${t.id}" onclick="handleTopicoClick(event.currentTarget)">
-                    <div class="topico-l" style="pointer-events:none;">
-                        <div class="topico-nome">${esc(t.nome)}</div>
-                        ${t.artigoBase ? `<div class="topico-artigo">${esc(t.artigoBase)}</div>` : ''}
-                    </div>
-                    <div class="topico-r" style="pointer-events:none;">
-                        <span class="topico-q-count">${t.totalQuestoes}q</span>
-                        <span class="topico-aprov" style="color:${aprovCor}">${aprovTxt}</span>
-                        <span class="badge ${bc}">${bt}</span>
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14" style="color:var(--text3)"><path d="M6 4l4 4-4 4"/></svg>
-                    </div>
-                </div>`;
+      <div class="topico-l" style="pointer-events:none;">
+        <div class="topico-nome">${esc(t.nome)}</div>
+        ${t.artigoBase ? `<div class="topico-artigo">${esc(t.artigoBase)}</div>` : ''}
+      </div>
+      <div class="topico-r" style="pointer-events:none;">
+        <span class="topico-q-count">${t.totalQuestoes}q</span>
+        <span class="topico-aprov" style="color:${aprovCor}">${aprovTxt}</span>
+        <span class="badge ${bc}">${bt}</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14" style="color:var(--text3)"><path d="M6 4l4 4-4 4"/></svg>
+      </div>
+    </div>`;
             }).join('');
 
             return `<div class="materia-card" id="mc-${m.id}">
-                <div class="materia-hdr" onclick="toggleMateria(${m.id})">
-                    <div class="materia-hdr-l">
-                        <div class="materia-nome">${esc(m.nome)}</div>
-                        ${m.fonteLegal ? `<div class="materia-fonte">${esc(m.fonteLegal)}</div>` : ''}
-                    </div>
-                    <div class="materia-hdr-r">
-                        <span class="materia-prog">${m.topicosConcluidosCount}/${m.totalTopicos}</span>
-                        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
-                    </div>
-                </div>
-                <div style="height:2px;background:var(--border);overflow:hidden;">
-                    <div class="materia-mini-bar" data-pct="${pct}" style="width:0%;height:100%;background:var(--teal);transition:width 1s ease;"></div>
-                </div>
-                <div class="materia-topicos hidden" id="mt-${m.id}">
-                    ${topicosHtml || '<div style="padding:1rem 1.25rem;font-size:.85rem;color:var(--text3);">Nenhum tópico cadastrado.</div>'}
-                </div>
-            </div>`;
+    <div class="materia-hdr" onclick="toggleMateria(${m.id})">
+      <div class="materia-hdr-l">
+        <div class="materia-nome">${esc(m.nome)}</div>
+        ${m.fonteLegal ? `<div class="materia-fonte">${esc(m.fonteLegal)}</div>` : ''}
+      </div>
+      <div class="materia-hdr-r" style="display:flex;align-items:center;gap:.6rem;">
+        <span class="materia-prog">${m.topicosConcluidosCount}/${m.totalTopicos}</span>
+        <button class="sim-mat-btn" onclick="event.stopPropagation(); abrirModalSimMat(${m.id})" title="Simulado desta matéria">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 13 8 5 13"/></svg>
+          Simular
+        </button>
+        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+    </div>
+    <div style="height:2px;background:var(--border);overflow:hidden;">
+      <div class="materia-mini-bar" data-pct="${pct}" style="width:0%;height:100%;background:var(--teal);transition:width 1s ease;"></div>
+    </div>
+    <div class="materia-topicos hidden" id="mt-${m.id}">
+      ${topicosHtml || '<div style="padding:1rem 1.25rem;font-size:.85rem;color:var(--text3);">Nenhum tópico cadastrado.</div>'}
+    </div>
+  </div>`;
         }
 
         function toggleMateria(id) {
@@ -1846,6 +2543,7 @@
             card.classList.toggle('open', !isOpen);
         }
 
+        /* ── BRIDGE: clique seguro — recebe o próprio .topico-row via currentTarget ── */
         function handleTopicoClick(row) {
             const id = +row.dataset.topicoId;
             const meta = _topicoMeta[id];
@@ -1858,7 +2556,7 @@
             topicoAtual = id;
             materiaAtual = materiaNome;
             respostasTopico = {};
-            questoesAtivas = [];
+            questoesAtivas = [];          // limpa cache do tópico anterior
             filtroQuestoes = 'todas';
 
             showScreen('s-topico');
@@ -1867,20 +2565,18 @@
             document.getElementById('artigos-list').innerHTML = '';
             document.getElementById('anotacoes-list').innerHTML = '';
             document.getElementById('resumo-content').innerHTML = '';
+            // Reseta tabs de filtro de questões para "Todas"
             filtrarQuestoesBotao('todas');
             ctabAtivo('resumo');
 
-            // Reset tab buttons visual state
-            document.querySelectorAll('.ctab').forEach(t => t.classList.remove('on'));
-            document.querySelector('.ctab[data-tab="resumo"]').classList.add('on');
-
+            // Breadcrumb
             document.getElementById('breadcrumb').innerHTML = `
-                <span class="bc-item" onclick="voltarMaterias()">📚 Matérias</span>
-                <span class="bc-sep">›</span>
-                <span class="bc-item" onclick="voltarMaterias()">${esc(materiaNome)}</span>
-                <span class="bc-sep">›</span>
-                <span class="bc-item atual">${esc(nome)}</span>
-            `;
+    <span class="bc-item" onclick="voltarMaterias()">📚 Matérias</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-item" onclick="voltarMaterias()">${esc(materiaNome)}</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-item atual">${esc(nome)}</span>
+  `;
 
             try {
                 const data = await apiFetch('/lei-seca/topicos/' + id);
@@ -1895,35 +2591,46 @@
         function renderTopico(data) {
             const prog = progressoDisplay(data.acertos, data.erros);
 
-            // BUG CORRIGIDO: template literal fechado corretamente (era encerrado com \`; dentro de string regular)
+            // Header
             document.getElementById('topico-hdr').innerHTML = `
-                <div class="td-hdr-top">
-                    <div>
-                        <div class="td-titulo">${esc(data.nome)}</div>
-                        ${data.artigoBase ? `<div style="font-size:.78rem;color:var(--text3);font-family:var(--mono);margin-top:.2rem;">${esc(data.artigoBase)}</div>` : ''}
-                    </div>
-                    <div class="td-acoes">
-                        <button class="icon-btn danger" title="Resetar progresso" onclick="resetarTopico(${data.id})">
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8A6 6 0 0114 5.5"/><path d="M14 8A6 6 0 012 10.5"/><path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2"/></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="td-meta">
-                    <span class="badge ${{ PENDENTE: 'b-pendente', EM_ESTUDO: 'b-estudando', CONCLUIDO: 'b-concluido' }[data.status] || 'b-pendente'}">
-                        ${{ PENDENTE: '⏳ Pendente', EM_ESTUDO: '✏️ Em Estudo', CONCLUIDO: '✓ Concluído' }[data.status] || data.status}
-                    </span>
-                    <span style="font-size:.8rem;color:var(--text2);">${data.questoes?.length || 0} questões</span>
-                </div>
-                <div class="score-bar" style="margin-top:.75rem;">
-                    <div class="sc-item ac"><div class="sc-val" id="score-ac">${data.acertos}</div><div class="sc-lbl">Acertos</div></div>
-                    <div class="sc-item er"><div class="sc-val" id="score-er">${data.erros}</div><div class="sc-lbl">Erros</div></div>
-                    <div class="sc-item ap"><div class="sc-val" id="score-ap">${prog.pct}%</div><div class="sc-lbl">Aproveitamento</div></div>
-                </div>`;
+    <div class="td-hdr-top">
+      <div>
+        <div class="td-titulo">${esc(data.nome)}</div>
+        ${data.artigoBase ? `<div style="font-size:.78rem;color:var(--text3);font-family:var(--mono);margin-top:.2rem;">${esc(data.artigoBase)}</div>` : ''}
+      </div>
+      <div class="td-acoes" style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;">
+        <button class="add-q-btn" onclick="abrirModalAddQ(${data.id})">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v12M2 8h12"/></svg>
+          + Questão
+        </button>
+        <button class="icon-btn danger" title="Resetar progresso" onclick="resetarTopico(${data.id})">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8A6 6 0 0114 5.5"/><path d="M14 8A6 6 0 012 10.5"/><path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="td-meta">
+      <span class="badge ${{ PENDENTE: 'b-pendente', EM_ESTUDO: 'b-estudando', CONCLUIDO: 'b-concluido' }[data.status] || 'b-pendente'}">
+        ${{ PENDENTE: '⏳ Pendente', EM_ESTUDO: '✏️ Em Estudo', CONCLUIDO: '✓ Concluído' }[data.status] || data.status}
+      </span>
+      <span style="font-size:.8rem;color:var(--text2);">${data.questoes?.length || 0} questões</span>
+    </div>
+    <div class="score-bar" style="margin-top:.75rem;">
+      <div class="sc-item ac"><div class="sc-val" id="score-ac">${data.acertos}</div><div class="sc-lbl">Acertos</div></div>
+      <div class="sc-item er"><div class="sc-val" id="score-er">${data.erros}</div><div class="sc-lbl">Erros</div></div>
+      <div class="sc-item ap"><div class="sc-val" id="score-ap">${prog.pct}%</div><div class="sc-lbl">Aproveitamento</div></div>
+    </div>
+  `;
 
+            // Resumo
             renderResumo(data.resumo);
+
+            // Artigos
             renderArtigos(data.artigos || []);
+
+            // Questões
             renderQuestoes(data.questoes || []);
 
+            // Contador
             document.getElementById('q-count-label').textContent =
                 (data.questoes?.length || 0) + ' questões para este tópico';
         }
@@ -1934,14 +2641,14 @@
                 box.innerHTML = '<div style="color:var(--text3);font-size:.88rem;padding:.5rem;">Nenhum resumo cadastrado para este tópico.</div>';
                 return;
             }
-            // BUG CORRIGIDO: regex de lista com flag correta e sem o /s incorreto
+            // Converte markdown simples
             const html = resumo
                 .replace(/^## (.+)$/gm, '<h2>$1</h2>')
                 .replace(/^### (.+)$/gm, '<h3>$1</h3>')
                 .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
                 .replace(/`(.+?)`/g, '<code>$1</code>')
                 .replace(/^- (.+)$/gm, '<li>$1</li>')
-                .replace(/(<li>[\s\S]+?<\/li>)/g, '<ul>$1</ul>')
+                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
                 .replace(/\n{2,}/g, '</p><p>')
                 .replace(/\n/g, '<br>');
             box.innerHTML = '<p>' + html + '</p>';
@@ -1953,22 +2660,33 @@
                 el.innerHTML = '<div class="empty"><div class="empty-icon">📜</div><div>Nenhum artigo cadastrado para este tópico.</div></div>';
                 return;
             }
-            // BUG CORRIGIDO: espaço espúrio removido em `< div class=` → `<div class=`
             el.innerHTML = artigos.map(a => `
-                <div class="artigo-item ${a.destaque ? 'destaque' : ''}">
-                    <div class="artigo-id">
-                        ${a.destaque ? '<span class="badge b-destaque">⭐ Muito Cobrado</span>' : ''}
-                        ${esc(a.identificador)}
-                    </div>
-                    <div class="artigo-texto">${esc(a.texto)}</div>
-                </div>`).join('');
+    <div class="artigo-item ${a.destaque ? 'destaque' : ''}">
+      <div class="artigo-id">
+        ${a.destaque ? '<span class="badge b-destaque">⭐ Muito Cobrado</span>' : ''}
+        ${esc(a.identificador)}
+      </div>
+      <div class="artigo-texto">${esc(a.texto)}</div>
+    </div>`).join('');
         }
 
+        let questoesAtivas = [];
+
         function renderQuestoes(questoes) {
-            if (Array.isArray(questoes) && questoes.length > 0) questoesAtivas = questoes;
+            // Atualiza o cache apenas quando chega um array real com itens
+            if (Array.isArray(questoes) && questoes.length > 0) {
+                questoesAtivas = questoes;
+            }
+            // Se cache vazio e sem dado novo, mostra vazio limpo
+            if (!questoesAtivas.length && !questoes?.length) {
+                document.getElementById('questoes-list').innerHTML =
+                    '<div class="empty"><div class="empty-icon">✏️</div><div>Nenhuma questão cadastrada para este tópico.</div></div>';
+                return;
+            }
 
             const nLbl = { FACIL: 'b-facil Fácil', MEDIO: 'b-medio Médio', DIFICIL: 'b-dificil Difícil' };
 
+            // Filtra SEMPRE a partir do cache completo
             const fonte = questoesAtivas;
             const filtradas = fonte.filter(q => {
                 if (filtroQuestoes === 'erradas') return respostasTopico[q.id] && !respostasTopico[q.id].acertou;
@@ -1986,56 +2704,56 @@
                 const resp = respostasTopico[q.id];
                 const respondida = !!resp;
                 const acertou = resp?.acertou;
-                const _nivelStr = nLbl[q.nivel] || 'b-medio Médio';
+                const _nivelStr = nLbl[q.nivel] || 'b-sub Médio';
                 const nc = _nivelStr.split(' ')[0];
                 const nl = _nivelStr.split(' ').slice(1).join(' ');
 
                 const gabHtml = respondida ? (() => {
                     const gabTxt = resp.gabarito ? 'CERTO' : 'ERRADO';
-                    // BUG CORRIGIDO: espaço espúrio removido em `< span class=` → `<span class=`
                     const pegHtml = resp.tipoPegadinha
                         ? `<span class="badge b-pegad" style="display:inline-flex;margin-bottom:.4rem;">🪤 ${esc(resp.tipoPegadinha)}</span><br>` : '';
                     const resumoHtml = resp.resumoEstudo
                         ? `<div class="gab-resumo">${mdBold(esc(resp.resumoEstudo))}</div>` : '';
                     return `<div class="gab-reveal ${acertou ? 'gab-ok' : 'gab-err'}">
-                        <div class="gab-hdr">
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
-                            ${acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
-                        </div>
-                        <div class="gab-body">
-                            ${pegHtml}${esc(resp.comentario || '')}
-                            ${resp.artigoRef ? `<div class="ref-tag">📖 ${esc(resp.artigoRef)}</div>` : ''}
-                        </div>
-                        ${resumoHtml}
-                    </div>`;
+        <div class="gab-hdr">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+          ${acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
+        </div>
+        <div class="gab-body">
+          ${pegHtml}${esc(resp.comentario || '')}
+          ${resp.artigoRef ? `<div class="ref-tag">📖 ${esc(resp.artigoRef)}</div>` : ''}
+        </div>
+        ${resumoHtml}
+      </div>`;
                 })() : '';
 
                 return `<div class="qlei-outer" style="animation-delay:${Math.min(i * .03, .4)}s">
-                    <div class="qlei-card ${respondida ? (acertou ? 'ok' : 'err') : ''}" id="qlei-${q.id}">
-                        <div class="qlei-head">
-                            <span class="qlei-n">Q${i + 1}</span>
-                            <span class="badge ${nc}">${nl}</span>
-                            ${q.recorrencia > 1 ? `<span class="recorr">🔁 ${q.recorrencia}x</span>` : ''}
-                            ${q.orgaoProva ? `<span class="badge b-pendente">${esc(q.orgaoProva)}</span>` : ''}
-                            ${q.tipoPegadinha && !respondida ? `<span class="badge b-pegad">🪤</span>` : ''}
-                        </div>
-                        <div class="qlei-body">
-                            <div class="qlei-enunciado">${esc(q.enunciado)}</div>
-                            <div class="qlei-btns" id="qb-${q.id}">
-                                <button class="btn-resp btn-certo" onclick="responder(${q.id}, true)" ${respondida ? 'disabled' : ''}>
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 8l4 4 8-8"/></svg> CERTO
-                                </button>
-                                <button class="btn-resp btn-errado" onclick="responder(${q.id}, false)" ${respondida ? 'disabled' : ''}>
-                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 2l12 12M14 2L2 14"/></svg> ERRADO
-                                </button>
-                            </div>
-                            <div id="gb-${q.id}">${gabHtml}</div>
-                        </div>
-                    </div>
-                </div>`;
+      <div class="qlei-card ${respondida ? (acertou ? 'ok' : 'err') : ''}" id="qlei-${q.id}">
+        <div class="qlei-head">
+          <span class="qlei-n">Q${i + 1}</span>
+          <span class="badge ${nc}">${nl}</span>
+          ${q.recorrencia > 1 ? `<span class="recorr">🔁 ${q.recorrencia}x</span>` : ''}
+          ${q.orgaoProva ? `<span class="badge b-pendente">${esc(q.orgaoProva)}</span>` : ''}
+          ${q.tipoPegadinha && !respondida ? `<span class="badge b-pegad">🪤</span>` : ''}
+        </div>
+        <div class="qlei-body">
+          <div class="qlei-enunciado">${esc(q.enunciado)}</div>
+          <div class="qlei-btns" id="qb-${q.id}">
+            <button class="btn-resp btn-certo" onclick="responder(${q.id}, true)" ${respondida ? 'disabled' : ''}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 8l4 4 8-8"/></svg> CERTO
+            </button>
+            <button class="btn-resp btn-errado" onclick="responder(${q.id}, false)" ${respondida ? 'disabled' : ''}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 2l12 12M14 2L2 14"/></svg> ERRADO
+            </button>
+          </div>
+          <div id="gb-${q.id}">${gabHtml}</div>
+        </div>
+      </div>
+    </div>`;
             }).join('');
         }
 
+        /* Atualiza apenas o estilo dos botões de filtro (sem renderizar) */
         function filtrarQuestoesBotao(f) {
             filtroQuestoes = f;
             ['todas', 'erradas', 'certas'].forEach(v => {
@@ -2051,6 +2769,7 @@
 
         function filtrarQuestoes(f) {
             filtrarQuestoesBotao(f);
+            // Passa null para renderQuestoes não sobrescrever o cache (só filtra)
             renderQuestoes(null);
         }
 
@@ -2074,7 +2793,9 @@
                 };
 
                 const card = document.getElementById(`qlei-${qId}`);
-                if (card) card.classList.add(data.acertou ? 'ok' : 'err');
+                if (card) {
+                    card.classList.add(data.acertou ? 'ok' : 'err');
+                }
 
                 const gabTxt = data.gabarito ? 'CERTO' : 'ERRADO';
                 const pegHtml = data.tipoPegadinha
@@ -2084,19 +2805,21 @@
 
                 const gbEl = document.getElementById(`gb-${qId}`);
                 if (gbEl) gbEl.innerHTML = `
-                    <div class="gab-reveal ${data.acertou ? 'gab-ok' : 'gab-err'}">
-                        <div class="gab-hdr">
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${data.acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
-                            ${data.acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
-                        </div>
-                        <div class="gab-body">
-                            ${pegHtml}${esc(data.comentario || '')}
-                            ${data.artigoRef ? `<div class="ref-tag">📖 ${esc(data.artigoRef)}</div>` : ''}
-                        </div>
-                        ${resumoHtml}
-                    </div>`;
+      <div class="gab-reveal ${data.acertou ? 'gab-ok' : 'gab-err'}">
+        <div class="gab-hdr">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${data.acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+          ${data.acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
+        </div>
+        <div class="gab-body">
+          ${pegHtml}${esc(data.comentario || '')}
+          ${data.artigoRef ? `<div class="ref-tag">📖 ${esc(data.artigoRef)}</div>` : ''}
+        </div>
+        ${resumoHtml}
+      </div>`;
 
                 toast(data.acertou ? '✅ Acertou!' : '❌ Errou!', data.acertou ? 'ok' : 'err');
+
+                // Atualiza score no header sem recarregar tudo
                 atualizarScore();
             } catch (e) {
                 toast('Erro ao registrar resposta', 'err');
@@ -2144,17 +2867,19 @@
                 return;
             }
             el.innerHTML = lista.map(a => `
-                <div class="anot-item">
-                    <div class="anot-data">${new Date(a.createdAt).toLocaleString('pt-BR')}</div>
-                    ${esc(a.conteudo)}
-                </div>`).join('');
+    <div class="anot-item">
+      <div class="anot-data">${new Date(a.createdAt).toLocaleString('pt-BR')}</div>
+      ${esc(a.conteudo)}
+    </div>`).join('');
         }
 
         async function salvarAnotacao() {
             const txt = document.getElementById('anot-input').value.trim();
             if (!txt) return;
             try {
-                await apiFetch('/lei-seca/topicos/' + topicoAtual + '/anotacoes', 'POST', { conteudo: txt });
+                await apiFetch('/lei-seca/topicos/' + topicoAtual + '/anotacoes', 'POST', {
+                    conteudo: txt
+                });
                 document.getElementById('anot-input').value = '';
                 await carregarAnotacoes(topicoAtual);
                 toast('Anotação salva', 'ok');
@@ -2172,8 +2897,10 @@
             ['resumo', 'artigos', 'questoes', 'anotacoes'].forEach(t => {
                 document.getElementById('ct-' + t).classList.toggle('hidden', t !== tab);
             });
+            // Quando abre a aba questões, atualiza estilos dos botões e renderiza com cache atual
             if (tab === 'questoes') {
                 filtrarQuestoesBotao(filtroQuestoes);
+                // Só renderiza se já tiver dados (evita apagar enquanto carrega)
                 if (questoesAtivas.length > 0) renderQuestoes(null);
             }
         }
@@ -2221,6 +2948,13 @@
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
             document.getElementById(id).classList.add('on');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Limpa tabs de conteúdo ao sair do tópico
+            if (id !== 's-topico') {
+                questoesAtivas = [];
+                document.querySelectorAll('.ctab').forEach(t => {
+                    t.classList.toggle('on', t.dataset.tab === 'resumo');
+                });
+            }
         }
 
         function voltarMaterias() {
@@ -2241,14 +2975,9 @@
         function toast(msg, type = '') {
             const w = document.getElementById('toast-wrap');
             const el = document.createElement('div');
-            el.className = 'toast ' + (type || '');
-            el.textContent = msg;
+            el.className = 'toast ' + (type || ''); el.textContent = msg;
             w.appendChild(el);
-            setTimeout(() => {
-                el.style.opacity = '0';
-                el.style.transition = 'opacity .2s';
-                setTimeout(() => el.remove(), 220);
-            }, 3000);
+            setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .2s'; setTimeout(() => el.remove(), 220); }, 3000);
         }
 
         function progressoDisplay(ac, er) {
@@ -2266,13 +2995,507 @@
                 .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
-        document.getElementById('modal-imp').addEventListener('click', e => {
-            if (e.target === document.getElementById('modal-imp')) fecharImportar();
+        // Fecha qualquer modal ao clicar no backdrop
+        ['modal-imp', 'modal-sim-mat', 'modal-add-q', 'modal-estat'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('click', e => { if (e.target === el) el.classList.add('hidden'); });
         });
 
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') fecharImportar();
+            if (e.key !== 'Escape') return;
+            ['modal-imp', 'modal-sim-mat', 'modal-add-q', 'modal-estat'].forEach(id => {
+                document.getElementById(id)?.classList.add('hidden');
+            });
         });
+
+
+        /* ── Fechar modal estatística e abrir tópico usando _topicoMeta ── */
+        function fecharEstatIr(el) {
+            const id = +el.dataset.tid;
+            const meta = _topicoMeta[id];
+            document.getElementById('modal-estat').classList.add('hidden');
+            if (meta) abrirTopico(id, meta.nome, meta.materiaNome);
+            else toast('Abra a matéria primeiro para carregar o tópico', '');
+        }
+
+        /* ════════════════════════════════════════════════
+           BUSCA / FILTRO DE CONTEÚDO
+        ════════════════════════════════════════════════ */
+        let _materiasCache = [];
+
+        function buscarConteudo() {
+            const termo = document.getElementById('busca-input').value.trim().toLowerCase();
+            const status = document.getElementById('busca-status-filtro').value;
+            const resBadge = document.getElementById('busca-resultado');
+
+            if (!_materiasCache.length) { resBadge.textContent = ''; return; }
+
+            if (!termo && !status) {
+                // Mostra tudo
+                _materiasCache.forEach(m => {
+                    const card = document.getElementById('mc-' + m.id);
+                    if (card) card.style.display = '';
+                });
+                resBadge.textContent = '';
+                return;
+            }
+
+            let totalVisible = 0;
+
+            _materiasCache.forEach(m => {
+                const card = document.getElementById('mc-' + m.id);
+                const panel = document.getElementById('mt-' + m.id);
+                if (!card) return;
+
+                let materiaMatch = !termo || m.nome.toLowerCase().includes(termo)
+                    || (m.fonteLegal || '').toLowerCase().includes(termo)
+                    || (m.descricao || '').toLowerCase().includes(termo);
+
+                let topicoVisivel = false;
+
+                // Verifica tópicos
+                (m.topicos || []).forEach(t => {
+                    const row = panel?.querySelector('[data-topico-id="' + t.id + '"]');
+                    if (!row) return;
+
+                    const topicoMatch = !termo
+                        || t.nome.toLowerCase().includes(termo)
+                        || (t.artigoBase || '').toLowerCase().includes(termo);
+                    const statusMatch = !status || t.status === status;
+
+                    if (topicoMatch && statusMatch) {
+                        row.style.display = '';
+                        topicoVisivel = true;
+
+                        // Realça o texto encontrado
+                        if (termo) {
+                            const nomeEl = row.querySelector('.topico-nome');
+                            if (nomeEl) {
+                                const original = t.nome;
+                                const re = new RegExp('(' + escapeRegex(termo) + ')', 'gi');
+                                nomeEl.innerHTML = original.replace(re, '<mark class="highlight">$1</mark>');
+                            }
+                        }
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                const shouldShow = materiaMatch || topicoVisivel;
+                card.style.display = shouldShow ? '' : 'none';
+
+                if (shouldShow) {
+                    totalVisible++;
+                    // Expande automaticamente se há filtro ativo
+                    if (termo || status) {
+                        panel?.classList.remove('hidden');
+                        card.classList.add('open');
+                    }
+                }
+            });
+
+            resBadge.textContent = (termo || status)
+                ? totalVisible + ' matéria(s) encontrada(s)' : '';
+        }
+
+        function escapeRegex(s) {
+            return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        /* ════════════════════════════════════════════════
+           SIMULADO POR MATÉRIA
+        ════════════════════════════════════════════════ */
+        let _simMatId = null;
+        let _simMatQuestoes = [];
+        let _simMatRespostas = {};
+
+        function abrirModalSimMat(materiaId) {
+            _simMatId = materiaId;
+            const materia = _materiasCache.find(m => m.id === materiaId);
+            if (!materia) return;
+
+            const topicos = materia.topicos || [];
+            const body = document.getElementById('sim-topicos-config');
+
+            body.innerHTML = topicos.map(t => `
+    <div class="sim-topico-row" data-topico-id="${t.id}">
+      <span class="sim-topico-nome">${esc(t.nome)}</span>
+      <div style="display:flex;align-items:center;gap:.4rem;">
+        <span style="font-size:.72rem;color:var(--text3);">${t.totalQuestoes} disp.</span>
+        <input class="sim-qtd-input" type="number" min="0" max="${t.totalQuestoes}"
+               value="${Math.min(5, t.totalQuestoes)}" id="qtd-topico-${t.id}">
+      </div>
+    </div>`).join('');
+
+            document.getElementById('modal-sim-mat').classList.remove('hidden');
+        }
+
+        function fecharModalSimMat() {
+            document.getElementById('modal-sim-mat').classList.add('hidden');
+        }
+
+        async function iniciarSimMat() {
+            const materia = _materiasCache.find(m => m.id === _simMatId);
+            if (!materia) return;
+            const topicos = materia.topicos || [];
+            const embaralhar = document.getElementById('sim-embaralhar').checked;
+
+            // Coleta quantidades
+            const config = topicos
+                .map(t => ({ id: t.id, qtd: +document.getElementById('qtd-topico-' + t.id)?.value || 0 }))
+                .filter(c => c.qtd > 0);
+
+            if (!config.length) { toast('Configure ao menos 1 questão', 'err'); return; }
+
+            const btn = document.querySelector('#modal-sim-mat .btn-teal');
+            btn.disabled = true;
+            btn.textContent = 'Carregando…';
+
+            try {
+                // Carrega questões de cada tópico
+                let pool = [];
+                for (const { id, qtd } of config) {
+                    const data = await apiFetch('/lei-seca/topicos/' + id);
+                    const qs = (data.questoes || []).slice(0, qtd);
+                    pool = pool.concat(qs.map(q => ({ ...q, _topicoNome: data.nome })));
+                }
+
+                if (embaralhar) pool = shuffle(pool);
+
+                _simMatQuestoes = pool;
+                _simMatRespostas = {};
+                fecharModalSimMat();
+                renderSimMat(materia.nome, pool);
+                showScreen('s-simulado-mat');
+            } catch (e) {
+                toast('Erro ao carregar: ' + e.message, 'err');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Iniciar Simulado';
+            }
+        }
+
+        function renderSimMat(titulo, questoes) {
+            document.getElementById('sim-mat-titulo').textContent = titulo;
+            document.getElementById('sim-sc-rest').textContent = questoes.length + ' pend.';
+            document.getElementById('sim-sc-ac').textContent = '0 ✓';
+            document.getElementById('sim-sc-er').textContent = '0 ✗';
+            document.getElementById('sim-prog-fill').style.width = '0%';
+            document.getElementById('sim-mat-finalizar').classList.add('hidden');
+
+            const nLbl = { FACIL: 'b-facil Fácil', MEDIO: 'b-medio Médio', DIFICIL: 'b-dificil Difícil' };
+
+            document.getElementById('sim-mat-lista').innerHTML = questoes.map((q, i) => {
+                const _ns = nLbl[q.nivel] || 'b-sub Médio';
+                const nc = _ns.split(' ')[0];
+                const nl = _ns.split(' ').slice(1).join(' ');
+                return `<div class="qlei-outer" style="animation-delay:${Math.min(i * .025, .4)}s">
+      <div class="qlei-card" id="sm-qc-${q.id}-${i}">
+        <div class="qlei-head">
+          <span class="qlei-n">Q${i + 1}</span>
+          <span class="badge b-sub">${esc(q._topicoNome || '')}</span>
+          <span class="badge ${nc}">${nl}</span>
+          ${q.recorrencia > 1 ? `<span class="recorr">🔁 ${q.recorrencia}x</span>` : ''}
+        </div>
+        <div class="qlei-body">
+          <div class="qlei-enunciado">${esc(q.enunciado)}</div>
+          <div class="qlei-btns" id="sm-qb-${q.id}-${i}">
+            <button class="btn-resp btn-certo"  onclick="responderSim(${q.id}, ${i}, true)">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 8l4 4 8-8"/></svg> CERTO
+            </button>
+            <button class="btn-resp btn-errado" onclick="responderSim(${q.id}, ${i}, false)">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 2l12 12M14 2L2 14"/></svg> ERRADO
+            </button>
+          </div>
+          <div id="sm-gb-${q.id}-${i}"></div>
+        </div>
+      </div>
+    </div>`;
+            }).join('');
+        }
+
+        async function responderSim(qId, idx, resposta) {
+            const key = qId + '_' + idx;
+            if (_simMatRespostas[key]) return;
+
+            document.getElementById(`sm-qb-${qId}-${idx}`)
+                ?.querySelectorAll('.btn-resp').forEach(b => b.disabled = true);
+
+            try {
+                const data = await apiFetch('/lei-seca/responder', 'POST', { questaoId: qId, resposta });
+                _simMatRespostas[key] = data;
+
+                const card = document.getElementById(`sm-qc-${qId}-${idx}`);
+                if (card) card.classList.add(data.acertou ? 'ok' : 'err');
+
+                const pegHtml = data.tipoPegadinha
+                    ? `<span class="badge b-pegad" style="display:inline-flex;margin-bottom:.4rem;">🪤 ${esc(data.tipoPegadinha)}</span><br>` : '';
+                const resumoHtml = data.resumoEstudo
+                    ? `<div class="gab-resumo">${mdBold(esc(data.resumoEstudo))}</div>` : '';
+
+                const gbEl = document.getElementById(`sm-gb-${qId}-${idx}`);
+                if (gbEl) gbEl.innerHTML = `
+      <div class="gab-reveal ${data.acertou ? 'gab-ok' : 'gab-err'}">
+        <div class="gab-hdr">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${data.acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+          ${data.acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${data.gabarito ? 'CERTO' : 'ERRADO'}
+        </div>
+        <div class="gab-body">
+          ${pegHtml}${esc(data.comentario || '')}
+          ${data.artigoRef ? `<div class="ref-tag">📖 ${esc(data.artigoRef)}</div>` : ''}
+        </div>
+        ${resumoHtml}
+      </div>`;
+
+                // Atualiza placar
+                const vals = Object.values(_simMatRespostas);
+                const ac = vals.filter(r => r.acertou).length;
+                const er = vals.filter(r => !r.acertou).length;
+                const total = _simMatQuestoes.length;
+                const rest = total - vals.length;
+                document.getElementById('sim-sc-ac').textContent = ac + ' ✓';
+                document.getElementById('sim-sc-er').textContent = er + ' ✗';
+                document.getElementById('sim-sc-rest').textContent = rest + ' pend.';
+                document.getElementById('sim-prog-fill').style.width = (vals.length / total * 100) + '%';
+
+                if (rest === 0)
+                    document.getElementById('sim-mat-finalizar').classList.remove('hidden');
+
+                toast(data.acertou ? '✅ Acertou!' : '❌ Errou!', data.acertou ? 'ok' : 'err');
+            } catch (e) {
+                toast('Erro ao registrar', 'err');
+                document.getElementById(`sm-qb-${qId}-${idx}`)
+                    ?.querySelectorAll('.btn-resp').forEach(b => b.disabled = false);
+            }
+        }
+
+        function finalizarSimMat() {
+            const vals = Object.values(_simMatRespostas);
+            const ac = vals.filter(r => r.acertou).length;
+            const er = vals.filter(r => !r.acertou).length;
+            const total = _simMatQuestoes.length;
+            const pct = total > 0 ? Math.round(ac / total * 100) : 0;
+            const cor = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
+            toast(`Resultado: ${pct}% — ${ac} acertos de ${total}`, pct >= 70 ? 'ok' : '');
+        }
+
+        function voltarMateriasDoSim() {
+            showScreen('s-materias');
+            carregarMaterias();
+        }
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        /* ════════════════════════════════════════════════
+           ADICIONAR QUESTÃO AO TÓPICO
+        ════════════════════════════════════════════════ */
+        let _aqGabAtual = null;
+        let _aqTopicoId = null;
+
+        function abrirModalAddQ(topicoId) {
+            _aqTopicoId = topicoId;
+            _aqGabAtual = null;
+            ['aq-enunciado', 'aq-comentario', 'aq-resumo', 'aq-orgao', 'aq-pegadinha', 'aq-artigo-ref'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            const recEl = document.getElementById('aq-recorr');
+            if (recEl) recEl.value = '1';
+            const nivEl = document.getElementById('aq-nivel');
+            if (nivEl) nivEl.value = 'MEDIO';
+            document.getElementById('aq-gab-c').className = 'gab-opt';
+            document.getElementById('aq-gab-e').className = 'gab-opt';
+            document.getElementById('modal-add-q').classList.remove('hidden');
+        }
+
+        function fecharModalAddQ() {
+            document.getElementById('modal-add-q').classList.add('hidden');
+        }
+
+        function selGabQ(val) {
+            _aqGabAtual = val;
+            document.getElementById('aq-gab-c').className = 'gab-opt' + (val === true ? ' sel-c' : '');
+            document.getElementById('aq-gab-e').className = 'gab-opt' + (val === false ? ' sel-e' : '');
+        }
+
+        async function salvarQuestaoTopico() {
+            const enunciado = document.getElementById('aq-enunciado').value.trim();
+            const comentario = document.getElementById('aq-comentario').value.trim();
+            if (!enunciado) { toast('Digite o enunciado', 'err'); return; }
+            if (!comentario) { toast('Digite o comentário', 'err'); return; }
+            if (_aqGabAtual === null) { toast('Selecione o gabarito', 'err'); return; }
+
+            const btn = document.getElementById('aq-btn-save');
+            btn.disabled = true;
+
+            // Monta payload compatível com /lei-seca/importar
+            // mas usando o tópico existente via endpoint direto
+            // Rota: POST /lei-seca/topicos/{id}/questoes
+            const payload = {
+                enunciado,
+                gabarito: _aqGabAtual,
+                comentario,
+                resumoEstudo: document.getElementById('aq-resumo').value.trim() || null,
+                tipoPegadinha: document.getElementById('aq-pegadinha').value.trim() || null,
+                artigoRef: document.getElementById('aq-artigo-ref').value.trim() || null,
+                nivel: document.getElementById('aq-nivel').value,
+                orgaoProva: document.getElementById('aq-orgao').value.trim() || null,
+                recorrencia: +document.getElementById('aq-recorr').value || 1
+            };
+
+            try {
+                await apiFetch('/lei-seca/topicos/' + _aqTopicoId + '/questoes', 'POST', payload);
+                fecharModalAddQ();
+                toast('Questão adicionada!', 'ok');
+                // Recarrega o tópico atual se for o mesmo
+                if (_aqTopicoId === topicoAtual) {
+                    const data = await apiFetch('/lei-seca/topicos/' + topicoAtual);
+                    renderTopico(data);
+                }
+            } catch (e) {
+                toast('Erro: ' + e.message, 'err');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        /* ════════════════════════════════════════════════
+           ESTATÍSTICA "ONDE PRECISO MELHORAR"
+        ════════════════════════════════════════════════ */
+        async function abrirEstat() {
+            document.getElementById('modal-estat').classList.remove('hidden');
+            const body = document.getElementById('modal-estat-body');
+            body.innerHTML = '<div class="page-loading"><span class="spinner-lg"></span> Calculando...</div>';
+
+            try {
+                const materias = _materiasCache;
+                if (!materias.length) {
+                    body.innerHTML = '<div class="empty"><div>Nenhum dado ainda. Estude alguns tópicos primeiro.</div></div>';
+                    return;
+                }
+
+                // Coleta tópicos com progresso
+                const rows = [];
+                for (const m of materias) {
+                    for (const t of (m.topicos || [])) {
+                        const total = t.acertos + t.erros;
+                        if (total === 0) continue;
+                        const pct = Math.round(t.acertos / total * 100);
+                        rows.push({
+                            materiaNome: m.nome, topicoNome: t.nome, topicoId: t.id,
+                            acertos: t.acertos, erros: t.erros, total, pct,
+                            status: t.status
+                        });
+                    }
+                }
+
+                // Tópicos sem nenhuma tentativa
+                const semTentativa = [];
+                for (const m of materias) {
+                    for (const t of (m.topicos || [])) {
+                        if (t.acertos + t.erros === 0 && t.totalQuestoes > 0) {
+                            semTentativa.push({ materiaNome: m.nome, topicoNome: t.nome, topicoId: t.id, totalQuestoes: t.totalQuestoes });
+                        }
+                    }
+                }
+
+                if (!rows.length && !semTentativa.length) {
+                    body.innerHTML = '<div class="tudo-certo">📭 Nenhuma atividade registrada ainda.</div>';
+                    return;
+                }
+
+                // Ordena piores primeiro
+                rows.sort((a, b) => a.pct - b.pct);
+
+                const piores = rows.filter(r => r.pct < 60);
+                const atenção = rows.filter(r => r.pct >= 60 && r.pct < 80);
+                const bons = rows.filter(r => r.pct >= 80);
+
+                let html = '';
+
+                // ── Prioritários (< 60%) ──
+                if (piores.length) {
+                    html += renderEstatSection('🚨 Prioridade Alta — Abaixo de 60%', piores, 'priority-1', '#f87171');
+                }
+
+                // ── Atenção (60-79%) ──
+                if (atenção.length) {
+                    html += renderEstatSection('⚠️ Atenção — Entre 60% e 79%', atenção, 'priority-2', '#fbbf24');
+                }
+
+                // ── Bons (>= 80%) ──
+                if (bons.length) {
+                    html += renderEstatSection('✅ Bom Desempenho — Acima de 80%', bons, 'priority-3', '#34d399');
+                }
+
+                // ── Não estudados ──
+                if (semTentativa.length) {
+                    html += `<div class="estat-section">
+        <div class="estat-hdr">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M8 5v3M8 11h.01"/></svg>
+          📚 Ainda não estudados (${semTentativa.length})
+        </div>
+        <div class="estat-body">
+          ${semTentativa.map(t => `
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:.45rem .6rem;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-xs);margin-bottom:.4rem;cursor:pointer;" data-tid="${t.topicoId}" onclick="fecharEstatIr(this)">
+              <div>
+                <div style="font-size:.82rem;font-weight:600;color:var(--text);">${esc(t.topicoNome)}</div>
+                <div style="font-size:.72rem;color:var(--text3);">${esc(t.materiaNome)} · ${t.totalQuestoes} questões</div>
+              </div>
+              <span style="font-size:.72rem;color:var(--teal);font-weight:700;">Estudar →</span>
+            </div>`).join('')}
+        </div>
+      </div>`;
+                }
+
+                if (!html) {
+                    html = '<div class="tudo-certo">🎉 Ótimo! Todos os tópicos com bom aproveitamento.</div>';
+                }
+
+                body.innerHTML = html;
+                // Anima barras
+                setTimeout(() => {
+                    document.querySelectorAll('.estat-bar-f[data-pct]').forEach(el => {
+                        el.style.width = el.dataset.pct + '%';
+                    });
+                }, 150);
+
+            } catch (e) {
+                body.innerHTML = `<div class="empty">Erro: ${esc(e.message)}</div>`;
+            }
+        }
+
+        function renderEstatSection(titulo, rows, priorityClass, cor) {
+            return `<div class="estat-section">
+    <div class="estat-hdr">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="10" width="3" height="4"/><rect x="6" y="6" width="3" height="8"/><rect x="11" y="2" width="3" height="12"/></svg>
+      ${titulo}
+    </div>
+    <div class="estat-body">
+      ${rows.map(r => `
+        <div class="estat-row" style="cursor:pointer;" data-tid="${r.topicoId}" onclick="fecharEstatIr(this)">
+          <div class="estat-nome" title="${esc(r.topicoNome)} · ${esc(r.materiaNome)}">
+            <span class="${priorityClass} priority-badge">${r.pct < 60 ? '!' : r.pct < 80 ? '~' : '✓'}</span>
+            ${esc(r.topicoNome)}
+            <div style="font-size:.68rem;color:var(--text3);">${esc(r.materiaNome)}</div>
+          </div>
+          <div class="estat-bar-w">
+            <div class="estat-bar-f" data-pct="${r.pct}" style="background:${cor};width:0%"></div>
+          </div>
+          <div class="estat-pct" style="color:${cor}">${r.pct}%
+            <div style="font-size:.62rem;color:var(--text3);">${r.acertos}/${r.total}</div>
+          </div>
+        </div>`).join('')}
+    </div>
+  </div>`;
+        }
 
         init();
     </script>

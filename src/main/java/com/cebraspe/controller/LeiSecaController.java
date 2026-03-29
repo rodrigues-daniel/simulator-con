@@ -1,6 +1,7 @@
 package com.cebraspe.controller;
 
 import com.cebraspe.record.Anotacao;
+import com.cebraspe.record.QuestaoLei;
 import com.cebraspe.record.request.ResponderLeiRequest;
 import com.cebraspe.record.response.*;
 import com.cebraspe.service.LeiSecaService;
@@ -84,5 +85,13 @@ public class LeiSecaController {
     public ResponseEntity<ImportacaoLeiResponse> importarJson(
             @RequestBody Map<String, String> body) {
         return ResponseEntity.ok(service.importar(body.get("json")));
+    }
+
+    // Adicionar questão diretamente a um tópico pelo id
+    @PostMapping("/topicos/{id}/questoes")
+    public ResponseEntity<QuestaoLei> adicionarQuestao(
+            @PathVariable Long id,
+            @RequestBody Map<String, Object> body) {
+        return ResponseEntity.ok(service.adicionarQuestaoTopico(id, body));
     }
 }
