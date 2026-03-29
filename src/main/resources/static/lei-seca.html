@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Lei Seca · CEBRASPE Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ── TEMAS ── */
+        [data-tema="escuro"] {
+            --bg: #06080f;
+            --bg2: #0d1120;
+            --bg3: #141929;
+            --surface: #1a2035;
+            --surface2: #202740;
+            --border: rgba(255, 255, 255, .07);
+            --border2: rgba(255, 255, 255, .13);
+            --text: #dde2f0;
+            --text2: #7e8aaa;
+            --text3: #414d6b;
+            --shadow: 0 8px 32px rgba(0, 0, 0, .5);
+        }
+
+        [data-tema="claro"] {
+            --bg: #f2f3f7;
+            --bg2: #ffffff;
+            --bg3: #ecedf2;
+            --surface: #e4e6ed;
+            --surface2: #d8dae4;
+            --border: rgba(0, 0, 0, .08);
+            --border2: rgba(0, 0, 0, .14);
+            --text: #1a1d2e;
+            --text2: #555c7a;
+            --text3: #9099b8;
+            --shadow: 0 8px 32px rgba(0, 0, 0, .10);
+        }
+
+        :root {
+            --gold: #f5c842;
+            --gold2: #fde98a;
+            --gold-bg: rgba(245, 200, 66, .12);
+            --gold-bd: rgba(245, 200, 66, .28);
+            --green: #34d399;
+            --green-bg: rgba(52, 211, 153, .12);
+            --green-bd: rgba(52, 211, 153, .28);
+            --red: #f87171;
+            --red-bg: rgba(248, 113, 113, .12);
+            --red-bd: rgba(248, 113, 113, .28);
+            --blue: #60a5fa;
+            --blue-bg: rgba(96, 165, 250, .12);
+            --blue-bd: rgba(96, 165, 250, .28);
+            --amber: #fbbf24;
+            --amber-bg: rgba(251, 191, 36, .12);
+            --amber-bd: rgba(251, 191, 36, .28);
+            --purple: #a78bfa;
+            --purple-bg: rgba(167, 139, 250, .12);
+            --purple-bd: rgba(167, 139, 250, .28);
+            --teal: #2dd4bf;
+            --teal-bg: rgba(45, 212, 191, .12);
+            --teal-bd: rgba(45, 212, 191, .28);
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans: 'Outfit', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --r: 12px;
+            --r-sm: 8px;
+            --r-xs: 5px;
+            --tr: background .22s, color .22s, border-color .22s;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            font-size: 15px;
+            line-height: 1.6;
+            transition: var(--tr);
+        }
+
+        /* ── HEADER ── */
+        .hdr {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 1.5rem;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 80;
+            transition: var(--tr);
+        }
+
+        .hdr-brand {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .hdr-mark {
+            width: 30px;
+            height: 30px;
+            background: var(--teal);
+            border-radius: 7px;
+            display: grid;
+            place-items: center;
+            font-size: 15px;
+        }
+
+        .hdr-name {
+            font-weight: 700;
+            font-size: .9rem;
+            letter-spacing: -.2px;
+        }
+
+        .hdr-sep {
+            width: 1px;
+            height: 15px;
+            background: var(--border2);
+        }
+
+        .hdr-sub {
+            font-size: .75rem;
+            color: var(--text3);
+            font-weight: 300;
+        }
+
+        .hdr-right {
+            display: flex;
+            gap: .4rem;
+            align-items: center;
+        }
+
+        .hdr-link {
+            padding: .35rem .8rem;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border2);
+            color: var(--text2);
+            font-size: .78rem;
+            font-family: var(--sans);
+            text-decoration: none;
+            transition: all .15s;
+        }
+
+        .hdr-link:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .tema-btn {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border2);
+            background: transparent;
+            color: var(--text2);
+            cursor: pointer;
+            transition: all .15s;
+            font-size: 17px;
+        }
+
+        .tema-btn:hover {
+            background: var(--surface);
+        }
+
+        /* ── SCREENS ── */
+        .screen {
+            display: none;
+        }
+
+        .screen.on {
+            display: block;
+        }
+
+        .page {
+            max-width: 1020px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 5rem;
+        }
+
+        /* ═══════ TELA 1: SELEÇÃO DE CARGO ═══════ */
+        .hero {
+            text-align: center;
+            padding: 3.5rem 1rem 2rem;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .28rem .85rem;
+            border-radius: 99px;
+            background: var(--teal-bg);
+            border: 1px solid var(--teal-bd);
+            color: var(--teal);
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(1.9rem, 5vw, 2.8rem);
+            line-height: 1.15;
+            margin-bottom: .65rem;
+        }
+
+        .hero-title em {
+            color: var(--teal);
+            font-style: italic;
+        }
+
+        .hero-sub {
+            color: var(--text2);
+            font-size: .92rem;
+            font-weight: 300;
+            max-width: 520px;
+            margin: 0 auto 2rem;
+        }
+
+        .cargo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: .75rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cargo-card {
+            padding: 1.1rem 1.25rem;
+            background: var(--bg2);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r);
+            cursor: pointer;
+            transition: all .2s;
+            text-align: left;
+        }
+
+        .cargo-card:hover {
+            border-color: var(--teal-bd);
+            background: var(--teal-bg);
+            transform: translateY(-1px);
+        }
+
+        .cargo-card.on {
+            border-color: var(--teal-bd);
+            background: var(--teal-bg);
+        }
+
+        .cargo-nome {
+            font-weight: 700;
+            font-size: .9rem;
+            margin-bottom: .2rem;
+        }
+
+        .cargo-card.on .cargo-nome {
+            color: var(--teal);
+        }
+
+        .cargo-orgao {
+            font-size: .75rem;
+            color: var(--text3);
+        }
+
+        .btn-entrar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .55rem;
+            margin: 1.75rem auto 0;
+            padding: .9rem 2.5rem;
+            background: var(--teal);
+            color: #06080f;
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--sans);
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .btn-entrar:hover:not(:disabled) {
+            background: #22c5ad;
+            transform: translateY(-1px);
+        }
+
+        .btn-entrar:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-entrar svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        /* ═══════ TELA 2: MATÉRIAS ═══════ */
+        /* Stats topo */
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: .6rem;
+            margin-bottom: 2rem;
+        }
+
+        @media(max-width:600px) {
+            .stats-strip {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .stat-c {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            padding: .85rem;
+            text-align: center;
+            transition: var(--tr);
+        }
+
+        .stat-v {
+            font-family: var(--mono);
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: .2rem;
+        }
+
+        .stat-l {
+            font-size: .68rem;
+            color: var(--text3);
+        }
+
+        .stat-c.teal .stat-v {
+            color: var(--teal);
+        }
+
+        .stat-c.green .stat-v {
+            color: var(--green);
+        }
+
+        .stat-c.gold .stat-v {
+            color: var(--gold);
+        }
+
+        .stat-c.blue .stat-v {
+            color: var(--blue);
+        }
+
+        .stat-c.purple .stat-v {
+            color: var(--purple);
+        }
+
+        /* Barra progresso geral */
+        .prog-geral {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1.1rem 1.25rem;
+            margin-bottom: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--tr);
+        }
+
+        .prog-geral-info {
+            flex: 1;
+        }
+
+        .prog-geral-label {
+            font-size: .82rem;
+            font-weight: 600;
+            margin-bottom: .4rem;
+        }
+
+        .prog-bar-wrap {
+            height: 8px;
+            background: var(--surface2);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .prog-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--teal), var(--green));
+            border-radius: 99px;
+            transition: width 1s ease;
+        }
+
+        .prog-pct {
+            font-family: var(--mono);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--teal);
+            min-width: 48px;
+            text-align: right;
+        }
+
+        /* Matéria card */
+        .materia-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-bottom: 1rem;
+            transition: var(--tr);
+        }
+
+        .materia-hdr {
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .materia-hdr:hover {
+            background: var(--surface);
+        }
+
+        .materia-hdr-l {
+            flex: 1;
+        }
+
+        .materia-nome {
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -.2px;
+            margin-bottom: .2rem;
+        }
+
+        .materia-fonte {
+            font-size: .75rem;
+            color: var(--text3);
+            font-family: var(--mono);
+        }
+
+        .materia-hdr-r {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+
+        .materia-prog {
+            font-family: var(--mono);
+            font-size: .78rem;
+            color: var(--text2);
+        }
+
+        .chevron {
+            width: 18px;
+            height: 18px;
+            color: var(--text3);
+            transition: transform .2s;
+            flex-shrink: 0;
+        }
+
+        .materia-card.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        .materia-topicos {
+            border-top: 1px solid var(--border);
+        }
+
+        .materia-mini-bar {
+            height: 3px;
+            background: var(--teal);
+            transition: width 1s ease;
+        }
+
+        /* Tópico row */
+        .topico-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 1rem;
+            padding: .85rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background .15s;
+        }
+
+        .topico-row:last-child {
+            border-bottom: none;
+        }
+
+        .topico-row:hover {
+            background: var(--surface);
+        }
+
+        .topico-l {}
+
+        .topico-nome {
+            font-size: .9rem;
+            font-weight: 500;
+            margin-bottom: .2rem;
+        }
+
+        .topico-artigo {
+            font-size: .73rem;
+            color: var(--text3);
+            font-family: var(--mono);
+        }
+
+        .topico-r {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            flex-shrink: 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .2rem;
+            padding: .18rem .55rem;
+            border-radius: 99px;
+            font-size: .68rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .b-pendente {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            color: var(--text3);
+        }
+
+        .b-estudando {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        .b-concluido {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-facil {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .b-medio {
+            background: var(--amber-bg);
+            border: 1px solid var(--amber-bd);
+            color: var(--amber);
+        }
+
+        .b-dificil {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .b-destaque {
+            background: var(--gold-bg);
+            border: 1px solid var(--gold-bd);
+            color: var(--gold);
+        }
+
+        .b-pegad {
+            background: var(--purple-bg);
+            border: 1px solid var(--purple-bd);
+            color: var(--purple);
+        }
+
+        .topico-q-count {
+            font-family: var(--mono);
+            font-size: .72rem;
+            color: var(--text3);
+        }
+
+        .topico-aprov {
+            font-family: var(--mono);
+            font-size: .75rem;
+        }
+
+        /* ═══════ TELA 3: TÓPICO / ESTUDO ═══════ */
+        /* Nav breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .bc-item {
+            font-size: .8rem;
+            color: var(--text3);
+            cursor: pointer;
+            transition: color .15s;
+        }
+
+        .bc-item:hover {
+            color: var(--text);
+        }
+
+        .bc-item.atual {
+            color: var(--text);
+            font-weight: 600;
+            cursor: default;
+        }
+
+        .bc-sep {
+            color: var(--text3);
+            font-size: .75rem;
+        }
+
+        /* Topico header */
+        .topico-detail-hdr {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            transition: var(--tr);
+        }
+
+        .td-hdr-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: .75rem;
+        }
+
+        .td-titulo {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            line-height: 1.3;
+        }
+
+        .td-meta {
+            display: flex;
+            gap: .4rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .td-acoes {
+            display: flex;
+            gap: .4rem;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border2);
+            border-radius: var(--r-xs);
+            background: transparent;
+            color: var(--text3);
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .icon-btn:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .icon-btn.danger:hover {
+            background: var(--red-bg);
+            border-color: var(--red-bd);
+            color: var(--red);
+        }
+
+        .icon-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Score bar */
+        .score-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .sc-item {
+            padding: .55rem;
+            border-radius: var(--r-sm);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .sc-val {
+            font-family: var(--mono);
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .sc-lbl {
+            font-size: .68rem;
+            color: var(--text3);
+            margin-top: .15rem;
+        }
+
+        .sc-item.ac {
+            border-color: var(--green-bd);
+        }
+
+        .sc-item.ac .sc-val {
+            color: var(--green);
+        }
+
+        .sc-item.er {
+            border-color: var(--red-bd);
+        }
+
+        .sc-item.er .sc-val {
+            color: var(--red);
+        }
+
+        .sc-item.ap .sc-val {
+            color: var(--teal);
+        }
+
+        /* Tabs de conteúdo */
+        .content-tabs {
+            display: flex;
+            gap: .3rem;
+            margin-bottom: 1.1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: .6rem;
+        }
+
+        .ctab {
+            padding: .4rem .85rem;
+            border-radius: var(--r-sm);
+            border: none;
+            background: transparent;
+            color: var(--text2);
+            font-family: var(--sans);
+            font-size: .83rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .ctab:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .ctab.on {
+            background: var(--teal-bg);
+            border: 1px solid var(--teal-bd);
+            color: var(--teal);
+            font-weight: 700;
+        }
+
+        /* Resumo de estudo */
+        .resumo-box {
+            background: var(--bg2);
+            border: 1px solid var(--teal-bd);
+            border-radius: var(--r);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.1rem;
+            transition: var(--tr);
+        }
+
+        .resumo-box h2,
+        .resumo-box h3 {
+            font-family: var(--serif);
+            margin-bottom: .5rem;
+        }
+
+        .resumo-box h2 {
+            font-size: 1.1rem;
+            color: var(--teal);
+        }
+
+        .resumo-box h3 {
+            font-size: .95rem;
+            color: var(--text);
+            margin-top: 1rem;
+        }
+
+        .resumo-box p {
+            font-size: .9rem;
+            line-height: 1.7;
+            color: var(--text2);
+            margin-bottom: .5rem;
+        }
+
+        .resumo-box strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .resumo-box ul,
+        .resumo-box ol {
+            padding-left: 1.2rem;
+            margin-bottom: .5rem;
+        }
+
+        .resumo-box li {
+            font-size: .88rem;
+            color: var(--text2);
+            line-height: 1.7;
+        }
+
+        .resumo-box code {
+            font-family: var(--mono);
+            font-size: .82rem;
+            background: var(--surface);
+            padding: .1rem .4rem;
+            border-radius: 3px;
+            color: var(--teal);
+        }
+
+        /* Artigo */
+        .artigo-item {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            margin-bottom: .6rem;
+            overflow: hidden;
+            transition: var(--tr);
+        }
+
+        .artigo-item.destaque {
+            border-color: var(--gold-bd);
+        }
+
+        .artigo-id {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem .9rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg3);
+            font-family: var(--mono);
+            font-size: .78rem;
+            font-weight: 500;
+            color: var(--text2);
+            transition: var(--tr);
+        }
+
+        .artigo-item.destaque .artigo-id {
+            color: var(--gold);
+            background: var(--gold-bg);
+        }
+
+        .artigo-texto {
+            padding: .85rem .9rem;
+            font-size: .88rem;
+            line-height: 1.75;
+            color: var(--text);
+        }
+
+        /* Questão lei */
+        .qlei-outer {
+            margin-bottom: .75rem;
+            animation: qin .22s ease both;
+        }
+
+        @keyframes qin {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .qlei-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: border-color .2s, var(--tr);
+        }
+
+        .qlei-card.ok {
+            border-color: var(--green-bd);
+        }
+
+        .qlei-card.err {
+            border-color: var(--red-bd);
+        }
+
+        .qlei-head {
+            padding: .6rem 1rem;
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            flex-wrap: wrap;
+            transition: var(--tr);
+        }
+
+        .qlei-n {
+            font-family: var(--mono);
+            font-size: .68rem;
+            color: var(--text3);
+            background: var(--surface2);
+            padding: .15rem .5rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border2);
+        }
+
+        .recorr {
+            font-family: var(--mono);
+            font-size: .68rem;
+            padding: .18rem .5rem;
+            border-radius: 99px;
+            background: var(--gold-bg);
+            border: 1px solid var(--gold-bd);
+            color: var(--gold);
+        }
+
+        .qlei-body {
+            padding: 1.1rem 1rem .9rem;
+        }
+
+        .qlei-enunciado {
+            font-family: var(--serif);
+            font-size: 1.02rem;
+            line-height: 1.78;
+            color: var(--text);
+            margin-bottom: 1.1rem;
+        }
+
+        .qlei-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .5rem;
+        }
+
+        .btn-resp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .75rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--sans);
+            font-size: .88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+            letter-spacing: .3px;
+        }
+
+        .btn-certo {
+            border-color: var(--green-bd);
+            color: var(--green);
+            background: var(--green-bg);
+        }
+
+        .btn-errado {
+            border-color: var(--red-bd);
+            color: var(--red);
+            background: var(--red-bg);
+        }
+
+        .btn-certo:hover:not(:disabled) {
+            background: var(--green);
+            color: #06080f;
+        }
+
+        .btn-errado:hover:not(:disabled) {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-resp:disabled {
+            opacity: .35;
+            cursor: not-allowed;
+        }
+
+        .btn-resp svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        /* Gabarito reveal */
+        .gab-reveal {
+            margin-top: .85rem;
+            border-radius: var(--r-sm);
+            overflow: hidden;
+            animation: gabin .22s ease;
+        }
+
+        @keyframes gabin {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gab-hdr {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem .85rem;
+            font-size: .82rem;
+            font-weight: 700;
+        }
+
+        .gab-hdr svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .gab-ok .gab-hdr {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+            border-radius: var(--r-sm) var(--r-sm) 0 0;
+            border-bottom: none;
+        }
+
+        .gab-err .gab-hdr {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+            border-radius: var(--r-sm) var(--r-sm) 0 0;
+            border-bottom: none;
+        }
+
+        .gab-body {
+            padding: .9rem .85rem;
+            font-size: .86rem;
+            line-height: 1.7;
+            color: var(--text2);
+            border: 1px solid;
+            border-top: none;
+            border-radius: 0 0 var(--r-sm) var(--r-sm);
+        }
+
+        .gab-ok .gab-body {
+            border-color: var(--green-bd);
+            background: rgba(52, 211, 153, .04);
+        }
+
+        .gab-err .gab-body {
+            border-color: var(--red-bd);
+            background: rgba(248, 113, 113, .04);
+        }
+
+        .gab-resumo {
+            margin-top: .65rem;
+            padding: .7rem .85rem;
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-radius: var(--r-sm);
+            font-size: .82rem;
+            line-height: 1.65;
+            color: var(--text2);
+        }
+
+        .gab-resumo strong {
+            color: var(--teal);
+        }
+
+        .ref-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            margin-top: .5rem;
+            font-family: var(--mono);
+            font-size: .71rem;
+            color: var(--text3);
+            background: var(--surface);
+            padding: .2rem .55rem;
+            border-radius: var(--r-xs);
+            border: 1px solid var(--border);
+        }
+
+        /* Anotações */
+        .anot-form {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        .anot-textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: .7rem .85rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: .88rem;
+            outline: none;
+            resize: vertical;
+            transition: border-color .15s;
+        }
+
+        .anot-textarea:focus {
+            border-color: var(--teal);
+        }
+
+        .btn-anot {
+            align-self: flex-end;
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .45rem .95rem;
+            background: var(--teal);
+            color: #06080f;
+            border: none;
+            border-radius: var(--r-sm);
+            font-family: var(--sans);
+            font-size: .82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .btn-anot:hover {
+            background: #22c5ad;
+        }
+
+        .anot-item {
+            padding: .65rem .85rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            margin-bottom: .45rem;
+            font-size: .84rem;
+            line-height: 1.6;
+            color: var(--text2);
+            position: relative;
+            transition: var(--tr);
+        }
+
+        .anot-data {
+            font-size: .68rem;
+            color: var(--text3);
+            font-family: var(--mono);
+            margin-bottom: .25rem;
+        }
+
+        /* ═══════ MODAL IMPORTAR ═══════ */
+        .modal-bg {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 8, 15, .78);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+        }
+
+        .modal-bg.hidden {
+            display: none;
+        }
+
+        .modal {
+            background: var(--bg2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            width: 100%;
+            max-width: 680px;
+            margin: auto;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: mIn .2s ease;
+            transition: var(--tr);
+        }
+
+        @keyframes mIn {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-hdr {
+            padding: 1rem 1.3rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg3);
+            transition: var(--tr);
+        }
+
+        .modal-title {
+            font-size: .93rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border2);
+            border-radius: var(--r-xs);
+            background: transparent;
+            color: var(--text3);
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-close svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .modal-body {
+            padding: 1.25rem;
+        }
+
+        .json-ta {
+            width: 100%;
+            min-height: 240px;
+            padding: .85rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            font-family: var(--mono);
+            font-size: .76rem;
+            line-height: 1.6;
+            color: var(--text);
+            resize: vertical;
+            outline: none;
+            tab-size: 2;
+            transition: border-color .15s, var(--tr);
+        }
+
+        .json-ta:focus {
+            border-color: var(--teal);
+        }
+
+        .modal-foot {
+            padding: .9rem 1.3rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: .5rem;
+            justify-content: flex-end;
+            background: var(--bg3);
+            transition: var(--tr);
+        }
+
+        .btn-m {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .5rem 1rem;
+            border-radius: var(--r-sm);
+            border: 1.5px solid;
+            font-family: var(--sans);
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s;
+        }
+
+        .btn-ghost {
+            border-color: var(--border2);
+            background: transparent;
+            color: var(--text2);
+        }
+
+        .btn-ghost:hover {
+            background: var(--surface);
+            color: var(--text);
+        }
+
+        .btn-teal {
+            border-color: var(--teal);
+            background: var(--teal);
+            color: #06080f;
+        }
+
+        .btn-teal:hover {
+            background: #22c5ad;
+        }
+
+        .btn-teal:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+
+        .imp-result {
+            margin-top: .75rem;
+            padding: .7rem .9rem;
+            border-radius: var(--r-sm);
+            font-size: .82rem;
+        }
+
+        .imp-result.ok {
+            background: var(--green-bg);
+            border: 1px solid var(--green-bd);
+            color: var(--green);
+        }
+
+        .imp-result.err {
+            background: var(--red-bg);
+            border: 1px solid var(--red-bd);
+            color: var(--red);
+        }
+
+        .imp-erros {
+            margin-top: .35rem;
+            font-size: .72rem;
+            font-family: var(--mono);
+            line-height: 1.6;
+        }
+
+        .schema-mini {
+            margin-top: .85rem;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            padding: .7rem .9rem;
+            font-family: var(--mono);
+            font-size: .72rem;
+            line-height: 1.8;
+            color: var(--text2);
+            transition: var(--tr);
+        }
+
+        .schema-mini .k {
+            color: var(--teal);
+        }
+
+        .schema-mini .c {
+            color: var(--text3);
+            font-style: italic;
+        }
+
+        /* Misc */
+        .hidden {
+            display: none !important;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(45, 212, 191, .2);
+            border-top-color: #06080f;
+            border-radius: 50%;
+            animation: sp .7s linear infinite;
+        }
+
+        @keyframes sp {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .empty {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text3);
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: .75rem;
+        }
+
+        .page-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+            gap: .75rem;
+            color: var(--text2);
+        }
+
+        .spinner-lg {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border2);
+            border-top-color: var(--teal);
+            border-radius: 50%;
+            animation: sp .7s linear infinite;
+        }
+
+        .toast-wrap {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: .45rem;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .62rem .9rem;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: var(--r-sm);
+            color: var(--text);
+            font-size: .82rem;
+            font-weight: 500;
+            min-width: 220px;
+            box-shadow: var(--shadow);
+            animation: tin .18s ease;
+        }
+
+        @keyframes tin {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .toast.ok {
+            background: var(--green-bg);
+            border-color: var(--green-bd);
+            color: var(--green);
+        }
+
+        .toast.err {
+            background: var(--red-bg);
+            border-color: var(--red-bd);
+            color: var(--red);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hdr">
+        <a href="prova.html" class="hdr-brand">
+            <div class="hdr-mark">⚖️</div>
+            <div class="hdr-sep"></div>
+            <span class="hdr-name">Lei Seca</span>
+            <div class="hdr-sep"></div>
+            <span class="hdr-sub">Estudo Dirigido · CEBRASPE</span>
+        </a>
+        <div class="hdr-right">
+            <button class="hdr-link" style="cursor:pointer;border:1px solid var(--border2);"
+                onclick="abrirImportar()">📥 Importar</button>
+            <a href="prova.html" class="hdr-link">🎯 Simulado</a>
+            <a href="estatisticas.html" class="hdr-link">📊 Stats</a>
+            <button class="tema-btn" id="tema-btn" onclick="toggleTema()" title="Alternar tema">🌙</button>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════
+     TELA 1: ESCOLHA DE CARGO
+═══════════════════════════ -->
+    <div id="s-cargo" class="screen on">
+        <div class="hero">
+            <div class="hero-eyebrow">⚖️ Lei Seca</div>
+            <h1 class="hero-title">Domine os <em>artigos que mais caem</em></h1>
+            <p class="hero-sub">Selecione seu cargo para ver as matérias, artigos e questões da CEBRASPE mais
+                recorrentes.</p>
+            <div class="cargo-grid" id="cargo-grid">
+                <div class="page-loading"><span class="spinner-lg"></span></div>
+            </div>
+            <button class="btn-entrar" id="btn-entrar" onclick="entrarMaterias()" disabled>
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <polygon points="5 3 13 8 5 13" />
+                </svg>
+                Estudar
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════
+     TELA 2: MATÉRIAS
+═══════════════════════════ -->
+    <div id="s-materias" class="screen">
+        <div class="page">
+
+            <div
+                style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem;">
+                <div>
+                    <div style="font-family:var(--serif);font-size:1.5rem;font-style:italic;" id="mat-titulo">Matérias
+                    </div>
+                    <div style="font-size:.82rem;color:var(--text3);" id="mat-cargo-label"></div>
+                </div>
+                <button onclick="voltarCargo()"
+                    style="display:flex;align-items:center;gap:.35rem;padding:.4rem .85rem;border-radius:var(--r-sm);border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--sans);font-size:.8rem;cursor:pointer;transition:all .15s;">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+                        <path d="M10 4L6 8l4 4" />
+                    </svg>
+                    Trocar cargo
+                </button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-strip">
+                <div class="stat-c teal">
+                    <div class="stat-v" id="st-materias">—</div>
+                    <div class="stat-l">Matérias</div>
+                </div>
+                <div class="stat-c blue">
+                    <div class="stat-v" id="st-topicos">—</div>
+                    <div class="stat-l">Tópicos</div>
+                </div>
+                <div class="stat-c green">
+                    <div class="stat-v" id="st-concluidos">—</div>
+                    <div class="stat-l">Concluídos</div>
+                </div>
+                <div class="stat-c gold">
+                    <div class="stat-v" id="st-questoes">—</div>
+                    <div class="stat-l">Questões</div>
+                </div>
+                <div class="stat-c purple">
+                    <div class="stat-v" id="st-prog">—</div>
+                    <div class="stat-l">Progresso</div>
+                </div>
+            </div>
+
+            <!-- Progresso geral -->
+            <div class="prog-geral">
+                <div class="prog-geral-info">
+                    <div class="prog-geral-label">Progresso geral de estudo</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar-fill" id="prog-geral-fill" style="width:0%"></div>
+                    </div>
+                </div>
+                <div class="prog-pct" id="prog-geral-pct">0%</div>
+            </div>
+
+            <!-- Lista de matérias -->
+            <div id="lista-materias">
+                <div class="page-loading"><span class="spinner-lg"></span> Carregando matérias…</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════
+     TELA 3: TÓPICO
+═══════════════════════════ -->
+    <div id="s-topico" class="screen">
+        <div class="page">
+
+            <div class="breadcrumb" id="breadcrumb"></div>
+
+            <!-- Header do tópico -->
+            <div class="topico-detail-hdr" id="topico-hdr"></div>
+
+            <!-- Tabs -->
+            <div class="content-tabs">
+                <button class="ctab on" data-tab="resumo" onclick="ctab(this)">📖 Resumo</button>
+                <button class="ctab" data-tab="artigos" onclick="ctab(this)">📜 Artigos</button>
+                <button class="ctab" data-tab="questoes" onclick="ctab(this)">✏️ Questões</button>
+                <button class="ctab" data-tab="anotacoes" onclick="ctab(this)">📝 Anotações</button>
+            </div>
+
+            <!-- Tab Resumo -->
+            <div id="ct-resumo" class="ct-panel">
+                <div class="resumo-box" id="resumo-content"></div>
+            </div>
+
+            <!-- Tab Artigos -->
+            <div id="ct-artigos" class="ct-panel hidden">
+                <div id="artigos-list"></div>
+            </div>
+
+            <!-- Tab Questões -->
+            <div id="ct-questoes" class="ct-panel hidden">
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem;">
+                    <div style="font-size:.82rem;color:var(--text2);" id="q-count-label"></div>
+                    <div style="display:flex;gap:.4rem;">
+                        <button onclick="filtrarQuestoes('todas')" id="fq-todas"
+                            style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--border2);background:var(--teal-bg);border-color:var(--teal-bd);color:var(--teal);font-size:.75rem;font-weight:700;cursor:pointer;font-family:var(--sans);">Todas</button>
+                        <button onclick="filtrarQuestoes('erradas')" id="fq-erradas"
+                            style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:.75rem;font-weight:600;cursor:pointer;font-family:var(--sans);">Erradas</button>
+                        <button onclick="filtrarQuestoes('certas')" id="fq-certas"
+                            style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:.75rem;font-weight:600;cursor:pointer;font-family:var(--sans);">Acertadas</button>
+                    </div>
+                </div>
+                <div id="questoes-list"></div>
+            </div>
+
+            <!-- Tab Anotações -->
+            <div id="ct-anotacoes" class="ct-panel hidden">
+                <div class="anot-form">
+                    <textarea class="anot-textarea" id="anot-input"
+                        placeholder="Escreva sua anotação, dúvida ou mnemônico para este tópico…"></textarea>
+                    <button class="btn-anot" onclick="salvarAnotacao()">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13"
+                            height="13">
+                            <path d="M13 2H4a1 1 0 00-1 1v10a1 1 0 001 1h9a1 1 0 001-1V5l-2-3z" />
+                        </svg>
+                        Salvar Anotação
+                    </button>
+                </div>
+                <div id="anotacoes-list"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════
+     MODAL IMPORTAR
+═══════════════════════════ -->
+    <div class="modal-bg hidden" id="modal-imp">
+        <div class="modal">
+            <div class="modal-hdr">
+                <span class="modal-title">📥 Importar Conteúdo JSON</span>
+                <button class="modal-close" onclick="fecharImportar()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 2l12 12M14 2L2 14" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="json-ta" id="json-imp" spellcheck="false"
+                    placeholder='[{"materia":"Lei 8.112/90","topico":"Provimento e Vacância","enunciado":"...","gabarito":"errado","comentario":"..."}]'></textarea>
+                <div id="imp-result" class="imp-result hidden"></div>
+                <details style="margin-top:.85rem;">
+                    <summary style="font-size:.78rem;color:var(--text3);cursor:pointer;user-select:none;">📋 Ver campos
+                        aceitos</summary>
+                    <div class="schema-mini">
+                        <span class="k">materia</span> — obrigatório<br>
+                        <span class="k">topico</span> — obrigatório<br>
+                        <span class="k">enunciado</span> — obrigatório<br>
+                        <span class="k">gabarito</span> — obrigatório · <span
+                            class="c">certo|errado|true|false</span><br>
+                        <span class="k">comentario</span> — obrigatório · análise da questão<br>
+                        <span class="c">fonte_legal</span> — opcional · "Lei 8.112/90"<br>
+                        <span class="c">descricao_materia</span> — opcional<br>
+                        <span class="c">artigo_base</span> — opcional · "Arts. 1-5"<br>
+                        <span class="c">resumo_topico</span> — opcional · markdown<br>
+                        <span class="c">artigo_identificador</span> — opcional · "Art. 8º"<br>
+                        <span class="c">artigo_texto</span> — opcional · texto literal<br>
+                        <span class="c">resumo_estudo</span> — opcional · síntese da resposta<br>
+                        <span class="c">tipo_pegadinha</span> — opcional<br>
+                        <span class="c">artigo_ref</span> — opcional · "Lei 8.112/90, Art. 8º"<br>
+                        <span class="c">nivel</span> — opcional · Fácil|Médio|Difícil<br>
+                        <span class="c">ano_prova</span> — opcional · 2024<br>
+                        <span class="c">orgao_prova</span> — opcional · "TCU 2024"<br>
+                        <span class="c">recorrencia</span> — opcional · nº de vezes que o tema caiu<br>
+                        <span class="c">cargo</span> — opcional · nome exato do cargo
+                    </div>
+                </details>
+            </div>
+            <div class="modal-foot">
+                <button class="btn-m btn-ghost" onclick="fecharImportar()">Cancelar</button>
+                <button class="btn-m btn-teal" id="btn-imp-ok" onclick="importarJson()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                        <path d="M8 2v9M4 7l4 4 4-4" />
+                        <path d="M2 13h12" />
+                    </svg>
+                    Importar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-wrap" id="toast-wrap"></div>
+
+    <script>
+        const API = 'http://localhost:8090/api';
+
+        /* ── STATE ── */
+        let cargoAtual = null;
+        let topicoAtual = null;
+        let materiaAtual = null;
+        let respostasTopico = {};   // questaoId -> { acertou, gabarito, comentario, ... }
+        let filtroQuestoes = 'todas';
+
+        /* ══ INIT ══ */
+        async function init() {
+            const prefs = await apiFetch('/preferencias').catch(() => ({}));
+            aplicarTema(prefs.tema_visual || 'escuro');
+            await carregarCargos();
+        }
+
+        /* ── TEMA ── */
+        function aplicarTema(t) {
+            document.documentElement.setAttribute('data-tema', t);
+            document.getElementById('tema-btn').textContent = t === 'escuro' ? '☀️' : '🌙';
+        }
+
+        async function toggleTema() {
+            const novo = document.documentElement.getAttribute('data-tema') === 'escuro' ? 'claro' : 'escuro';
+            aplicarTema(novo);
+            try { await apiFetch('/preferencias/tema_visual', 'PUT', { valor: novo }); } catch (e) { }
+        }
+
+        /* ── CARGOS ── */
+        async function carregarCargos() {
+            try {
+                const cargos = await apiFetch('/admin/cargos');
+                const grid = document.getElementById('cargo-grid');
+                if (!cargos.length) {
+                    grid.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><div>Nenhum cargo cadastrado. Adicione no Admin.</div></div>';
+                    return;
+                }
+                grid.innerHTML = cargos.map(c => `
+      <div class="cargo-card" data-id="${c.id}" data-nome="${esc(c.nome)}" onclick="selCargo(this)">
+        <div class="cargo-nome">${esc(c.nome)}</div>
+        <div class="cargo-orgao">${esc(c.orgao || 'Geral')}</div>
+      </div>`).join('');
+            } catch (e) {
+                document.getElementById('cargo-grid').innerHTML =
+                    '<div class="empty"><div>Erro ao conectar ao backend.</div></div>';
+            }
+        }
+
+        function selCargo(el) {
+            document.querySelectorAll('.cargo-card').forEach(c => c.classList.remove('on'));
+            el.classList.add('on');
+            cargoAtual = { id: +el.dataset.id, nome: el.dataset.nome };
+            document.getElementById('btn-entrar').disabled = false;
+        }
+
+        async function entrarMaterias() {
+            if (!cargoAtual) return;
+            showScreen('s-materias');
+            document.getElementById('mat-titulo').textContent = 'Matérias · ' + cargoAtual.nome;
+            document.getElementById('mat-cargo-label').textContent = 'Cargo selecionado: ' + cargoAtual.nome;
+            await carregarMaterias();
+        }
+
+        function voltarCargo() { showScreen('s-cargo'); }
+
+        /* ── MATÉRIAS ── */
+        async function carregarMaterias() {
+            document.getElementById('lista-materias').innerHTML =
+                '<div class="page-loading"><span class="spinner-lg"></span> Carregando…</div>';
+            try {
+                const [materias, stats] = await Promise.all([
+                    apiFetch('/lei-seca/materias?cargoId=' + cargoAtual.id),
+                    apiFetch('/lei-seca/stats?cargoId=' + cargoAtual.id)
+                ]);
+
+                // Stats
+                document.getElementById('st-materias').textContent = stats.materias ?? 0;
+                document.getElementById('st-topicos').textContent = stats.topicos ?? 0;
+                document.getElementById('st-concluidos').textContent = stats.concluidos ?? 0;
+                document.getElementById('st-questoes').textContent = stats.questoes ?? 0;
+                document.getElementById('st-prog').textContent = (stats.progresso ?? 0) + '%';
+                document.getElementById('prog-geral-fill').style.width = (stats.progresso ?? 0) + '%';
+                document.getElementById('prog-geral-pct').textContent = (stats.progresso ?? 0) + '%';
+
+                if (!materias.length) {
+                    document.getElementById('lista-materias').innerHTML =
+                        '<div class="empty"><div class="empty-icon">📭</div><div>Nenhuma matéria encontrada. Importe conteúdo via JSON.</div></div>';
+                    return;
+                }
+
+                document.getElementById('lista-materias').innerHTML = materias.map(m => renderMateriaCard(m)).join('');
+
+                // Animar barras
+                setTimeout(() => {
+                    document.querySelectorAll('.materia-mini-bar[data-pct]').forEach(el => {
+                        el.style.width = el.dataset.pct + '%';
+                    });
+                }, 200);
+            } catch (e) {
+                document.getElementById('lista-materias').innerHTML =
+                    '<div class="empty"><div>Erro ao carregar matérias: ' + esc(e.message) + '</div></div>';
+            }
+        }
+
+        function renderMateriaCard(m) {
+            const pct = Math.round(m.progressoPct || 0);
+            const topicosHtml = (m.topicos || []).map(t => {
+                const statusBadge = {
+                    PENDENTE: 'b-pendente ⏳ Pendente',
+                    EM_ESTUDO: 'b-estudando ✏️ Em Estudo',
+                    CONCLUIDO: 'b-concluido ✓ Concluído'
+                }[t.status] || 'b-pendente ⏳ Pendente';
+                const [bc, bt] = statusBadge.split(' ').reduce((a, v, i) => i === 0 ? [v, ''] : [a[0], a[1] + ' ' + v], ['', '']);
+                const aprovTxt = (t.acertos + t.erros) > 0
+                    ? Math.round(t.acertos / (t.acertos + t.erros) * 100) + '%' : '—';
+                const aprovCor = (t.acertos + t.erros) > 0
+                    ? (t.aproveitamento >= 70 ? 'var(--green)' : t.aproveitamento >= 50 ? 'var(--amber)' : 'var(--red)')
+                    : 'var(--text3)';
+                return `<div class="topico-row" onclick="abrirTopico(${t.id}, ${JSON.stringify(esc(t.nome))}, ${JSON.stringify(esc(m.nome))})">
+      <div class="topico-l">
+        <div class="topico-nome">${esc(t.nome)}</div>
+        ${t.artigoBase ? `<div class="topico-artigo">${esc(t.artigoBase)}</div>` : ''}
+      </div>
+      <div class="topico-r">
+        <span class="topico-q-count">${t.totalQuestoes}q</span>
+        <span class="topico-aprov" style="color:${aprovCor}">${aprovTxt}</span>
+        <span class="badge ${bc}">${bt.trim()}</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14" style="color:var(--text3)"><path d="M6 4l4 4-4 4"/></svg>
+      </div>
+    </div>`;
+            }).join('');
+
+            return `<div class="materia-card" id="mc-${m.id}">
+    <div class="materia-hdr" onclick="toggleMateria(${m.id})">
+      <div class="materia-hdr-l">
+        <div class="materia-nome">${esc(m.nome)}</div>
+        ${m.fonteLegal ? `<div class="materia-fonte">${esc(m.fonteLegal)}</div>` : ''}
+      </div>
+      <div class="materia-hdr-r">
+        <span class="materia-prog">${m.topicosConcluidosCount}/${m.totalTopicos}</span>
+        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+      </div>
+    </div>
+    <div style="height:2px;background:var(--border);overflow:hidden;">
+      <div class="materia-mini-bar" data-pct="${pct}" style="width:0%;height:100%;background:var(--teal);transition:width 1s ease;"></div>
+    </div>
+    <div class="materia-topicos hidden" id="mt-${m.id}">
+      ${topicosHtml || '<div style="padding:1rem 1.25rem;font-size:.85rem;color:var(--text3);">Nenhum tópico cadastrado.</div>'}
+    </div>
+  </div>`;
+        }
+
+        function toggleMateria(id) {
+            const card = document.getElementById('mc-' + id);
+            const panel = document.getElementById('mt-' + id);
+            const isOpen = !panel.classList.contains('hidden');
+            panel.classList.toggle('hidden', isOpen);
+            card.classList.toggle('open', !isOpen);
+        }
+
+        /* ── TÓPICO ── */
+        async function abrirTopico(id, nome, materiaNome) {
+            topicoAtual = id;
+            materiaAtual = materiaNome;
+            respostasTopico = {};
+            filtroQuestoes = 'todas';
+
+            showScreen('s-topico');
+            document.getElementById('topico-hdr').innerHTML = '<div class="page-loading"><span class="spinner-lg"></span></div>';
+            document.getElementById('questoes-list').innerHTML = '';
+            document.getElementById('artigos-list').innerHTML = '';
+            document.getElementById('anotacoes-list').innerHTML = '';
+            document.getElementById('resumo-content').innerHTML = '';
+            ctabAtivo('resumo');
+
+            // Breadcrumb
+            document.getElementById('breadcrumb').innerHTML = `
+    <span class="bc-item" onclick="voltarMaterias()">📚 Matérias</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-item" onclick="voltarMaterias()">${esc(materiaNome)}</span>
+    <span class="bc-sep">›</span>
+    <span class="bc-item atual">${esc(nome)}</span>
+  `;
+
+            try {
+                const data = await apiFetch('/lei-seca/topicos/' + id);
+                renderTopico(data);
+                await carregarAnotacoes(id);
+            } catch (e) {
+                document.getElementById('topico-hdr').innerHTML =
+                    `<div class="empty">Erro ao carregar tópico: ${esc(e.message)}</div>`;
+            }
+        }
+
+        function renderTopico(data) {
+            const prog = progressoDisplay(data.acertos, data.erros);
+
+            // Header
+            document.getElementById('topico-hdr').innerHTML = `
+    <div class="td-hdr-top">
+      <div>
+        <div class="td-titulo">${esc(data.nome)}</div>
+        ${data.artigoBase ? `<div style="font-size:.78rem;color:var(--text3);font-family:var(--mono);margin-top:.2rem;">${esc(data.artigoBase)}</div>` : ''}
+      </div>
+      <div class="td-acoes">
+        <button class="icon-btn danger" title="Resetar progresso" onclick="resetarTopico(${data.id})">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8A6 6 0 0114 5.5"/><path d="M14 8A6 6 0 012 10.5"/><path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="td-meta">
+      <span class="badge ${{ PENDENTE: 'b-pendente', EM_ESTUDO: 'b-estudando', CONCLUIDO: 'b-concluido' }[data.status] || 'b-pendente'}">
+        ${{ PENDENTE: '⏳ Pendente', EM_ESTUDO: '✏️ Em Estudo', CONCLUIDO: '✓ Concluído' }[data.status] || data.status}
+      </span>
+      <span style="font-size:.8rem;color:var(--text2);">${data.questoes?.length || 0} questões</span>
+    </div>
+    <div class="score-bar" style="margin-top:.75rem;">
+      <div class="sc-item ac"><div class="sc-val">${data.acertos}</div><div class="sc-lbl">Acertos</div></div>
+      <div class="sc-item er"><div class="sc-val">${data.erros}</div><div class="sc-lbl">Erros</div></div>
+      <div class="sc-item ap"><div class="sc-val">${prog.pct}%</div><div class="sc-lbl">Aproveitamento</div></div>
+    </div>`;
+
+            // Resumo
+            renderResumo(data.resumo);
+
+            // Artigos
+            renderArtigos(data.artigos || []);
+
+            // Questões
+            renderQuestoes(data.questoes || []);
+
+            // Contador
+            document.getElementById('q-count-label').textContent =
+                (data.questoes?.length || 0) + ' questões para este tópico';
+        }
+
+        function renderResumo(resumo) {
+            const box = document.getElementById('resumo-content');
+            if (!resumo) {
+                box.innerHTML = '<div style="color:var(--text3);font-size:.88rem;padding:.5rem;">Nenhum resumo cadastrado para este tópico.</div>';
+                return;
+            }
+            // Converte markdown simples
+            const html = resumo
+                .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/`(.+?)`/g, '<code>$1</code>')
+                .replace(/^- (.+)$/gm, '<li>$1</li>')
+                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+                .replace(/\n{2,}/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+            box.innerHTML = '<p>' + html + '</p>';
+        }
+
+        function renderArtigos(artigos) {
+            const el = document.getElementById('artigos-list');
+            if (!artigos.length) {
+                el.innerHTML = '<div class="empty"><div class="empty-icon">📜</div><div>Nenhum artigo cadastrado para este tópico.</div></div>';
+                return;
+            }
+            el.innerHTML = artigos.map(a => `
+    <div class="artigo-item ${a.destaque ? 'destaque' : ''}">
+      <div class="artigo-id">
+        ${a.destaque ? '<span class="badge b-destaque">⭐ Muito Cobrado</span>' : ''}
+        ${esc(a.identificador)}
+      </div>
+      <div class="artigo-texto">${esc(a.texto)}</div>
+    </div>`).join('');
+        }
+
+        function renderQuestoes(questoes) {
+            const nLbl = { FACIL: 'b-facil Fácil', MEDIO: 'b-medio Médio', DIFICIL: 'b-dificil Difícil' };
+
+            const filtradas = questoes.filter(q => {
+                if (filtroQuestoes === 'erradas') return respostasTopico[q.id] && !respostasTopico[q.id].acertou;
+                if (filtroQuestoes === 'certas') return respostasTopico[q.id] && respostasTopico[q.id].acertou;
+                return true;
+            });
+
+            const el = document.getElementById('questoes-list');
+            if (!filtradas.length) {
+                el.innerHTML = '<div class="empty"><div class="empty-icon">✏️</div><div>Nenhuma questão disponível com este filtro.</div></div>';
+                return;
+            }
+
+            el.innerHTML = filtradas.map((q, i) => {
+                const resp = respostasTopico[q.id];
+                const respondida = !!resp;
+                const acertou = resp?.acertou;
+                const [nc, nl] = (nLbl[q.nivel] || 'b-sub Médio').split(' ');
+
+                const gabHtml = respondida ? (() => {
+                    const gabTxt = resp.gabarito ? 'CERTO' : 'ERRADO';
+                    const pegHtml = resp.tipoPegadinha
+                        ? `<span class="badge b-pegad" style="display:inline-flex;margin-bottom:.4rem;">🪤 ${esc(resp.tipoPegadinha)}</span><br>` : '';
+                    const resumoHtml = resp.resumoEstudo
+                        ? `<div class="gab-resumo">${mdBold(esc(resp.resumoEstudo))}</div>` : '';
+                    return `<div class="gab-reveal ${acertou ? 'gab-ok' : 'gab-err'}">
+        <div class="gab-hdr">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+          ${acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
+        </div>
+        <div class="gab-body">
+          ${pegHtml}${esc(resp.comentario || '')}
+          ${resp.artigoRef ? `<div class="ref-tag">📖 ${esc(resp.artigoRef)}</div>` : ''}
+        </div>
+        ${resumoHtml}
+      </div>`;
+                })() : '';
+
+                return `<div class="qlei-outer" style="animation-delay:${Math.min(i * .03, .4)}s">
+      <div class="qlei-card ${respondida ? (acertou ? 'ok' : 'err') : ''}" id="qlei-${q.id}">
+        <div class="qlei-head">
+          <span class="qlei-n">Q${i + 1}</span>
+          <span class="badge ${nc}">${nl}</span>
+          ${q.recorrencia > 1 ? `<span class="recorr">🔁 ${q.recorrencia}x</span>` : ''}
+          ${q.orgaoProva ? `<span class="badge b-pendente">${esc(q.orgaoProva)}</span>` : ''}
+          ${q.tipoPegadinha && !respondida ? `<span class="badge b-pegad">🪤</span>` : ''}
+        </div>
+        <div class="qlei-body">
+          <div class="qlei-enunciado">${esc(q.enunciado)}</div>
+          <div class="qlei-btns" id="qb-${q.id}">
+            <button class="btn-resp btn-certo" onclick="responder(${q.id}, true)" ${respondida ? 'disabled' : ''}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 8l4 4 8-8"/></svg> CERTO
+            </button>
+            <button class="btn-resp btn-errado" onclick="responder(${q.id}, false)" ${respondida ? 'disabled' : ''}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 2l12 12M14 2L2 14"/></svg> ERRADO
+            </button>
+          </div>
+          <div id="gb-${q.id}">${gabHtml}</div>
+        </div>
+      </div>
+    </div>`;
+            }).join('');
+        }
+
+        function filtrarQuestoes(f) {
+            filtroQuestoes = f;
+            ['todas', 'erradas', 'certas'].forEach(v => {
+                const el = document.getElementById('fq-' + v);
+                if (!el) return;
+                el.style.background = v === f ? 'var(--teal-bg)' : 'transparent';
+                el.style.borderColor = v === f ? 'var(--teal-bd)' : 'var(--border2)';
+                el.style.color = v === f ? 'var(--teal)' : 'var(--text2)';
+                el.style.fontWeight = v === f ? '700' : '600';
+            });
+            // Rerender with current data from DOM state
+            const questoes = getAllQuestoesFromDOM();
+            renderQuestoes(questoes);
+        }
+
+        // Recupera questões do estado atual
+        let questoesAtivas = [];
+        function getAllQuestoesFromDOM() { return questoesAtivas; }
+
+        /* ── RESPONDER ── */
+        async function responder(qId, resposta) {
+            if (respostasTopico[qId]) return;
+            document.getElementById(`qb-${qId}`)?.querySelectorAll('.btn-resp').forEach(b => b.disabled = true);
+
+            try {
+                const data = await apiFetch('/lei-seca/responder', 'POST', {
+                    questaoId: qId, resposta
+                });
+
+                respostasTopico[qId] = {
+                    acertou: data.acertou,
+                    gabarito: data.gabarito,
+                    comentario: data.comentario,
+                    resumoEstudo: data.resumoEstudo,
+                    tipoPegadinha: data.tipoPegadinha,
+                    artigoRef: data.artigoRef
+                };
+
+                const card = document.getElementById(`qlei-${qId}`);
+                if (card) {
+                    card.classList.add(data.acertou ? 'ok' : 'err');
+                }
+
+                const gabTxt = data.gabarito ? 'CERTO' : 'ERRADO';
+                const pegHtml = data.tipoPegadinha
+                    ? `<span class="badge b-pegad" style="display:inline-flex;margin-bottom:.4rem;">🪤 ${esc(data.tipoPegadinha)}</span><br>` : '';
+                const resumoHtml = data.resumoEstudo
+                    ? `<div class="gab-resumo">${mdBold(esc(data.resumoEstudo))}</div>` : '';
+
+                const gbEl = document.getElementById(`gb-${qId}`);
+                if (gbEl) gbEl.innerHTML = `
+      <div class="gab-reveal ${data.acertou ? 'gab-ok' : 'gab-err'}">
+        <div class="gab-hdr">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${data.acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+          ${data.acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
+        </div>
+        <div class="gab-body">
+          ${pegHtml}${esc(data.comentario || '')}
+          ${data.artigoRef ? `<div class="ref-tag">📖 ${esc(data.artigoRef)}</div>` : ''}
+        </div>
+        ${resumoHtml}
+      </div>`;
+
+                toast(data.acertou ? '✅ Acertou!' : '❌ Errou!', data.acertou ? 'ok' : 'err');
+
+                // Atualiza score no header sem recarregar tudo
+                atualizarScore();
+            } catch (e) {
+                toast('Erro ao registrar resposta', 'err');
+                document.getElementById(`qb-${qId}`)?.querySelectorAll('.btn-resp').forEach(b => b.disabled = false);
+            }
+        }
+
+        function atualizarScore() {
+            const vals = Object.values(respostasTopico);
+            const ac = vals.filter(r => r.acertou).length;
+            const er = vals.filter(r => !r.acertou).length;
+            const pct = (ac + er) > 0 ? Math.round(ac * 100 / (ac + er)) : 0;
+            const scoreEls = document.querySelectorAll('.sc-val');
+            if (scoreEls.length >= 3) {
+                scoreEls[0].textContent = ac;
+                scoreEls[1].textContent = er;
+                scoreEls[2].textContent = pct + '%';
+            }
+        }
+
+        /* ── RESETAR TÓPICO ── */
+        async function resetarTopico(id) {
+            if (!confirm('Resetar todo o progresso deste tópico?')) return;
+            try {
+                await apiFetch('/lei-seca/topicos/' + id + '/resetar', 'POST');
+                respostasTopico = {};
+                toast('Progresso resetado', 'ok');
+                const data = await apiFetch('/lei-seca/topicos/' + id);
+                renderTopico(data);
+            } catch (e) { toast('Erro ao resetar', 'err'); }
+        }
+
+        /* ── ANOTAÇÕES ── */
+        async function carregarAnotacoes(topicoId) {
+            try {
+                const lista = await apiFetch('/lei-seca/topicos/' + topicoId + '/anotacoes');
+                renderAnotacoes(lista);
+            } catch (e) { }
+        }
+
+        function renderAnotacoes(lista) {
+            const el = document.getElementById('anotacoes-list');
+            if (!lista.length) {
+                el.innerHTML = '<div style="color:var(--text3);font-size:.85rem;padding:.5rem;">Nenhuma anotação ainda.</div>';
+                return;
+            }
+            el.innerHTML = lista.map(a => `
+    <div class="anot-item">
+      <div class="anot-data">${new Date(a.createdAt).toLocaleString('pt-BR')}</div>
+      ${esc(a.conteudo)}
+    </div>`).join('');
+        }
+
+        async function salvarAnotacao() {
+            const txt = document.getElementById('anot-input').value.trim();
+            if (!txt) return;
+            try {
+                await apiFetch('/lei-seca/topicos/' + topicoAtual + '/anotacoes', 'POST', {
+                    conteudo: txt
+                });
+                document.getElementById('anot-input').value = '';
+                await carregarAnotacoes(topicoAtual);
+                toast('Anotação salva', 'ok');
+            } catch (e) { toast('Erro ao salvar', 'err'); }
+        }
+
+        /* ── TABS CONTEÚDO ── */
+        function ctab(el) {
+            document.querySelectorAll('.ctab').forEach(t => t.classList.remove('on'));
+            el.classList.add('on');
+            ctabAtivo(el.dataset.tab);
+        }
+
+        function ctabAtivo(tab) {
+            ['resumo', 'artigos', 'questoes', 'anotacoes'].forEach(t => {
+                document.getElementById('ct-' + t).classList.toggle('hidden', t !== tab);
+            });
+            if (tab === 'questoes') {
+                // Garantir que filtro "todas" está ativo ao abrir aba
+                filtrarQuestoes('todas');
+            }
+        }
+
+        /* ── IMPORTAR ── */
+        function abrirImportar() { document.getElementById('modal-imp').classList.remove('hidden'); }
+        function fecharImportar() { document.getElementById('modal-imp').classList.add('hidden'); }
+
+        async function importarJson() {
+            const json = document.getElementById('json-imp').value.trim();
+            if (!json) { toast('Cole o JSON primeiro', 'err'); return; }
+            const btn = document.getElementById('btn-imp-ok');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Importando…';
+            try {
+                const data = await fetch(API + '/lei-seca/importar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: json
+                }).then(r => r.json());
+
+                const el = document.getElementById('imp-result');
+                el.classList.remove('hidden', 'ok', 'err');
+                el.classList.add(data.ignoradas === 0 ? 'ok' : 'err');
+                const errosHtml = data.erros?.length
+                    ? `<div class="imp-erros">${data.erros.map(e => '• ' + esc(e)).join('<br>')}</div>` : '';
+                el.innerHTML =
+                    `✓ <strong>${data.questoesImportadas}</strong> questões · ` +
+                    `${data.materiasNovas} matérias novas · ` +
+                    `${data.topicosNovos} tópicos novos · ` +
+                    `${data.artigosNovos} artigos novos` + errosHtml;
+
+                toast(data.questoesImportadas + ' questões importadas', 'ok');
+                if (cargoAtual) await carregarMaterias();
+            } catch (e) {
+                toast('Erro: ' + e.message, 'err');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M8 2v9M4 7l4 4 4-4"/><path d="M2 13h12"/></svg> Importar';
+            }
+        }
+
+        /* ── NAVEGAÇÃO ── */
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+            document.getElementById(id).classList.add('on');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function voltarMaterias() {
+            showScreen('s-materias');
+            if (cargoAtual) carregarMaterias();
+        }
+
+        /* ── UTILS ── */
+        async function apiFetch(p, m = 'GET', b = null) {
+            const o = { method: m, headers: { 'Content-Type': 'application/json' } };
+            if (b) o.body = JSON.stringify(b);
+            const r = await fetch(API + p, o);
+            if (r.status === 204) return null;
+            if (!r.ok) throw new Error(await r.text().catch(() => r.statusText));
+            return r.json();
+        }
+
+        function toast(msg, type = '') {
+            const w = document.getElementById('toast-wrap');
+            const el = document.createElement('div');
+            el.className = 'toast ' + (type || ''); el.textContent = msg;
+            w.appendChild(el);
+            setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .2s'; setTimeout(() => el.remove(), 220); }, 3000);
+        }
+
+        function progressoDisplay(ac, er) {
+            const tot = ac + er;
+            return { pct: tot > 0 ? Math.round(ac * 100 / tot) : 0 };
+        }
+
+        function mdBold(s) {
+            return s.replace(/\*\*(.+?)\*\*/g, '<strong style="color:var(--teal)">$1</strong>');
+        }
+
+        function esc(s) {
+            return String(s ?? '')
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        document.getElementById('modal-imp').addEventListener('click', e => {
+            if (e.target === document.getElementById('modal-imp')) fecharImportar();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') fecharImportar();
+        });
+
+        init();
+    </script>
+</body>
+
+</html>
