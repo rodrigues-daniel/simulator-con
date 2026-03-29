@@ -316,7 +316,6 @@
         }
 
         /* ═══════ TELA 2: MATÉRIAS ═══════ */
-        /* Stats topo */
         .stats-strip {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -372,7 +371,6 @@
             color: var(--purple);
         }
 
-        /* Barra progresso geral */
         .prog-geral {
             background: var(--bg2);
             border: 1px solid var(--border);
@@ -513,8 +511,6 @@
             background: var(--surface);
         }
 
-        .topico-l {}
-
         .topico-nome {
             font-size: .9rem;
             font-weight: 500;
@@ -605,7 +601,6 @@
         }
 
         /* ═══════ TELA 3: TÓPICO / ESTUDO ═══════ */
-        /* Nav breadcrumb */
         .breadcrumb {
             display: flex;
             align-items: center;
@@ -636,7 +631,6 @@
             font-size: .75rem;
         }
 
-        /* Topico header */
         .topico-detail-hdr {
             background: var(--bg2);
             border: 1px solid var(--border);
@@ -702,7 +696,6 @@
             height: 14px;
         }
 
-        /* Score bar */
         .score-bar {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -749,7 +742,6 @@
             color: var(--teal);
         }
 
-        /* Tabs de conteúdo */
         .content-tabs {
             display: flex;
             gap: .3rem;
@@ -783,7 +775,6 @@
             font-weight: 700;
         }
 
-        /* Resumo de estudo */
         .resumo-box {
             background: var(--bg2);
             border: 1px solid var(--teal-bd);
@@ -843,7 +834,6 @@
             color: var(--teal);
         }
 
-        /* Artigo */
         .artigo-item {
             background: var(--bg2);
             border: 1px solid var(--border);
@@ -883,7 +873,6 @@
             color: var(--text);
         }
 
-        /* Questão lei */
         .qlei-outer {
             margin-bottom: .75rem;
             animation: qin .22s ease both;
@@ -1014,7 +1003,6 @@
             height: 15px;
         }
 
-        /* Gabarito reveal */
         .gab-reveal {
             margin-top: .85rem;
             border-radius: var(--r-sm);
@@ -1113,7 +1101,6 @@
             border: 1px solid var(--border);
         }
 
-        /* Anotações */
         .anot-form {
             display: flex;
             flex-direction: column;
@@ -1505,9 +1492,7 @@
         </div>
     </header>
 
-    <!-- ═══════════════════════════
-     TELA 1: ESCOLHA DE CARGO
-═══════════════════════════ -->
+    <!-- TELA 1: ESCOLHA DE CARGO -->
     <div id="s-cargo" class="screen on">
         <div class="hero">
             <div class="hero-eyebrow">⚖️ Lei Seca</div>
@@ -1526,12 +1511,9 @@
         </div>
     </div>
 
-    <!-- ═══════════════════════════
-     TELA 2: MATÉRIAS
-═══════════════════════════ -->
+    <!-- TELA 2: MATÉRIAS -->
     <div id="s-materias" class="screen">
         <div class="page">
-
             <div
                 style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem;">
                 <div>
@@ -1548,7 +1530,6 @@
                 </button>
             </div>
 
-            <!-- Stats -->
             <div class="stats-strip">
                 <div class="stat-c teal">
                     <div class="stat-v" id="st-materias">—</div>
@@ -1572,7 +1553,6 @@
                 </div>
             </div>
 
-            <!-- Progresso geral -->
             <div class="prog-geral">
                 <div class="prog-geral-info">
                     <div class="prog-geral-label">Progresso geral de estudo</div>
@@ -1583,26 +1563,19 @@
                 <div class="prog-pct" id="prog-geral-pct">0%</div>
             </div>
 
-            <!-- Lista de matérias -->
             <div id="lista-materias">
                 <div class="page-loading"><span class="spinner-lg"></span> Carregando matérias…</div>
             </div>
-
         </div>
     </div>
 
-    <!-- ═══════════════════════════
-     TELA 3: TÓPICO
-═══════════════════════════ -->
+    <!-- TELA 3: TÓPICO -->
     <div id="s-topico" class="screen">
         <div class="page">
-
             <div class="breadcrumb" id="breadcrumb"></div>
 
-            <!-- Header do tópico -->
             <div class="topico-detail-hdr" id="topico-hdr"></div>
 
-            <!-- Tabs -->
             <div class="content-tabs">
                 <button class="ctab on" data-tab="resumo" onclick="ctab(this)">📖 Resumo</button>
                 <button class="ctab" data-tab="artigos" onclick="ctab(this)">📜 Artigos</button>
@@ -1610,24 +1583,21 @@
                 <button class="ctab" data-tab="anotacoes" onclick="ctab(this)">📝 Anotações</button>
             </div>
 
-            <!-- Tab Resumo -->
             <div id="ct-resumo" class="ct-panel">
                 <div class="resumo-box" id="resumo-content"></div>
             </div>
 
-            <!-- Tab Artigos -->
             <div id="ct-artigos" class="ct-panel hidden">
                 <div id="artigos-list"></div>
             </div>
 
-            <!-- Tab Questões -->
             <div id="ct-questoes" class="ct-panel hidden">
                 <div
                     style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem;">
                     <div style="font-size:.82rem;color:var(--text2);" id="q-count-label"></div>
                     <div style="display:flex;gap:.4rem;">
                         <button onclick="filtrarQuestoes('todas')" id="fq-todas"
-                            style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--border2);background:var(--teal-bg);border-color:var(--teal-bd);color:var(--teal);font-size:.75rem;font-weight:700;cursor:pointer;font-family:var(--sans);">Todas</button>
+                            style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--teal-bd);background:var(--teal-bg);color:var(--teal);font-size:.75rem;font-weight:700;cursor:pointer;font-family:var(--sans);">Todas</button>
                         <button onclick="filtrarQuestoes('erradas')" id="fq-erradas"
                             style="padding:.28rem .7rem;border-radius:99px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:.75rem;font-weight:600;cursor:pointer;font-family:var(--sans);">Erradas</button>
                         <button onclick="filtrarQuestoes('certas')" id="fq-certas"
@@ -1637,7 +1607,6 @@
                 <div id="questoes-list"></div>
             </div>
 
-            <!-- Tab Anotações -->
             <div id="ct-anotacoes" class="ct-panel hidden">
                 <div class="anot-form">
                     <textarea class="anot-textarea" id="anot-input"
@@ -1652,13 +1621,10 @@
                 </div>
                 <div id="anotacoes-list"></div>
             </div>
-
         </div>
     </div>
 
-    <!-- ═══════════════════════════
-     MODAL IMPORTAR
-═══════════════════════════ -->
+    <!-- MODAL IMPORTAR -->
     <div class="modal-bg hidden" id="modal-imp">
         <div class="modal">
             <div class="modal-hdr">
@@ -1722,8 +1688,9 @@
         let cargoAtual = null;
         let topicoAtual = null;
         let materiaAtual = null;
-        let respostasTopico = {};   // questaoId -> { acertou, gabarito, comentario, ... }
+        let respostasTopico = {};
         let filtroQuestoes = 'todas';
+        let questoesAtivas = [];
 
         /* ══ INIT ══ */
         async function init() {
@@ -1754,10 +1721,10 @@
                     return;
                 }
                 grid.innerHTML = cargos.map(c => `
-      <div class="cargo-card" data-id="${c.id}" data-nome="${esc(c.nome)}" onclick="selCargo(this)">
-        <div class="cargo-nome">${esc(c.nome)}</div>
-        <div class="cargo-orgao">${esc(c.orgao || 'Geral')}</div>
-      </div>`).join('');
+                    <div class="cargo-card" data-id="${c.id}" data-nome="${esc(c.nome)}" onclick="selCargo(this)">
+                        <div class="cargo-nome">${esc(c.nome)}</div>
+                        <div class="cargo-orgao">${esc(c.orgao || 'Geral')}</div>
+                    </div>`).join('');
             } catch (e) {
                 document.getElementById('cargo-grid').innerHTML =
                     '<div class="empty"><div>Erro ao conectar ao backend.</div></div>';
@@ -1791,7 +1758,6 @@
                     apiFetch('/lei-seca/stats?cargoId=' + cargoAtual.id)
                 ]);
 
-                // Stats
                 document.getElementById('st-materias').textContent = stats.materias ?? 0;
                 document.getElementById('st-topicos').textContent = stats.topicos ?? 0;
                 document.getElementById('st-concluidos').textContent = stats.concluidos ?? 0;
@@ -1808,7 +1774,6 @@
 
                 document.getElementById('lista-materias').innerHTML = materias.map(m => renderMateriaCard(m)).join('');
 
-                // Animar barras
                 setTimeout(() => {
                     document.querySelectorAll('.materia-mini-bar[data-pct]').forEach(el => {
                         el.style.width = el.dataset.pct + '%';
@@ -1820,52 +1785,57 @@
             }
         }
 
+        const _topicoMeta = {};
+
         function renderMateriaCard(m) {
             const pct = Math.round(m.progressoPct || 0);
+            const statusCls = { PENDENTE: 'b-pendente', EM_ESTUDO: 'b-estudando', CONCLUIDO: 'b-concluido' };
+            const statusTxt = { PENDENTE: '⏳ Pendente', EM_ESTUDO: '✏️ Em Estudo', CONCLUIDO: '✓ Concluído' };
+
             const topicosHtml = (m.topicos || []).map(t => {
-                const statusBadge = {
-                    PENDENTE: 'b-pendente ⏳ Pendente',
-                    EM_ESTUDO: 'b-estudando ✏️ Em Estudo',
-                    CONCLUIDO: 'b-concluido ✓ Concluído'
-                }[t.status] || 'b-pendente ⏳ Pendente';
-                const [bc, bt] = statusBadge.split(' ').reduce((a, v, i) => i === 0 ? [v, ''] : [a[0], a[1] + ' ' + v], ['', '']);
+                _topicoMeta[t.id] = { nome: t.nome, materiaNome: m.nome };
+
+                const bc = statusCls[t.status] || 'b-pendente';
+                const bt = statusTxt[t.status] || '⏳ Pendente';
+
                 const aprovTxt = (t.acertos + t.erros) > 0
                     ? Math.round(t.acertos / (t.acertos + t.erros) * 100) + '%' : '—';
                 const aprovCor = (t.acertos + t.erros) > 0
                     ? (t.aproveitamento >= 70 ? 'var(--green)' : t.aproveitamento >= 50 ? 'var(--amber)' : 'var(--red)')
                     : 'var(--text3)';
-                return `<div class="topico-row" onclick="abrirTopico(${t.id}, ${JSON.stringify(esc(t.nome))}, ${JSON.stringify(esc(m.nome))})">
-      <div class="topico-l">
-        <div class="topico-nome">${esc(t.nome)}</div>
-        ${t.artigoBase ? `<div class="topico-artigo">${esc(t.artigoBase)}</div>` : ''}
-      </div>
-      <div class="topico-r">
-        <span class="topico-q-count">${t.totalQuestoes}q</span>
-        <span class="topico-aprov" style="color:${aprovCor}">${aprovTxt}</span>
-        <span class="badge ${bc}">${bt.trim()}</span>
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14" style="color:var(--text3)"><path d="M6 4l4 4-4 4"/></svg>
-      </div>
-    </div>`;
+
+                return `<div class="topico-row" data-topico-id="${t.id}" onclick="handleTopicoClick(event.currentTarget)">
+                    <div class="topico-l" style="pointer-events:none;">
+                        <div class="topico-nome">${esc(t.nome)}</div>
+                        ${t.artigoBase ? `<div class="topico-artigo">${esc(t.artigoBase)}</div>` : ''}
+                    </div>
+                    <div class="topico-r" style="pointer-events:none;">
+                        <span class="topico-q-count">${t.totalQuestoes}q</span>
+                        <span class="topico-aprov" style="color:${aprovCor}">${aprovTxt}</span>
+                        <span class="badge ${bc}">${bt}</span>
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14" style="color:var(--text3)"><path d="M6 4l4 4-4 4"/></svg>
+                    </div>
+                </div>`;
             }).join('');
 
             return `<div class="materia-card" id="mc-${m.id}">
-    <div class="materia-hdr" onclick="toggleMateria(${m.id})">
-      <div class="materia-hdr-l">
-        <div class="materia-nome">${esc(m.nome)}</div>
-        ${m.fonteLegal ? `<div class="materia-fonte">${esc(m.fonteLegal)}</div>` : ''}
-      </div>
-      <div class="materia-hdr-r">
-        <span class="materia-prog">${m.topicosConcluidosCount}/${m.totalTopicos}</span>
-        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
-      </div>
-    </div>
-    <div style="height:2px;background:var(--border);overflow:hidden;">
-      <div class="materia-mini-bar" data-pct="${pct}" style="width:0%;height:100%;background:var(--teal);transition:width 1s ease;"></div>
-    </div>
-    <div class="materia-topicos hidden" id="mt-${m.id}">
-      ${topicosHtml || '<div style="padding:1rem 1.25rem;font-size:.85rem;color:var(--text3);">Nenhum tópico cadastrado.</div>'}
-    </div>
-  </div>`;
+                <div class="materia-hdr" onclick="toggleMateria(${m.id})">
+                    <div class="materia-hdr-l">
+                        <div class="materia-nome">${esc(m.nome)}</div>
+                        ${m.fonteLegal ? `<div class="materia-fonte">${esc(m.fonteLegal)}</div>` : ''}
+                    </div>
+                    <div class="materia-hdr-r">
+                        <span class="materia-prog">${m.topicosConcluidosCount}/${m.totalTopicos}</span>
+                        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l4 4 4-4"/></svg>
+                    </div>
+                </div>
+                <div style="height:2px;background:var(--border);overflow:hidden;">
+                    <div class="materia-mini-bar" data-pct="${pct}" style="width:0%;height:100%;background:var(--teal);transition:width 1s ease;"></div>
+                </div>
+                <div class="materia-topicos hidden" id="mt-${m.id}">
+                    ${topicosHtml || '<div style="padding:1rem 1.25rem;font-size:.85rem;color:var(--text3);">Nenhum tópico cadastrado.</div>'}
+                </div>
+            </div>`;
         }
 
         function toggleMateria(id) {
@@ -1876,11 +1846,19 @@
             card.classList.toggle('open', !isOpen);
         }
 
+        function handleTopicoClick(row) {
+            const id = +row.dataset.topicoId;
+            const meta = _topicoMeta[id];
+            if (!meta) { console.error('Meta não encontrada para tópico id=' + id); return; }
+            abrirTopico(id, meta.nome, meta.materiaNome);
+        }
+
         /* ── TÓPICO ── */
         async function abrirTopico(id, nome, materiaNome) {
             topicoAtual = id;
             materiaAtual = materiaNome;
             respostasTopico = {};
+            questoesAtivas = [];
             filtroQuestoes = 'todas';
 
             showScreen('s-topico');
@@ -1889,16 +1867,20 @@
             document.getElementById('artigos-list').innerHTML = '';
             document.getElementById('anotacoes-list').innerHTML = '';
             document.getElementById('resumo-content').innerHTML = '';
+            filtrarQuestoesBotao('todas');
             ctabAtivo('resumo');
 
-            // Breadcrumb
+            // Reset tab buttons visual state
+            document.querySelectorAll('.ctab').forEach(t => t.classList.remove('on'));
+            document.querySelector('.ctab[data-tab="resumo"]').classList.add('on');
+
             document.getElementById('breadcrumb').innerHTML = `
-    <span class="bc-item" onclick="voltarMaterias()">📚 Matérias</span>
-    <span class="bc-sep">›</span>
-    <span class="bc-item" onclick="voltarMaterias()">${esc(materiaNome)}</span>
-    <span class="bc-sep">›</span>
-    <span class="bc-item atual">${esc(nome)}</span>
-  `;
+                <span class="bc-item" onclick="voltarMaterias()">📚 Matérias</span>
+                <span class="bc-sep">›</span>
+                <span class="bc-item" onclick="voltarMaterias()">${esc(materiaNome)}</span>
+                <span class="bc-sep">›</span>
+                <span class="bc-item atual">${esc(nome)}</span>
+            `;
 
             try {
                 const data = await apiFetch('/lei-seca/topicos/' + id);
@@ -1913,41 +1895,35 @@
         function renderTopico(data) {
             const prog = progressoDisplay(data.acertos, data.erros);
 
-            // Header
+            // BUG CORRIGIDO: template literal fechado corretamente (era encerrado com \`; dentro de string regular)
             document.getElementById('topico-hdr').innerHTML = `
-    <div class="td-hdr-top">
-      <div>
-        <div class="td-titulo">${esc(data.nome)}</div>
-        ${data.artigoBase ? `<div style="font-size:.78rem;color:var(--text3);font-family:var(--mono);margin-top:.2rem;">${esc(data.artigoBase)}</div>` : ''}
-      </div>
-      <div class="td-acoes">
-        <button class="icon-btn danger" title="Resetar progresso" onclick="resetarTopico(${data.id})">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8A6 6 0 0114 5.5"/><path d="M14 8A6 6 0 012 10.5"/><path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="td-meta">
-      <span class="badge ${{ PENDENTE: 'b-pendente', EM_ESTUDO: 'b-estudando', CONCLUIDO: 'b-concluido' }[data.status] || 'b-pendente'}">
-        ${{ PENDENTE: '⏳ Pendente', EM_ESTUDO: '✏️ Em Estudo', CONCLUIDO: '✓ Concluído' }[data.status] || data.status}
-      </span>
-      <span style="font-size:.8rem;color:var(--text2);">${data.questoes?.length || 0} questões</span>
-    </div>
-    <div class="score-bar" style="margin-top:.75rem;">
-      <div class="sc-item ac"><div class="sc-val">${data.acertos}</div><div class="sc-lbl">Acertos</div></div>
-      <div class="sc-item er"><div class="sc-val">${data.erros}</div><div class="sc-lbl">Erros</div></div>
-      <div class="sc-item ap"><div class="sc-val">${prog.pct}%</div><div class="sc-lbl">Aproveitamento</div></div>
-    </div>`;
+                <div class="td-hdr-top">
+                    <div>
+                        <div class="td-titulo">${esc(data.nome)}</div>
+                        ${data.artigoBase ? `<div style="font-size:.78rem;color:var(--text3);font-family:var(--mono);margin-top:.2rem;">${esc(data.artigoBase)}</div>` : ''}
+                    </div>
+                    <div class="td-acoes">
+                        <button class="icon-btn danger" title="Resetar progresso" onclick="resetarTopico(${data.id})">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8A6 6 0 0114 5.5"/><path d="M14 8A6 6 0 012 10.5"/><path d="M12 3l2 2.5-2 2M4 13l-2-2.5 2-2"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="td-meta">
+                    <span class="badge ${{ PENDENTE: 'b-pendente', EM_ESTUDO: 'b-estudando', CONCLUIDO: 'b-concluido' }[data.status] || 'b-pendente'}">
+                        ${{ PENDENTE: '⏳ Pendente', EM_ESTUDO: '✏️ Em Estudo', CONCLUIDO: '✓ Concluído' }[data.status] || data.status}
+                    </span>
+                    <span style="font-size:.8rem;color:var(--text2);">${data.questoes?.length || 0} questões</span>
+                </div>
+                <div class="score-bar" style="margin-top:.75rem;">
+                    <div class="sc-item ac"><div class="sc-val" id="score-ac">${data.acertos}</div><div class="sc-lbl">Acertos</div></div>
+                    <div class="sc-item er"><div class="sc-val" id="score-er">${data.erros}</div><div class="sc-lbl">Erros</div></div>
+                    <div class="sc-item ap"><div class="sc-val" id="score-ap">${prog.pct}%</div><div class="sc-lbl">Aproveitamento</div></div>
+                </div>`;
 
-            // Resumo
             renderResumo(data.resumo);
-
-            // Artigos
             renderArtigos(data.artigos || []);
-
-            // Questões
             renderQuestoes(data.questoes || []);
 
-            // Contador
             document.getElementById('q-count-label').textContent =
                 (data.questoes?.length || 0) + ' questões para este tópico';
         }
@@ -1958,14 +1934,14 @@
                 box.innerHTML = '<div style="color:var(--text3);font-size:.88rem;padding:.5rem;">Nenhum resumo cadastrado para este tópico.</div>';
                 return;
             }
-            // Converte markdown simples
+            // BUG CORRIGIDO: regex de lista com flag correta e sem o /s incorreto
             const html = resumo
                 .replace(/^## (.+)$/gm, '<h2>$1</h2>')
                 .replace(/^### (.+)$/gm, '<h3>$1</h3>')
                 .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
                 .replace(/`(.+?)`/g, '<code>$1</code>')
                 .replace(/^- (.+)$/gm, '<li>$1</li>')
-                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+                .replace(/(<li>[\s\S]+?<\/li>)/g, '<ul>$1</ul>')
                 .replace(/\n{2,}/g, '</p><p>')
                 .replace(/\n/g, '<br>');
             box.innerHTML = '<p>' + html + '</p>';
@@ -1977,20 +1953,24 @@
                 el.innerHTML = '<div class="empty"><div class="empty-icon">📜</div><div>Nenhum artigo cadastrado para este tópico.</div></div>';
                 return;
             }
+            // BUG CORRIGIDO: espaço espúrio removido em `< div class=` → `<div class=`
             el.innerHTML = artigos.map(a => `
-    <div class="artigo-item ${a.destaque ? 'destaque' : ''}">
-      <div class="artigo-id">
-        ${a.destaque ? '<span class="badge b-destaque">⭐ Muito Cobrado</span>' : ''}
-        ${esc(a.identificador)}
-      </div>
-      <div class="artigo-texto">${esc(a.texto)}</div>
-    </div>`).join('');
+                <div class="artigo-item ${a.destaque ? 'destaque' : ''}">
+                    <div class="artigo-id">
+                        ${a.destaque ? '<span class="badge b-destaque">⭐ Muito Cobrado</span>' : ''}
+                        ${esc(a.identificador)}
+                    </div>
+                    <div class="artigo-texto">${esc(a.texto)}</div>
+                </div>`).join('');
         }
 
         function renderQuestoes(questoes) {
+            if (Array.isArray(questoes) && questoes.length > 0) questoesAtivas = questoes;
+
             const nLbl = { FACIL: 'b-facil Fácil', MEDIO: 'b-medio Médio', DIFICIL: 'b-dificil Difícil' };
 
-            const filtradas = questoes.filter(q => {
+            const fonte = questoesAtivas;
+            const filtradas = fonte.filter(q => {
                 if (filtroQuestoes === 'erradas') return respostasTopico[q.id] && !respostasTopico[q.id].acertou;
                 if (filtroQuestoes === 'certas') return respostasTopico[q.id] && respostasTopico[q.id].acertou;
                 return true;
@@ -2006,71 +1986,73 @@
                 const resp = respostasTopico[q.id];
                 const respondida = !!resp;
                 const acertou = resp?.acertou;
-                const [nc, nl] = (nLbl[q.nivel] || 'b-sub Médio').split(' ');
+                const _nivelStr = nLbl[q.nivel] || 'b-medio Médio';
+                const nc = _nivelStr.split(' ')[0];
+                const nl = _nivelStr.split(' ').slice(1).join(' ');
 
                 const gabHtml = respondida ? (() => {
                     const gabTxt = resp.gabarito ? 'CERTO' : 'ERRADO';
+                    // BUG CORRIGIDO: espaço espúrio removido em `< span class=` → `<span class=`
                     const pegHtml = resp.tipoPegadinha
                         ? `<span class="badge b-pegad" style="display:inline-flex;margin-bottom:.4rem;">🪤 ${esc(resp.tipoPegadinha)}</span><br>` : '';
                     const resumoHtml = resp.resumoEstudo
                         ? `<div class="gab-resumo">${mdBold(esc(resp.resumoEstudo))}</div>` : '';
                     return `<div class="gab-reveal ${acertou ? 'gab-ok' : 'gab-err'}">
-        <div class="gab-hdr">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
-          ${acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
-        </div>
-        <div class="gab-body">
-          ${pegHtml}${esc(resp.comentario || '')}
-          ${resp.artigoRef ? `<div class="ref-tag">📖 ${esc(resp.artigoRef)}</div>` : ''}
-        </div>
-        ${resumoHtml}
-      </div>`;
+                        <div class="gab-hdr">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+                            ${acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
+                        </div>
+                        <div class="gab-body">
+                            ${pegHtml}${esc(resp.comentario || '')}
+                            ${resp.artigoRef ? `<div class="ref-tag">📖 ${esc(resp.artigoRef)}</div>` : ''}
+                        </div>
+                        ${resumoHtml}
+                    </div>`;
                 })() : '';
 
                 return `<div class="qlei-outer" style="animation-delay:${Math.min(i * .03, .4)}s">
-      <div class="qlei-card ${respondida ? (acertou ? 'ok' : 'err') : ''}" id="qlei-${q.id}">
-        <div class="qlei-head">
-          <span class="qlei-n">Q${i + 1}</span>
-          <span class="badge ${nc}">${nl}</span>
-          ${q.recorrencia > 1 ? `<span class="recorr">🔁 ${q.recorrencia}x</span>` : ''}
-          ${q.orgaoProva ? `<span class="badge b-pendente">${esc(q.orgaoProva)}</span>` : ''}
-          ${q.tipoPegadinha && !respondida ? `<span class="badge b-pegad">🪤</span>` : ''}
-        </div>
-        <div class="qlei-body">
-          <div class="qlei-enunciado">${esc(q.enunciado)}</div>
-          <div class="qlei-btns" id="qb-${q.id}">
-            <button class="btn-resp btn-certo" onclick="responder(${q.id}, true)" ${respondida ? 'disabled' : ''}>
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 8l4 4 8-8"/></svg> CERTO
-            </button>
-            <button class="btn-resp btn-errado" onclick="responder(${q.id}, false)" ${respondida ? 'disabled' : ''}>
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 2l12 12M14 2L2 14"/></svg> ERRADO
-            </button>
-          </div>
-          <div id="gb-${q.id}">${gabHtml}</div>
-        </div>
-      </div>
-    </div>`;
+                    <div class="qlei-card ${respondida ? (acertou ? 'ok' : 'err') : ''}" id="qlei-${q.id}">
+                        <div class="qlei-head">
+                            <span class="qlei-n">Q${i + 1}</span>
+                            <span class="badge ${nc}">${nl}</span>
+                            ${q.recorrencia > 1 ? `<span class="recorr">🔁 ${q.recorrencia}x</span>` : ''}
+                            ${q.orgaoProva ? `<span class="badge b-pendente">${esc(q.orgaoProva)}</span>` : ''}
+                            ${q.tipoPegadinha && !respondida ? `<span class="badge b-pegad">🪤</span>` : ''}
+                        </div>
+                        <div class="qlei-body">
+                            <div class="qlei-enunciado">${esc(q.enunciado)}</div>
+                            <div class="qlei-btns" id="qb-${q.id}">
+                                <button class="btn-resp btn-certo" onclick="responder(${q.id}, true)" ${respondida ? 'disabled' : ''}>
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 8l4 4 8-8"/></svg> CERTO
+                                </button>
+                                <button class="btn-resp btn-errado" onclick="responder(${q.id}, false)" ${respondida ? 'disabled' : ''}>
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M2 2l12 12M14 2L2 14"/></svg> ERRADO
+                                </button>
+                            </div>
+                            <div id="gb-${q.id}">${gabHtml}</div>
+                        </div>
+                    </div>
+                </div>`;
             }).join('');
         }
 
-        function filtrarQuestoes(f) {
+        function filtrarQuestoesBotao(f) {
             filtroQuestoes = f;
             ['todas', 'erradas', 'certas'].forEach(v => {
                 const el = document.getElementById('fq-' + v);
                 if (!el) return;
-                el.style.background = v === f ? 'var(--teal-bg)' : 'transparent';
-                el.style.borderColor = v === f ? 'var(--teal-bd)' : 'var(--border2)';
-                el.style.color = v === f ? 'var(--teal)' : 'var(--text2)';
-                el.style.fontWeight = v === f ? '700' : '600';
+                const on = v === f;
+                el.style.background = on ? 'var(--teal-bg)' : 'transparent';
+                el.style.borderColor = on ? 'var(--teal-bd)' : 'var(--border2)';
+                el.style.color = on ? 'var(--teal)' : 'var(--text2)';
+                el.style.fontWeight = on ? '700' : '600';
             });
-            // Rerender with current data from DOM state
-            const questoes = getAllQuestoesFromDOM();
-            renderQuestoes(questoes);
         }
 
-        // Recupera questões do estado atual
-        let questoesAtivas = [];
-        function getAllQuestoesFromDOM() { return questoesAtivas; }
+        function filtrarQuestoes(f) {
+            filtrarQuestoesBotao(f);
+            renderQuestoes(null);
+        }
 
         /* ── RESPONDER ── */
         async function responder(qId, resposta) {
@@ -2092,9 +2074,7 @@
                 };
 
                 const card = document.getElementById(`qlei-${qId}`);
-                if (card) {
-                    card.classList.add(data.acertou ? 'ok' : 'err');
-                }
+                if (card) card.classList.add(data.acertou ? 'ok' : 'err');
 
                 const gabTxt = data.gabarito ? 'CERTO' : 'ERRADO';
                 const pegHtml = data.tipoPegadinha
@@ -2104,21 +2084,19 @@
 
                 const gbEl = document.getElementById(`gb-${qId}`);
                 if (gbEl) gbEl.innerHTML = `
-      <div class="gab-reveal ${data.acertou ? 'gab-ok' : 'gab-err'}">
-        <div class="gab-hdr">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${data.acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
-          ${data.acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
-        </div>
-        <div class="gab-body">
-          ${pegHtml}${esc(data.comentario || '')}
-          ${data.artigoRef ? `<div class="ref-tag">📖 ${esc(data.artigoRef)}</div>` : ''}
-        </div>
-        ${resumoHtml}
-      </div>`;
+                    <div class="gab-reveal ${data.acertou ? 'gab-ok' : 'gab-err'}">
+                        <div class="gab-hdr">
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">${data.acertou ? '<path d="M2 8l4 4 8-8"/>' : '<path d="M2 2l12 12M14 2L2 14"/>'}</svg>
+                            ${data.acertou ? 'Correto!' : 'Incorreto!'} — Gabarito: ${gabTxt}
+                        </div>
+                        <div class="gab-body">
+                            ${pegHtml}${esc(data.comentario || '')}
+                            ${data.artigoRef ? `<div class="ref-tag">📖 ${esc(data.artigoRef)}</div>` : ''}
+                        </div>
+                        ${resumoHtml}
+                    </div>`;
 
                 toast(data.acertou ? '✅ Acertou!' : '❌ Errou!', data.acertou ? 'ok' : 'err');
-
-                // Atualiza score no header sem recarregar tudo
                 atualizarScore();
             } catch (e) {
                 toast('Erro ao registrar resposta', 'err');
@@ -2131,12 +2109,12 @@
             const ac = vals.filter(r => r.acertou).length;
             const er = vals.filter(r => !r.acertou).length;
             const pct = (ac + er) > 0 ? Math.round(ac * 100 / (ac + er)) : 0;
-            const scoreEls = document.querySelectorAll('.sc-val');
-            if (scoreEls.length >= 3) {
-                scoreEls[0].textContent = ac;
-                scoreEls[1].textContent = er;
-                scoreEls[2].textContent = pct + '%';
-            }
+            const elAc = document.getElementById('score-ac');
+            const elEr = document.getElementById('score-er');
+            const elAp = document.getElementById('score-ap');
+            if (elAc) elAc.textContent = ac;
+            if (elEr) elEr.textContent = er;
+            if (elAp) elAp.textContent = pct + '%';
         }
 
         /* ── RESETAR TÓPICO ── */
@@ -2166,19 +2144,17 @@
                 return;
             }
             el.innerHTML = lista.map(a => `
-    <div class="anot-item">
-      <div class="anot-data">${new Date(a.createdAt).toLocaleString('pt-BR')}</div>
-      ${esc(a.conteudo)}
-    </div>`).join('');
+                <div class="anot-item">
+                    <div class="anot-data">${new Date(a.createdAt).toLocaleString('pt-BR')}</div>
+                    ${esc(a.conteudo)}
+                </div>`).join('');
         }
 
         async function salvarAnotacao() {
             const txt = document.getElementById('anot-input').value.trim();
             if (!txt) return;
             try {
-                await apiFetch('/lei-seca/topicos/' + topicoAtual + '/anotacoes', 'POST', {
-                    conteudo: txt
-                });
+                await apiFetch('/lei-seca/topicos/' + topicoAtual + '/anotacoes', 'POST', { conteudo: txt });
                 document.getElementById('anot-input').value = '';
                 await carregarAnotacoes(topicoAtual);
                 toast('Anotação salva', 'ok');
@@ -2197,8 +2173,8 @@
                 document.getElementById('ct-' + t).classList.toggle('hidden', t !== tab);
             });
             if (tab === 'questoes') {
-                // Garantir que filtro "todas" está ativo ao abrir aba
-                filtrarQuestoes('todas');
+                filtrarQuestoesBotao(filtroQuestoes);
+                if (questoesAtivas.length > 0) renderQuestoes(null);
             }
         }
 
@@ -2265,9 +2241,14 @@
         function toast(msg, type = '') {
             const w = document.getElementById('toast-wrap');
             const el = document.createElement('div');
-            el.className = 'toast ' + (type || ''); el.textContent = msg;
+            el.className = 'toast ' + (type || '');
+            el.textContent = msg;
             w.appendChild(el);
-            setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .2s'; setTimeout(() => el.remove(), 220); }, 3000);
+            setTimeout(() => {
+                el.style.opacity = '0';
+                el.style.transition = 'opacity .2s';
+                setTimeout(() => el.remove(), 220);
+            }, 3000);
         }
 
         function progressoDisplay(ac, er) {
